@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Pelatihan Guru - Math Champs</title>
+    <style>
+        :root {
+            --bg-main: #f2f9ff;
+            --accent-blue: #4d9cd6;
+            --accent-orange: #f2994a;
+            --accent-teal: #4bbdb4;
+            --accent-red: #d32f2f;
+            --text-dark: #333333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* BANNER UTAMA (LOGO) */
+        .hero-banner-container {
+            margin: 20px 0 30px 0;
+            width: 100%;
+            text-align: center;
+        }
+        .hero-banner-container img {
+            max-width: 150px;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* ANIMASI */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse-btn {
+            0% { box-shadow: 0 0 0 0 rgba(77, 156, 214, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(77, 156, 214, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(77, 156, 214, 0); }
+        }
+
+        /* LOGIN PANEL */
+        #login-panel {
+            background: white;
+            border-top: 5px solid var(--accent-blue);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            animation: fadeIn 0.4s ease-out;
+        }
+        #login-panel h2 { margin-top: 0; color: var(--accent-blue); }
+        input[type="email"] {
+            width: 90%;
+            padding: 12px;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        button.btn-main {
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            font-size: 15px;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        button.btn-main:active { transform: scale(0.98); }
+        .loading-pulse { animation: pulse-btn 1.5s infinite; background-color: #3a88c2 !important; }
+        #login-msg { font-size: 13px; min-height: 20px; margin-bottom: 15px; font-weight: bold; }
+
+        /* DASHBOARD PANEL */
+        #dashboard-panel {
+            display: none;
+            width: 100%;
+            max-width: 800px;
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        /* DEADLINE WIDGETS */
+        .deadline-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        .deadline-card {
+            flex: 1;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            min-width: 250px;
+        }
+        .icon-box {
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        .icon-box.video { background: #fdf3e8; color: var(--accent-orange); }
+        .icon-box.task { background: #ffebee; color: var(--accent-red); }
+        .deadline-text h4 { margin: 0; font-size: 14px; color: #666; }
+        .deadline-text p { margin: 5px 0 0 0; font-weight: bold; font-size: 16px; color: var(--text-dark); }
+        .urgency-pulse { animation: fadeIn 1s infinite alternate; }
+
+        /* PROGRESS BAR */
+        .progress-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .progress-bar-bg {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            height: 12px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        #progress-fill {
+            height: 100%;
+            background-color: var(--accent-teal);
+            width: 0%;
+            border-radius: 10px;
+            transition: width 1s ease-in-out;
+        }
+
+        /* MODULE CARDS */
+        .choice-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 45%;
+            min-width: 250px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .card-sempoa { border-top: 5px solid var(--accent-teal); }
+        .card-classroom { border-top: 5px solid var(--accent-blue); }
+        .card h3 { margin-top: 0; }
+
+        /* CONTENT AREA */
+        #content-area {
+            margin-top: 30px;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            display: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            animation: fadeIn 0.4s ease-out;
+        }
+        .module-item { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        .module-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .module-item a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            display: inline-block;
+            margin: 8px 15px 8px 0;
+            font-weight: 500;
+            padding: 6px 12px;
+            background: var(--bg-main);
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+        .module-item a:hover { background: #d0e8f8; }
+        .est-time { font-size: 13px; color: #666; display: block; margin-top: 5px; font-style: italic; }
+        .badge { font-size: 11px; background: #d0e8f8; color: #00509d; padding: 2px 6px; border-radius: 4px; margin-left: 5px; vertical-align: middle; }
+    </style>
+</head>
+<body>
+
+    <div id="hero-banner" class="hero-banner-container">
+        <img src="https://cdn-web.ruangguru.com/file-uploader/3f15f74f-6104-44d8-b0b3-7b886772a4f2.png" alt="Logo Math Champs">
+    </div>
+
+    <div id="login-panel">
+        <h2>Portal Pelatihan Guru</h2>
+        <p style="color: #666; font-size: 14px;">Silakan masuk untuk melanjutkan belajar.</p>
+        <input type="email" id="email-input" placeholder="contoh: guru@ruangguru.com">
+        <div id="login-msg"></div>
+        <button id="login-btn" class="btn-main" onclick="doLogin()">Masuk Sekarang</button>
+    </div>
+
+    <div id="dashboard-panel">
+        
+        <div class="deadline-container">
+            <div class="deadline-card" style="border-left: 4px solid var(--accent-orange);">
+                <div class="icon-box video">⏳</div>
+                <div class="deadline-text">
+                    <h4>Batas Menonton Video</h4>
+                    <p class="urgency-pulse" style="color: var(--accent-orange);">06 September 2026</p>
+                </div>
+            </div>
+            <div class="deadline-card" style="border-left: 4px solid var(--accent-red);">
+                <div class="icon-box task">📅</div>
+                <div class="deadline-text">
+                    <h4>Batas Kumpul Tugas</h4>
+                    <p class="urgency-pulse" style="color: var(--accent-red);">08 Agustus 2026</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <h3 style="margin: 0; color: var(--accent-teal);">Progres Belajar Anda</h3>
+            <div class="progress-bar-bg">
+                <div id="progress-fill"></div>
+            </div>
+            <p id="progress-text" style="margin: 0; font-weight: bold; color: #666;">0% Selesai</p>
+        </div>
+
+        <div class="choice-container">
+            <div class="card card-sempoa" onclick="showSempoaSkill()">
+                <h3 style="color: var(--accent-teal);">Sempoa Skill</h3>
+                <p style="font-size: 14px; color: #666;">Materi teknis berhitung dan modul latihan.</p>
+            </div>
+            <div class="card card-classroom" onclick="showClassroomMgmt()">
+                <h3 style="color: var(--accent-blue);">Classroom Management</h3>
+                <p style="font-size: 14px; color: #666;">Panduan kelola kelas dan tugas mandiri.</p>
+            </div>
+        </div>
+
+        <div id="content-area"></div>
+    </div>
+
+    <script>
+        // API SCRIPT (Sudah menggunakan link terbaru yang kamu berikan)
+        const API_URL = "https://script.google.com/macros/s/AKfycbxXmyI7pwbkYQWJHXGMVbPJKQ3NlrjxKnK2Nw0qQdFANUyu9J2PaDehqDhXWqS5nnb-/exec";
+        
+        let currentUserEmail = "";
+        let autoSaveInterval;
+        let learningDuration = 0;
+
+        // DATA MATERI
+        const classroomMgmtData = `
+            <h2 style="color: var(--accent-blue); border-bottom: 2px solid #eee; padding-bottom: 10px;">Classroom Management</h2>
+            <div class="module-item">
+                <strong>Panduan & Pengumpulan:</strong> <span class="badge">Wajib</span>
+                <span class="est-time">Estimasi: 45 menit</span>
+                <br>
+                <a href="#" target="_blank">🎥 Video Panduan Kelas Offline</a>
+                <a href="#" target="_blank">📄 Panduan Kelas (Drive)</a>
+            </div>
+            <div class="module-item">
+                <strong>Tugas Akhir:</strong>
+                <span class="est-time">Batas: 8 Agustus 2026</span>
+                <br>
+                <a href="#" target="_blank">📌 Kumpul Video Submission</a>
+                <a href="#" target="_blank">📌 Kumpul Tugas KLH</a>
+            </div>
+        `;
+
+        const sempoaSkillData = `
+            <h2 style="color: var(--accent-teal); border-bottom: 2px solid #eee; padding-bottom: 10px;">Sempoa Skill (Section 1-6)</h2>
+            <div class="module-item">
+                <strong>Section 1: Dasar Sempoa</strong>
+                <span class="est-time">Estimasi: 30 menit</span>
+                <br>
+                <a href="#" target="_blank">🎥 Video Pembelajaran</a>
+                <a href="#" target="_blank">📄 Modul Latihan PDF</a>
+            </div>
+            <div class="module-item">
+                <strong>Section 2: Latihan Lanjutan</strong>
+                <span class="est-time">Estimasi: 45 menit</span>
+                <br>
+                <a href="#" target="_blank">🎥 Video Pembelajaran</a>
+                <a href="#" target="_blank">📝 Post Test Section 2</a>
+            </div>
+        `;
+
+        // FUNGSI FETCH API (JSONP untuk memutar CORS)
+        function callApi(params) {
+            return new Promise((resolve, reject) => {
+                const callbackName = 'appsScriptCallback_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+                const script = document.createElement('script');
+                
+                const timeout = setTimeout(() => {
+                    cleanup();
+                    reject(new Error('Request timeout'));
+                }, 15000);
+
+                function cleanup() {
+                    clearTimeout(timeout);
+                    delete window[callbackName];
+                    if(document.body.contains(script)) script.remove();
+                }
+
+                window[callbackName] = (data) => {
+                    cleanup();
+                    resolve(data);
+                };
+
+                params.callback = callbackName;
+                const query = new URLSearchParams(params).toString();
+                
+                script.onerror = () => {
+                    cleanup();
+                    reject(new Error('Gagal memuat API Apps Script'));
+                };
+                script.src = `${API_URL}?${query}`;
+                document.body.appendChild(script);
+            });
+        }
+
+        // FUNGSI LOGIN
+        async function doLogin() {
+            const email = document.getElementById('email-input').value.trim();
+            const msgArea = document.getElementById('login-msg');
+            const btn = document.getElementById('login-btn');
+
+            if (!email) {
+                msgArea.innerText = "Email tidak boleh kosong.";
+                msgArea.style.color = "var(--accent-red)";
+                return;
+            }
+
+            msgArea.innerText = "Mencari datamu di sistem...";
+            msgArea.style.color = "#555";
+            btn.innerText = "Memuat...";
+            btn.disabled = true;
+            btn.classList.add('loading-pulse');
+
+            try {
+                const data = await callApi({ action: 'login', email: email });
+                
+                if (data.success) {
+                    currentUserEmail = email;
+                    // Transisi Tampilan
+                    document.getElementById('login-panel').style.display = 'none';
+                    document.getElementById('hero-banner').style.display = 'none';
+                    document.getElementById('dashboard-panel').style.display = 'block';
+                    
+                    // Update Progres & Mulai Simpan Otomatis
+                    updateProgressUI(45); // Simulasi Progres 45%
+                    startAutoSave();
+                } else {
+                    msgArea.innerText = data.message || "Email tidak terdaftar.";
+                    msgArea.style.color = "var(--accent-red)";
+                }
+            } catch (error) {
+                msgArea.innerText = "Gagal terhubung ke database. Pastikan link Apps Script sudah benar.";
+                msgArea.style.color = "var(--accent-red)";
+            } finally {
+                btn.innerText = "Masuk Sekarang";
+                btn.disabled = false;
+                btn.classList.remove('loading-pulse');
+            }
+        }
+
+        // FUNGSI UPDATE PROGRESS
+        function updateProgressUI(percentage) {
+            setTimeout(() => {
+                document.getElementById('progress-fill').style.width = percentage + '%';
+                document.getElementById('progress-text').innerText = percentage + '% Selesai';
+            }, 500);
+        }
+
+        // TAMPILKAN MATERI SEMPOA (Dengan Logika Penguncian Waktu)
+        function showSempoaSkill() {
+            const contentArea = document.getElementById('content-area');
+            const deadline = new Date("2026-09-07T00:00:00+07:00");
+            const now = new Date();
+
+            contentArea.style.display = 'block';
+            
+            if (now >= deadline) {
+                contentArea.innerHTML = `
+                    <div style="background: #ffeeee; color: var(--accent-red); padding: 20px; border-radius: 8px; text-align: center; font-weight: bold;">
+                        🔒 Maaf, akses ke materi Sempoa Skill telah dikunci sejak tanggal 6 September 2026.
+                    </div>
+                `;
+            } else {
+                contentArea.innerHTML = sempoaSkillData;
+            }
+        }
+
+        // TAMPILKAN MATERI CLASSROOM
+        function showClassroomMgmt() {
+            const contentArea = document.getElementById('content-area');
+            contentArea.style.display = 'block';
+            contentArea.innerHTML = classroomMgmtData;
+        }
+
+        // FITUR AUTO-SAVE BERKALA (Ke Server)
+        function startAutoSave() {
+            autoSaveInterval = setInterval(() => {
+                learningDuration += 60;
+                callApi({ 
+                    action: 'save_progress', 
+                    email: currentUserEmail, 
+                    duration: learningDuration 
+                }).catch(e => console.error("Gagal simpan progres otomatis", e));
+            }, 60000); // Tiap 60 detik
+        }
+    </script>
+</body>
+</html>
