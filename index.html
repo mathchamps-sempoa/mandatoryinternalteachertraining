@@ -1,476 +1,377 @@
-<!DOCTYPE html>
+html_content = """<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Pelatihan Guru - Math Champs</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* TEMA BIRU LEMBUT & PALET WARNA MODULAR */
-        :root {
-            --bg-main: #f2f9ff;
-            --accent-blue: #4d9cd6;
-            --accent-orange: #f2994a;
-            --accent-teal: #4bbdb4;
-            --accent-red: #d32f2f;
-            --text-dark: #2c3e50;
-            --text-muted: #7f8c8d;
-        }
-
         body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-main);
-            color: var(--text-dark);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f2f9ff 0%, #d0e8f8 100%);
             min-height: 100vh;
+            color: #333333;
         }
-
-        /* ANIMASI */
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pulse-btn {
-            0% { box-shadow: 0 0 0 0 rgba(77, 156, 214, 0.7); }
-            70% { box-shadow: 0 0 0 12px rgba(77, 156, 214, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(77, 156, 214, 0); }
-        }
-
-        /* BANNER LOGO */
-        .hero-banner-container {
-            margin: 30px 0;
-            width: 100%;
-            text-align: center;
-        }
-        .hero-banner-container img {
-            max-width: 180px;
-            height: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        
+        .floating-logo {
             animation: float 3.5s ease-in-out infinite;
+            filter: drop-shadow(0 8px 12px rgba(77, 156, 214, 0.2));
         }
 
-        /* STRUKTUR UMUM KARTU */
-        .panel-card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            width: 100%;
-            box-sizing: border-box;
-            animation: fadeIn 0.4s ease-out forwards;
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.02); }
         }
-
-        /* PANEL LOGIN */
-        #login-panel {
-            max-width: 400px;
-            border-top: 6px solid var(--accent-blue);
-            text-align: center;
-        }
-        #login-panel h2 { margin-top: 0; color: var(--accent-blue); font-size: 22px; }
-        #login-panel p { color: var(--text-muted); font-size: 14px; margin-bottom: 25px; }
         
-        input[type="email"] {
-            width: 100%;
-            padding: 14px;
-            margin: 10px 0 20px 0;
-            border: 1px solid #dcdde1;
-            border-radius: 6px;
-            box-sizing: border-box;
-            font-size: 15px;
-            transition: border-color 0.3s;
+        .loading-pulse { 
+            animation: pulseBtn 1.5s infinite; 
+            pointer-events: none; 
+            opacity: 0.8;
         }
-        input[type="email"]:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 3px rgba(77, 156, 214, 0.2);
+        
+        @keyframes pulseBtn {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(0.98); box-shadow: 0 0 0 10px rgba(77, 156, 214, 0); }
+        }
+        
+        .hover-lift { transition: all 0.3s ease; }
+        .hover-lift:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1); 
         }
 
-        button.btn-main {
-            background-color: var(--accent-blue);
-            color: white;
-            border: none;
-            padding: 14px 20px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            width: 100%;
-            font-size: 16px;
-            transition: all 0.2s ease;
-        }
-        button.btn-main:hover { background-color: #3a88c2; transform: translateY(-2px); }
-        button.btn-main:active { transform: scale(0.98); }
-        .loading-pulse { animation: pulse-btn 1.5s infinite; background-color: #3a88c2 !important; pointer-events: none; }
-        #login-msg { font-size: 14px; min-height: 20px; margin-bottom: 15px; font-weight: 600; }
-
-        /* DASHBOARD DUA KOLOM (GRID) */
-        #dashboard-panel {
-            display: none;
-            max-width: 1000px;
-            width: 100%;
-        }
-        .dashboard-layout {
+        /* Calendar Styles */
+        .calendar-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 25px;
-            align-items: start;
-        }
-
-        /* MODUL PILIHAN (KOLOM KIRI) */
-        .choice-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        .module-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
             text-align: center;
-            cursor: pointer;
-            border-top: 5px solid;
-            transition: all 0.2s ease;
+            font-size: 0.75rem;
         }
-        .card-sempoa { border-top-color: var(--accent-teal); }
-        .card-classroom { border-top-color: var(--accent-blue); }
-        
-        .module-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        }
-        .module-card h3 { margin: 10px 0; font-size: 18px; }
-        .module-card p { font-size: 13px; color: var(--text-muted); margin: 0; }
-
-        /* AREA KONTEN MATERI (KOLOM KIRI) */
-        #content-area {
-            display: none;
-        }
-        .module-item { 
-            margin-bottom: 20px; 
-            padding-bottom: 15px; 
-            border-bottom: 1px solid #ecf0f1; 
-        }
-        .module-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .module-item strong { display: block; font-size: 16px; margin-bottom: 6px; color: var(--text-dark); }
-        
-        /* TAUTAN MATERI */
-        .link-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 8px;
-        }
-        .module-item a {
-            color: var(--accent-blue);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
+        .calendar-day {
+            padding: 4px;
+            border-radius: 4px;
+            background: #f8fafc;
+            color: #64748b;
             font-weight: 500;
-            padding: 8px 12px;
-            background: var(--bg-main);
-            border-radius: 6px;
-            font-size: 14px;
-            transition: background 0.2s, color 0.2s;
         }
-        .module-item a:hover { background: var(--accent-blue); color: white; }
-
-        /* SIDEBAR BATAS WAKTU (KOLOM KANAN) */
-        .sidebar-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .deadline-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            border-left: 5px solid;
-        }
-        .card-video { border-left-color: var(--accent-orange); }
-        .card-task { border-left-color: var(--accent-red); }
-        
-        .icon-box {
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-        .icon-box.video { background: #fff4e6; color: var(--accent-orange); }
-        .icon-box.task { background: #ffebee; color: var(--accent-red); }
-        .deadline-text h4 { margin: 0; font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
-        .deadline-text p { margin: 5px 0 0 0; font-weight: bold; font-size: 15px; }
-
-        .locked-notice {
-            background: #fff4f4;
-            color: var(--accent-red);
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
+        .calendar-header {
             font-weight: bold;
-            border: 1px solid #ffcdcd;
+            color: #94a3b8;
+            padding-bottom: 4px;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 4px;
+        }
+        .date-highlight-red {
+            background: #fee2e2;
+            color: #d32f2f;
+            font-weight: bold;
+            animation: pulse-red 2s infinite;
+            border: 1px solid #fca5a5;
+        }
+        .date-highlight-orange {
+            background: #ffedd5;
+            color: #f2994a;
+            font-weight: bold;
+            animation: pulse-orange 2s infinite;
+            border: 1px solid #fdba74;
         }
 
-        /* RESPONSIVE UNTUK HP */
-        @media (max-width: 768px) {
-            .dashboard-layout { grid-template-columns: 1fr; }
-            .choice-container { grid-template-columns: 1fr; }
-            .sidebar-container { grid-row: 1; margin-bottom: 10px; }
-            .main-content { grid-row: 2; }
-        }
+        @keyframes pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.4); } 70% { box-shadow: 0 0 0 6px rgba(211, 47, 47, 0); } }
+        @keyframes pulse-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(242, 153, 74, 0.4); } 70% { box-shadow: 0 0 0 6px rgba(242, 153, 74, 0); } }
+
+        #dashboard-panel, #content-area { display: none; }
     </style>
 </head>
-<body>
+<body class="flex flex-col items-center p-4 md:p-8">
 
-    <div id="hero-banner" class="hero-banner-container">
-        <img src="https://cdn-web.ruangguru.com/file-uploader/3f15f74f-6104-44d8-b0b3-7b886772a4f2.png" alt="Logo Math Champs">
+    <div id="hero-banner" class="mt-10 mb-8 text-center transition-all duration-500">
+        <img src="https://cdn-web.ruangguru.com/file-uploader/3f15f74f-6104-44d8-b0b3-7b886772a4f2.png" alt="Logo Math Champs" class="w-56 mx-auto floating-logo">
     </div>
 
-    <div id="login-panel" class="panel-card">
-        <h2>Portal Pelatihan Guru</h2>
-        <p>Silakan masuk menggunakan email pendaftaran Anda.</p>
-        <input type="email" id="email-input" placeholder="contoh: guru@ruangguru.com" required>
-        <div id="login-msg"></div>
-        <button id="login-btn" class="btn-main" onclick="doLogin()">Masuk Sekarang</button>
+    <div id="login-panel" class="glass-panel w-full max-w-md rounded-2xl p-8 text-center border-t-8 border-t-[#4d9cd6] animate-[fadeIn_0.5s_ease-out]">
+        <h2 class="text-2xl font-bold text-[#4d9cd6] mb-2">Portal Pelatihan Guru</h2>
+        <p class="text-slate-500 text-sm mb-6">Silakan masuk menggunakan email pendaftaran Anda.</p>
+        
+        <div class="relative mb-6">
+            <i class="fas fa-envelope absolute left-4 top-3.5 text-slate-400"></i>
+            <input type="email" id="email-input" placeholder="contoh: guru@ruangguru.com" 
+                class="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-300 focus:border-[#4d9cd6] focus:ring-2 focus:ring-[#d0e8f8] outline-none transition-all text-slate-700" required>
+        </div>
+        
+        <div id="login-msg" class="text-sm font-semibold min-h-[24px] mb-4"></div>
+        
+        <button id="login-btn" onclick="doLogin()" 
+            class="w-full bg-[#4d9cd6] hover:bg-[#3a88c2] text-white font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-blue-500/30 flex justify-center items-center gap-2">
+            Masuk Sekarang <i class="fas fa-sign-in-alt"></i>
+        </button>
     </div>
 
-    <div id="dashboard-panel">
-        <div class="dashboard-layout">
+    <div id="dashboard-panel" class="w-full max-w-6xl mt-2 animate-[fadeIn_0.5s_ease-out]">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
-            <div class="main-content">
-                <div class="choice-container">
-                    <div class="module-card card-sempoa" onclick="showSempoaSkill()">
-                        <h3 style="color: var(--accent-teal);">Sempoa Skill</h3>
-                        <p>Materi teknis berhitung dan modul Section 1-6.</p>
+            <div class="lg:col-span-2 flex flex-col gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="glass-panel rounded-2xl p-6 cursor-pointer hover-lift border-t-4 border-t-[#4bbdb4] relative overflow-hidden group" onclick="showSempoaSkill()">
+                        <div class="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center mb-4 text-[#4bbdb4] text-xl shadow-sm"><i class="fas fa-calculator"></i></div>
+                        <h3 class="font-bold text-teal-800 text-lg">Sempoa Skill</h3>
+                        <p class="text-sm text-slate-500 mt-1">Materi teknis & Section 1-6.</p>
                     </div>
-                    <div class="module-card card-classroom" onclick="showClassroomMgmt()">
-                        <h3 style="color: var(--accent-blue);">Classroom Management</h3>
-                        <p>Panduan mengelola kelas dan tugas mandiri.</p>
+                    
+                    <div class="glass-panel rounded-2xl p-6 cursor-pointer hover-lift border-t-4 border-t-[#4d9cd6] relative overflow-hidden group" onclick="showClassroomMgmt()">
+                        <div class="w-12 h-12 rounded-xl bg-sky-50 flex items-center justify-center mb-4 text-[#4d9cd6] text-xl shadow-sm"><i class="fas fa-chalkboard-teacher"></i></div>
+                        <h3 class="font-bold text-sky-800 text-lg">Classroom Mgmt</h3>
+                        <p class="text-sm text-slate-500 mt-1">Panduan kelas & kumpul tugas.</p>
                     </div>
                 </div>
-
-                <div id="content-area" class="panel-card"></div>
+                
+                <div id="content-area" class="glass-panel rounded-2xl p-6 md:p-8"></div>
             </div>
 
-            <div class="sidebar-container">
-                <div class="deadline-card card-video">
-                    <div class="icon-box video"> ⏳ </div>
-                    <div class="deadline-text">
-                        <h4>Batas Nonton Video</h4>
-                        <p style="color: var(--accent-orange);">06 September 2026</p>
+            <div class="lg:col-span-1 flex flex-col gap-6">
+                <div class="glass-panel rounded-2xl p-5 border-l-4 border-l-[#d32f2f]">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center text-[#d32f2f]"><i class="fas fa-calendar-times"></i></div>
+                        <div>
+                            <h4 class="font-bold text-slate-700 text-sm">Batas Kumpul Tugas</h4>
+                            <p class="text-[#d32f2f] font-bold text-xs">8 Agustus 2026</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-slate-100">
+                        <div class="text-center font-bold text-slate-600 mb-2 text-sm">Agustus 2026</div>
+                        <div class="calendar-grid calendar-header">
+                            <div>M</div><div>S</div><div>S</div><div>R</div><div>K</div><div>J</div><div>S</div>
+                        </div>
+                        <div class="calendar-grid">
+                            <div class="text-transparent">.</div><div class="text-transparent">.</div><div class="text-transparent">.</div><div class="text-transparent">.</div><div class="text-transparent">.</div><div class="text-transparent">.</div><div class="calendar-day">1</div>
+                            <div class="calendar-day">2</div><div class="calendar-day">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div><div class="calendar-day">6</div><div class="calendar-day">7</div><div class="calendar-day date-highlight-red">8</div>
+                            <div class="calendar-day">9</div><div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day">14</div><div class="calendar-day">15</div>
+                            <div class="text-slate-300 text-xs col-span-7 mt-1 text-center">...</div>
+                        </div>
                     </div>
                 </div>
-                <div class="deadline-card card-task">
-                    <div class="icon-box task"> 📅 </div>
-                    <div class="deadline-text">
-                        <h4>Batas Kumpul Tugas</h4>
-                        <p style="color: var(--accent-red);">08 Agustus 2026</p>
-                    </div>
-                </div>
-            </div>
 
+                <div class="glass-panel rounded-2xl p-5 border-l-4 border-l-[#f2994a]">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center text-[#f2994a]"><i class="fas fa-hourglass-half"></i></div>
+                        <div>
+                            <h4 class="font-bold text-slate-700 text-sm">Batas Nonton Video</h4>
+                            <p class="text-[#f2994a] font-bold text-xs">6 September 2026</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-3 rounded-xl border border-slate-100">
+                        <div class="text-center font-bold text-slate-600 mb-2 text-sm">September 2026</div>
+                        <div class="calendar-grid calendar-header">
+                            <div>M</div><div>S</div><div>S</div><div>R</div><div>K</div><div>J</div><div>S</div>
+                        </div>
+                        <div class="calendar-grid">
+                            <div class="text-transparent">.</div><div class="text-transparent">.</div><div class="calendar-day">1</div><div class="calendar-day">2</div><div class="calendar-day">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div>
+                            <div class="calendar-day date-highlight-orange">6</div><div class="calendar-day">7</div><div class="calendar-day">8</div><div class="calendar-day">9</div><div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div>
+                            <div class="text-slate-300 text-xs col-span-7 mt-1 text-center">...</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 
     <script>
-        // API URL APPS SCRIPT
+        // API URL APPS SCRIPT YANG BARU (Update sesuai instruksi terakhir)
         const API_URL = "https://script.google.com/macros/s/AKfycbx09ukQqWDv2tr16FYdsE63z-s1mWCnHUOcuqAiomDjVEwKuPIx00xgziqiRHLFZbUj/exec";
-
+        
         let currentUserEmail = "";
         let autoSaveInterval;
         let learningDuration = 0;
 
-        // MATERI CLASSROOM MANAGEMENT (Terbuka Selamanya)
+        // Styling untuk tombol materi (Target Blank agar buka di tab baru)
+        const btnClass = "inline-flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-[#d0e8f8] text-slate-700 hover:text-[#00509d] text-sm font-semibold rounded-lg border border-slate-200 transition-colors shadow-sm";
+        
         const classroomMgmtData = `
-            <h2 style="color: var(--accent-blue); border-bottom: 2px solid #ecf0f1; padding-bottom: 12px; margin-top: 0;">Classroom Management</h2>
+            <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-200">
+                <i class="fas fa-chalkboard-teacher text-3xl text-[#4d9cd6]"></i>
+                <h2 class="text-2xl font-bold text-[#00509d] m-0">Classroom Management</h2>
+            </div>
             
-            <div class="module-item">
-                <strong>Panduan Kelas Offline</strong>
-                <div class="link-group">
-                    <a href="https://youtu.be/yTpWptR9lzI" target="_blank" rel="noopener noreferrer">🎥 Video Panduan</a>
-                    <a href="https://drive.google.com/file/d/1NPvU2M83XQ2DlSl5aWog9lWv-u1KfxaX/view?usp=drive_link" target="_blank" rel="noopener noreferrer">📄 Panduan Kelas (Drive)</a>
+            <div class="mb-5 p-5 bg-white rounded-xl border border-slate-100 shadow-sm">
+                <strong class="flex items-center text-slate-700 mb-4 text-base"><i class="fas fa-book-open text-[#4d9cd6] mr-2"></i> Panduan Kelas Offline</strong>
+                <p class="text-xs text-slate-500 mb-3 italic">Estimasi pengerjaan: 30 Menit</p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="https://youtu.be/yTpWptR9lzI" target="_blank" class="\${btnClass}"><i class="fab fa-youtube text-[#d32f2f]"></i> Video Panduan</a>
+                    <a href="https://drive.google.com/file/d/1NPvU2M83XQ2DlSl5aWog9lWv-u1KfxaX/view" target="_blank" class="\${btnClass}"><i class="fas fa-file-pdf text-[#f2994a]"></i> Panduan (Drive)</a>
                 </div>
             </div>
             
-            <div class="module-item">
-                <strong>Pengumpulan Tugas Wajib</strong>
-                <div class="link-group">
-                    <a href="https://tinyurl.com/pengumpulanvideosubmission" target="_blank" rel="noopener noreferrer">📌 Pengumpulan Video Submission</a>
-                    <a href="https://tinyurl.com/PengumpulanKLH" target="_blank" rel="noopener noreferrer">📌 Pengumpulan Tugas KLH</a>
+            <div class="p-5 bg-white rounded-xl border border-slate-100 shadow-sm">
+                <strong class="flex items-center text-slate-700 mb-4 text-base"><i class="fas fa-thumbtack text-[#d32f2f] mr-2"></i> Pengumpulan Tugas Wajib</strong>
+                <p class="text-xs text-slate-500 mb-3 italic">Wajib dikumpulkan sebelum 8 Agustus 2026</p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="https://tinyurl.com/pengumpulanvideosubmission" target="_blank" class="\${btnClass}"><i class="fas fa-upload text-[#4bbdb4]"></i> Video Submission</a>
+                    <a href="https://tinyurl.com/PengumpulanKLH" target="_blank" class="\${btnClass}"><i class="fas fa-upload text-[#4bbdb4]"></i> Tugas KLH</a>
                 </div>
             </div>
         `;
 
-        // MATERI SEMPOA SKILL LENGKAP (Section 1-6)
         const sempoaSkillData = `
-            <h2 style="color: var(--accent-teal); border-bottom: 2px solid #ecf0f1; padding-bottom: 12px; margin-top: 0;">Sempoa Skill (Section 1-6)</h2>
-            
-            <div class="module-item">
-                <strong>1. Pengenalan Sempoa</strong>
-                <div class="link-group">
-                    <a href="https://youtu.be/ZumRbx0uxzw" target="_blank" rel="noopener noreferrer">🎥 Video 1</a>
-                    <a href="https://youtu.be/XKZhGlAkqI0" target="_blank" rel="noopener noreferrer">🎥 Video 2</a>
-                    <a href="https://youtu.be/HL48XMlyvjw" target="_blank" rel="noopener noreferrer">🎥 Video 3</a>
-                    <a href="https://drive.google.com/file/d/1XUHRXjm5rUzGSkiSTy87rMX15VK8uo1O/view?usp=drive_link" target="_blank" rel="noopener noreferrer">📄 Modul</a>
-                </div>
+            <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-200">
+                <i class="fas fa-calculator text-3xl text-[#4bbdb4]"></i>
+                <h2 class="text-2xl font-bold text-[#00a89d] m-0">Sempoa Skill (Section 1-6)</h2>
             </div>
-
-            <div class="module-item">
-                <strong>2. Kawan Kecil</strong>
-                <div class="link-group">
-                    <a href="https://youtu.be/aMD7jUXH2lI" target="_blank" rel="noopener noreferrer">🎥 Video 1</a>
-                    <a href="https://youtu.be/wOoubFdBlf4" target="_blank" rel="noopener noreferrer">🎥 Video 2</a>
-                    <a href="https://drive.google.com/file/d/1RE7_VAHrkx7LIneQ5Bmxl0UzuYp16LtM/view?usp=drive_link" target="_blank" rel="noopener noreferrer">📄 Modul</a>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
+                    <strong class="block text-slate-700 mb-1 text-sm">1. Pengenalan Sempoa</strong>
+                    <p class="text-xs text-slate-500 mb-3 italic">Estimasi: 20 Menit</p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://youtu.be/ZumRbx0uxzw" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 1</a>
+                        <a href="https://youtu.be/XKZhGlAkqI0" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 2</a>
+                        <a href="https://drive.google.com/file/d/1XUHRXjm5rUzGSkiSTy87rMX15VK8uo1O/view" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fas fa-file-pdf text-[#4bbdb4]"></i> Modul</a>
+                    </div>
                 </div>
-            </div>
-
-            <div class="module-item">
-                <strong>3. Kawan Besar</strong>
-                <div class="link-group">
-                    <a href="https://youtu.be/VAxKB166otw" target="_blank" rel="noopener noreferrer">🎥 Video 1</a>
-                    <a href="https://youtu.be/Z_Ohxd8wkLE" target="_blank" rel="noopener noreferrer">🎥 Video 2</a>
-                    <a href="https://drive.google.com/file/d/1LIXN8OAkVcuiKbvRc_4VrwTon3C5hv4c/view?usp=drive_link" target="_blank" rel="noopener noreferrer">📄 Modul</a>
+                <div class="p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
+                    <strong class="block text-slate-700 mb-1 text-sm">2. Kawan Kecil</strong>
+                    <p class="text-xs text-slate-500 mb-3 italic">Estimasi: 25 Menit</p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://youtu.be/aMD7jUXH2lI" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 1</a>
+                        <a href="https://youtu.be/wOoubFdBlf4" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 2</a>
+                        <a href="https://drive.google.com/file/d/1RE7_VAHrkx7LIneQ5Bmxl0UzuYp16LtM/view" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fas fa-file-pdf text-[#4bbdb4]"></i> Modul</a>
+                    </div>
                 </div>
-            </div>
-
-            <div class="module-item">
-                <strong>4. Rumus Gabungan</strong>
-                <div class="link-group">
-                    <a href="https://youtu.be/M2Ld8XMy0iM" target="_blank" rel="noopener noreferrer">🎥 Video 1</a>
-                    <a href="https://youtu.be/Tjjr9Ye1DAA" target="_blank" rel="noopener noreferrer">🎥 Video 2</a>
-                    <a href="https://drive.google.com/file/d/1Vn0wtakWXXm7rA4az_sTZ-bEA4BM6wfW/view?usp=drive_link" target="_blank" rel="noopener noreferrer">📄 Modul</a>
+                <div class="p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
+                    <strong class="block text-slate-700 mb-1 text-sm">3. Kawan Besar</strong>
+                    <p class="text-xs text-slate-500 mb-3 italic">Estimasi: 25 Menit</p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://youtu.be/VAxKB166otw" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 1</a>
+                        <a href="https://youtu.be/Z_Ohxd8wkLE" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 2</a>
+                    </div>
                 </div>
-            </div>
-
-            <div class="module-item">
-                <strong>5. Multi-Digit Dasar</strong>
-                <div class="link-group">
-                    <a href="https://youtu.be/qIdMsbvxjo0" target="_blank" rel="noopener noreferrer">🎥 Video 1</a>
-                    <a href="https://drive.google.com/file/d/1puEpi4J3QwL2VoGuHaUOoHGxyLq0HbGa/view?usp=drive_link" target="_blank" rel="noopener noreferrer">📄 Modul</a>
+                <div class="p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
+                    <strong class="block text-slate-700 mb-1 text-sm">4. Rumus Gabungan</strong>
+                    <p class="text-xs text-slate-500 mb-3 italic">Estimasi: 30 Menit</p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://youtu.be/M2Ld8XMy0iM" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 1</a>
+                        <a href="https://youtu.be/Tjjr9Ye1DAA" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 2</a>
+                    </div>
                 </div>
-            </div>
-
-            <div class="module-item">
-                <strong>6. Multi-Digit Lanjutan</strong>
-                <div class="link-group">
-                    <a href="https://youtu.be/gUbRxFFR1sY" target="_blank" rel="noopener noreferrer">🎥 Video 1</a>
-                    <a href="https://drive.google.com/file/d/1WRW6G7VjXP6u6KM0qlLQKrFkoDtMX4B1/view?usp=drive_link" target="_blank" rel="noopener noreferrer">📄 Modul</a>
+                <div class="p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
+                    <strong class="block text-slate-700 mb-1 text-sm">5. Multi-Digit Dasar</strong>
+                    <p class="text-xs text-slate-500 mb-3 italic">Estimasi: 20 Menit</p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://youtu.be/qIdMsbvxjo0" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 1</a>
+                    </div>
+                </div>
+                 <div class="p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
+                    <strong class="block text-slate-700 mb-1 text-sm">6. Multi-Digit Lanjut</strong>
+                    <p class="text-xs text-slate-500 mb-3 italic">Estimasi: 25 Menit</p>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="https://youtu.be/gUbRxFFR1sY" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 1</a>
+                    </div>
                 </div>
             </div>
         `;
 
-        // FUNGSI FETCH API DENGAN JSONP
+        // JSONP API Fetch
         function callApi(params) {
             return new Promise((resolve, reject) => {
                 const callbackName = 'jsonpCallback_' + Math.round(100000 * Math.random());
                 const script = document.createElement('script');
-
                 const timeout = setTimeout(() => {
                     cleanup();
                     reject(new Error('Koneksi terputus (Timeout).'));
                 }, 15000);
-
+                
                 function cleanup() {
                     clearTimeout(timeout);
                     delete window[callbackName];
                     if (document.body.contains(script)) script.remove();
                 }
-
+                
                 window[callbackName] = (data) => {
                     cleanup();
                     resolve(data);
                 };
-
+                
                 params.callback = callbackName;
                 const query = new URLSearchParams(params).toString();
                 
-                script.onerror = () => {
-                    cleanup();
-                    reject(new Error('Gagal memuat API server.'));
-                };
-                
+                script.onerror = () => { cleanup(); reject(new Error('Gagal memuat API server.')); };
                 script.src = `${API_URL}?${query}`;
                 document.body.appendChild(script);
             });
         }
 
-        // FUNGSI LOGIN UTAMA
+        // Login Function
         async function doLogin() {
             const emailInput = document.getElementById('email-input');
             const email = emailInput.value.trim();
             const msgArea = document.getElementById('login-msg');
             const btn = document.getElementById('login-btn');
-
+            
             if (!email) {
                 msgArea.innerText = "Email tidak boleh kosong.";
-                msgArea.style.color = "var(--accent-red)";
+                msgArea.className = "text-sm font-semibold min-h-[24px] mb-4 text-[#d32f2f]";
                 emailInput.focus();
                 return;
             }
-
-            msgArea.innerText = "Memverifikasi data di database...";
-            msgArea.style.color = "var(--text-muted)";
-            btn.innerText = "Memproses...";
+            
+            msgArea.innerText = "Memverifikasi datamu di sistem...";
+            msgArea.className = "text-sm font-semibold min-h-[24px] mb-4 text-[#4d9cd6]";
+            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Memproses...';
             btn.classList.add('loading-pulse');
-
+            
             try {
                 const data = await callApi({ action: 'login', email: email });
-
                 if (data.success) {
                     currentUserEmail = email;
                     
+                    // Transisi ke Dashboard
                     document.getElementById('login-panel').style.display = 'none';
-                    document.getElementById('hero-banner').style.display = 'none';
+                    const banner = document.getElementById('hero-banner');
+                    banner.classList.remove('mt-10', 'mb-8');
+                    banner.classList.add('mt-2', 'mb-4', 'scale-90');
                     
                     const dashboard = document.getElementById('dashboard-panel');
                     dashboard.style.display = 'block';
-                    dashboard.style.animation = 'fadeIn 0.5s ease-out forwards';
-
+                    
                     startAutoSave();
                 } else {
-                    msgArea.innerText = data.message || "Email tidak terdaftar di sistem kami.";
-                    msgArea.style.color = "var(--accent-red)";
+                    msgArea.innerText = data.message || "Email tidak terdaftar di sistem.";
+                    msgArea.className = "text-sm font-semibold min-h-[24px] mb-4 text-[#d32f2f]";
                 }
             } catch (error) {
-                msgArea.innerText = "Gagal terhubung ke Google Sheets. Pastikan ID dan Deploy sudah benar.";
-                msgArea.style.color = "var(--accent-red)";
+                msgArea.innerText = "Gagal terhubung ke database server.";
+                msgArea.className = "text-sm font-semibold min-h-[24px] mb-4 text-[#d32f2f]";
             } finally {
-                btn.innerText = "Masuk Sekarang";
+                btn.innerHTML = 'Masuk Sekarang <i class="fas fa-sign-in-alt"></i>';
                 btn.classList.remove('loading-pulse');
             }
         }
 
-        // TAMPILKAN MATERI SEMPOA (Dengan Logika Batas Waktu)
+        // Logic Content Display
         function showSempoaSkill() {
             const contentArea = document.getElementById('content-area');
             const deadline = new Date("2026-09-07T00:00:00+07:00");
             const now = new Date();
-            
+
             contentArea.style.display = 'block';
             contentArea.style.animation = 'none';
             setTimeout(() => contentArea.style.animation = 'fadeIn 0.3s ease-out', 10);
-
+            
             if (now >= deadline) {
                 contentArea.innerHTML = `
-                    <div class="locked-notice">
-                        🔒 Maaf, akses ke materi Sempoa Skill telah dikunci sejak tanggal 6 September 2026.
+                    <div class="bg-red-50 text-[#d32f2f] p-8 rounded-xl text-center font-bold border border-red-200 shadow-sm">
+                        <i class="fas fa-lock text-4xl mb-4 block text-red-400"></i>
+                        Maaf, akses ke materi Sempoa Skill telah dikunci sejak tanggal 6 September 2026.
                     </div>
                 `;
             } else {
@@ -478,17 +379,15 @@
             }
         }
 
-        // TAMPILKAN MATERI CLASSROOM
         function showClassroomMgmt() {
             const contentArea = document.getElementById('content-area');
             contentArea.style.display = 'block';
             contentArea.style.animation = 'none';
             setTimeout(() => contentArea.style.animation = 'fadeIn 0.3s ease-out', 10);
-            
             contentArea.innerHTML = classroomMgmtData;
         }
 
-        // FITUR AUTO-SAVE BERKALA
+        // Auto Save Feature
         function startAutoSave() {
             autoSaveInterval = setInterval(() => {
                 learningDuration += 60;
@@ -496,9 +395,15 @@
                     action: 'save_progress',
                     email: currentUserEmail,
                     duration: learningDuration
-                }).catch(e => console.error("Gagal sinkronisasi auto-save", e));
-            }, 60000); 
+                }).catch(e => console.log("Gagal auto-save", e));
+            }, 60000);
         }
     </script>
 </body>
 </html>
+"""
+
+with open("index-final.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("File generated: index-final.html")
