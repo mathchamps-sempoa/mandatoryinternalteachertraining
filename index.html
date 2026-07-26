@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Pelatihan Guru - Math Champs</title>
     <style>
+        /* PALET WARNA MODULAR & TEMA BIRU LEMBUT */
         :root {
             --bg-main: #f2f9ff;
             --accent-blue: #4d9cd6;
             --accent-orange: #f2994a;
             --accent-teal: #4bbdb4;
             --accent-red: #d32f2f;
-            --text-dark: #333333;
+            --text-dark: #2c3e50;
+            --text-muted: #7f8c8d;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-main);
             color: var(--text-dark);
             margin: 0;
@@ -26,138 +28,158 @@
             min-height: 100vh;
         }
 
-        /* BANNER UTAMA (LOGO) */
-        .hero-banner-container {
-            margin: 20px 0 30px 0;
-            width: 100%;
-            text-align: center;
-        }
-        .hero-banner-container img {
-            max-width: 150px;
-            height: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
-            animation: float 3s ease-in-out infinite;
-        }
-
         /* ANIMASI */
         @keyframes float {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-12px); }
             100% { transform: translateY(0px); }
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
         @keyframes pulse-btn {
             0% { box-shadow: 0 0 0 0 rgba(77, 156, 214, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(77, 156, 214, 0); }
+            70% { box-shadow: 0 0 0 12px rgba(77, 156, 214, 0); }
             100% { box-shadow: 0 0 0 0 rgba(77, 156, 214, 0); }
+        }
+
+        /* BANNER LOGO */
+        .hero-banner-container {
+            margin: 30px 0;
+            width: 100%;
+            text-align: center;
+        }
+        .hero-banner-container img {
+            max-width: 180px;
+            height: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 6px 8px rgba(0,0,0,0.15));
+            animation: float 3.5s ease-in-out infinite;
+        }
+
+        /* PANEL KARTU UMUM */
+        .panel-card {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+            width: 100%;
+            box-sizing: border-box;
+            animation: fadeIn 0.5s ease-out forwards;
         }
 
         /* LOGIN PANEL */
         #login-panel {
-            background: white;
-            border-top: 5px solid var(--accent-blue);
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 420px;
+            border-top: 6px solid var(--accent-blue);
             text-align: center;
-            width: 100%;
-            max-width: 400px;
-            animation: fadeIn 0.4s ease-out;
         }
-        #login-panel h2 { margin-top: 0; color: var(--accent-blue); }
+        #login-panel h2 {
+            margin-top: 0;
+            color: var(--accent-blue);
+            font-size: 24px;
+        }
+        #login-panel p { color: var(--text-muted); font-size: 15px; margin-bottom: 25px; }
+        
         input[type="email"] {
-            width: 90%;
-            padding: 12px;
-            margin: 15px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #dcdde1;
+            border-radius: 6px;
             box-sizing: border-box;
-            font-size: 14px;
+            font-size: 15px;
+            transition: border-color 0.3s;
         }
+        input[type="email"]:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(77, 156, 214, 0.2);
+        }
+
         button.btn-main {
             background-color: var(--accent-blue);
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 4px;
+            padding: 14px 20px;
+            border-radius: 6px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 600;
             width: 100%;
-            font-size: 15px;
-            transition: background-color 0.3s, transform 0.1s;
+            font-size: 16px;
+            transition: all 0.3s ease;
         }
+        button.btn-main:hover { background-color: #3a88c2; transform: translateY(-2px); }
         button.btn-main:active { transform: scale(0.98); }
-        .loading-pulse { animation: pulse-btn 1.5s infinite; background-color: #3a88c2 !important; }
-        #login-msg { font-size: 13px; min-height: 20px; margin-bottom: 15px; font-weight: bold; }
+        .loading-pulse { animation: pulse-btn 1.5s infinite; background-color: #3a88c2 !important; pointer-events: none; }
+        #login-msg { font-size: 14px; min-height: 20px; margin-bottom: 15px; font-weight: 600; }
 
         /* DASHBOARD PANEL */
         #dashboard-panel {
             display: none;
+            max-width: 850px;
             width: 100%;
-            max-width: 800px;
-            animation: fadeIn 0.4s ease-out;
         }
-        
-        /* DEADLINE WIDGETS */
+
+        /* WIDGET KALENDER & TENGGAT WAKTU */
         .deadline-container {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             margin-bottom: 25px;
             flex-wrap: wrap;
         }
         .deadline-card {
             flex: 1;
             background: white;
-            padding: 15px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            min-width: 250px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            min-width: 260px;
+            transition: transform 0.3s;
         }
+        .deadline-card:hover { transform: translateY(-3px); }
         .icon-box {
-            width: 45px;
-            height: 45px;
-            border-radius: 8px;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            margin-right: 15px;
+            font-size: 26px;
+            margin-right: 18px;
         }
-        .icon-box.video { background: #fdf3e8; color: var(--accent-orange); }
+        .icon-box.video { background: #fff4e6; color: var(--accent-orange); }
         .icon-box.task { background: #ffebee; color: var(--accent-red); }
-        .deadline-text h4 { margin: 0; font-size: 14px; color: #666; }
-        .deadline-text p { margin: 5px 0 0 0; font-weight: bold; font-size: 16px; color: var(--text-dark); }
-        .urgency-pulse { animation: fadeIn 1s infinite alternate; }
+        .deadline-text h4 { margin: 0; font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .deadline-text p { margin: 5px 0 0 0; font-weight: 700; font-size: 17px; }
 
         /* PROGRESS BAR */
         .progress-container {
             background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             margin-bottom: 25px;
             text-align: center;
         }
         .progress-bar-bg {
             width: 100%;
-            background-color: #e0e0e0;
-            border-radius: 10px;
-            height: 12px;
-            margin: 10px 0;
+            background-color: #ecf0f1;
+            border-radius: 12px;
+            height: 14px;
+            margin: 15px 0;
             overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
         #progress-fill {
             height: 100%;
-            background-color: var(--accent-teal);
+            background: linear-gradient(90deg, #4bbdb4, #38a39a);
             width: 0%;
-            border-radius: 10px;
-            transition: width 1s ease-in-out;
+            border-radius: 12px;
+            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* MODULE CARDS */
@@ -167,51 +189,74 @@
             justify-content: center;
             flex-wrap: wrap;
         }
-        .card {
+        .module-card {
             background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            width: 45%;
-            min-width: 250px;
+            padding: 25px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            width: calc(50% - 10px);
+            min-width: 280px;
             text-align: center;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 5px;
         }
-        .card-sempoa { border-top: 5px solid var(--accent-teal); }
-        .card-classroom { border-top: 5px solid var(--accent-blue); }
-        .card h3 { margin-top: 0; }
+        .card-sempoa::before { background-color: var(--accent-teal); }
+        .card-classroom::before { background-color: var(--accent-blue); }
+        
+        .module-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+        }
+        .module-card h3 { margin: 10px 0; font-size: 20px; }
+        .module-card p { font-size: 14px; color: var(--text-muted); margin: 0; }
 
-        /* CONTENT AREA */
+        /* AREA KONTEN MATERI */
         #content-area {
-            margin-top: 30px;
-            background: white;
-            padding: 25px;
-            border-radius: 8px;
+            margin-top: 25px;
             display: none;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            animation: fadeIn 0.4s ease-out;
         }
-        .module-item { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #eee; }
+        .module-item { 
+            margin-bottom: 20px; 
+            padding-bottom: 15px; 
+            border-bottom: 1px solid #ecf0f1; 
+        }
         .module-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        
+        .module-item strong { display: block; font-size: 16px; margin-bottom: 8px; color: var(--text-dark); }
         .module-item a {
             color: var(--accent-blue);
             text-decoration: none;
-            display: inline-block;
-            margin: 8px 15px 8px 0;
+            display: inline-flex;
+            align-items: center;
+            margin: 6px 12px 6px 0;
             font-weight: 500;
-            padding: 6px 12px;
+            padding: 8px 14px;
             background: var(--bg-main);
-            border-radius: 4px;
-            transition: background 0.2s;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: background 0.2s, color 0.2s;
         }
-        .module-item a:hover { background: #d0e8f8; }
-        .est-time { font-size: 13px; color: #666; display: block; margin-top: 5px; font-style: italic; }
-        .badge { font-size: 11px; background: #d0e8f8; color: #00509d; padding: 2px 6px; border-radius: 4px; margin-left: 5px; vertical-align: middle; }
+        .module-item a:hover { background: var(--accent-blue); color: white; }
+        .est-time { font-size: 13px; color: var(--text-muted); margin-bottom: 10px; display: inline-block; font-style: italic; }
+        .badge { font-size: 11px; font-weight: bold; background: #ffebee; color: var(--accent-red); padding: 3px 8px; border-radius: 12px; margin-left: 8px; vertical-align: middle; }
+
+        .locked-notice {
+            background: #fff4f4;
+            color: var(--accent-red);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #ffcdcd;
+        }
     </style>
 </head>
 <body>
@@ -220,10 +265,10 @@
         <img src="https://cdn-web.ruangguru.com/file-uploader/3f15f74f-6104-44d8-b0b3-7b886772a4f2.png" alt="Logo Math Champs">
     </div>
 
-    <div id="login-panel">
+    <div id="login-panel" class="panel-card">
         <h2>Portal Pelatihan Guru</h2>
-        <p style="color: #666; font-size: 14px;">Silakan masuk untuk melanjutkan belajar.</p>
-        <input type="email" id="email-input" placeholder="contoh: guru@ruangguru.com">
+        <p>Silakan masuk menggunakan email pendaftaran Anda.</p>
+        <input type="email" id="email-input" placeholder="contoh: guru@ruangguru.com" required>
         <div id="login-msg"></div>
         <button id="login-btn" class="btn-main" onclick="doLogin()">Masuk Sekarang</button>
     </div>
@@ -232,103 +277,101 @@
         
         <div class="deadline-container">
             <div class="deadline-card" style="border-left: 4px solid var(--accent-orange);">
-                <div class="icon-box video">⏳</div>
+                <div class="icon-box video"> ⏳ </div>
                 <div class="deadline-text">
                     <h4>Batas Menonton Video</h4>
-                    <p class="urgency-pulse" style="color: var(--accent-orange);">06 September 2026</p>
+                    <p style="color: var(--accent-orange);">06 September 2026</p>
                 </div>
             </div>
             <div class="deadline-card" style="border-left: 4px solid var(--accent-red);">
-                <div class="icon-box task">📅</div>
+                <div class="icon-box task"> 📅 </div>
                 <div class="deadline-text">
                     <h4>Batas Kumpul Tugas</h4>
-                    <p class="urgency-pulse" style="color: var(--accent-red);">08 Agustus 2026</p>
+                    <p style="color: var(--accent-red);">08 Agustus 2026</p>
                 </div>
             </div>
         </div>
 
         <div class="progress-container">
-            <h3 style="margin: 0; color: var(--accent-teal);">Progres Belajar Anda</h3>
+            <h3 style="margin: 0 0 5px 0; color: var(--accent-teal); font-size: 18px;">Progres Belajar Anda</h3>
+            <p style="margin: 0; color: var(--text-muted); font-size: 14px;">Terus tingkatkan belajarmu hari ini!</p>
             <div class="progress-bar-bg">
                 <div id="progress-fill"></div>
             </div>
-            <p id="progress-text" style="margin: 0; font-weight: bold; color: #666;">0% Selesai</p>
+            <p id="progress-text" style="margin: 0; font-weight: bold; color: var(--text-dark);">0% Selesai</p>
         </div>
 
         <div class="choice-container">
-            <div class="card card-sempoa" onclick="showSempoaSkill()">
+            <div class="module-card card-sempoa" onclick="showSempoaSkill()">
                 <h3 style="color: var(--accent-teal);">Sempoa Skill</h3>
-                <p style="font-size: 14px; color: #666;">Materi teknis berhitung dan modul latihan.</p>
+                <p>Materi teknis berhitung dan modul latihan Section 1-6.</p>
             </div>
-            <div class="card card-classroom" onclick="showClassroomMgmt()">
+            <div class="module-card card-classroom" onclick="showClassroomMgmt()">
                 <h3 style="color: var(--accent-blue);">Classroom Management</h3>
-                <p style="font-size: 14px; color: #666;">Panduan kelola kelas dan tugas mandiri.</p>
+                <p>Panduan mengelola kelas offline dan tugas mandiri.</p>
             </div>
         </div>
 
-        <div id="content-area"></div>
+        <div id="content-area" class="panel-card"></div>
+
     </div>
 
     <script>
-        // API SCRIPT (Sudah menggunakan link terbaru yang kamu berikan)
-        const API_URL = "https://script.google.com/macros/s/AKfycbxXmyI7pwbkYQWJHXGMVbPJKQ3NlrjxKnK2Nw0qQdFANUyu9J2PaDehqDhXWqS5nnb-/exec";
-        
+        // TAUTAN API APPS SCRIPT TERBARU
+        const API_URL = "https://script.google.com/macros/s/AKfycbx09ukQqWDv2tr16FYdsE63z-s1mWCnHUOcuqAiomDjVEwKuPIx00xgziqiRHLFZbUj/exec";
+
         let currentUserEmail = "";
         let autoSaveInterval;
         let learningDuration = 0;
 
-        // DATA MATERI
+        // DATA KONTEN MATERI
         const classroomMgmtData = `
-            <h2 style="color: var(--accent-blue); border-bottom: 2px solid #eee; padding-bottom: 10px;">Classroom Management</h2>
+            <h2 style="color: var(--accent-blue); border-bottom: 2px solid #ecf0f1; padding-bottom: 12px; margin-top: 0;">Classroom Management</h2>
             <div class="module-item">
-                <strong>Panduan & Pengumpulan:</strong> <span class="badge">Wajib</span>
-                <span class="est-time">Estimasi: 45 menit</span>
-                <br>
+                <strong>Panduan & Pengumpulan <span class="badge">Wajib</span></strong>
+                <span class="est-time">Estimasi pengerjaan: 45 menit</span><br>
                 <a href="#" target="_blank">🎥 Video Panduan Kelas Offline</a>
                 <a href="#" target="_blank">📄 Panduan Kelas (Drive)</a>
             </div>
             <div class="module-item">
-                <strong>Tugas Akhir:</strong>
-                <span class="est-time">Batas: 8 Agustus 2026</span>
-                <br>
+                <strong>Tugas Akhir</strong>
+                <span class="est-time">Batas pengumpulan: 8 Agustus 2026</span><br>
                 <a href="#" target="_blank">📌 Kumpul Video Submission</a>
                 <a href="#" target="_blank">📌 Kumpul Tugas KLH</a>
             </div>
         `;
 
         const sempoaSkillData = `
-            <h2 style="color: var(--accent-teal); border-bottom: 2px solid #eee; padding-bottom: 10px;">Sempoa Skill (Section 1-6)</h2>
+            <h2 style="color: var(--accent-teal); border-bottom: 2px solid #ecf0f1; padding-bottom: 12px; margin-top: 0;">Sempoa Skill (Section 1-6)</h2>
             <div class="module-item">
                 <strong>Section 1: Dasar Sempoa</strong>
-                <span class="est-time">Estimasi: 30 menit</span>
-                <br>
+                <span class="est-time">Estimasi pengerjaan: 30 menit</span><br>
                 <a href="#" target="_blank">🎥 Video Pembelajaran</a>
                 <a href="#" target="_blank">📄 Modul Latihan PDF</a>
             </div>
             <div class="module-item">
                 <strong>Section 2: Latihan Lanjutan</strong>
-                <span class="est-time">Estimasi: 45 menit</span>
-                <br>
+                <span class="est-time">Estimasi pengerjaan: 45 menit</span><br>
                 <a href="#" target="_blank">🎥 Video Pembelajaran</a>
                 <a href="#" target="_blank">📝 Post Test Section 2</a>
             </div>
         `;
 
-        // FUNGSI FETCH API (JSONP untuk memutar CORS)
+        // FUNGSI FETCH API DENGAN JSONP
         function callApi(params) {
             return new Promise((resolve, reject) => {
-                const callbackName = 'appsScriptCallback_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
+                const callbackName = 'jsonpCallback_' + Math.round(100000 * Math.random());
                 const script = document.createElement('script');
-                
+
                 const timeout = setTimeout(() => {
                     cleanup();
-                    reject(new Error('Request timeout'));
+                    reject(new Error('Koneksi terputus (Timeout).'));
                 }, 15000);
 
                 function cleanup() {
                     clearTimeout(timeout);
                     delete window[callbackName];
-                    if(document.body.contains(script)) script.remove();
+                    if (document.body.contains(script)) script.remove();
                 }
 
                 window[callbackName] = (data) => {
@@ -341,77 +384,85 @@
                 
                 script.onerror = () => {
                     cleanup();
-                    reject(new Error('Gagal memuat API Apps Script'));
+                    reject(new Error('Gagal memuat API server.'));
                 };
+                
                 script.src = `${API_URL}?${query}`;
                 document.body.appendChild(script);
             });
         }
 
-        // FUNGSI LOGIN
+        // FUNGSI LOGIN UTAMA
         async function doLogin() {
-            const email = document.getElementById('email-input').value.trim();
+            const emailInput = document.getElementById('email-input');
+            const email = emailInput.value.trim();
             const msgArea = document.getElementById('login-msg');
             const btn = document.getElementById('login-btn');
 
             if (!email) {
                 msgArea.innerText = "Email tidak boleh kosong.";
                 msgArea.style.color = "var(--accent-red)";
+                emailInput.focus();
                 return;
             }
 
-            msgArea.innerText = "Mencari datamu di sistem...";
-            msgArea.style.color = "#555";
-            btn.innerText = "Memuat...";
-            btn.disabled = true;
+            // Ubah tampilan tombol saat loading
+            msgArea.innerText = "Memverifikasi data di database...";
+            msgArea.style.color = "var(--text-muted)";
+            btn.innerText = "Memproses...";
             btn.classList.add('loading-pulse');
 
             try {
                 const data = await callApi({ action: 'login', email: email });
-                
+
                 if (data.success) {
                     currentUserEmail = email;
-                    // Transisi Tampilan
+                    
+                    // Transisi Halaman Mulus
                     document.getElementById('login-panel').style.display = 'none';
                     document.getElementById('hero-banner').style.display = 'none';
-                    document.getElementById('dashboard-panel').style.display = 'block';
                     
-                    // Update Progres & Mulai Simpan Otomatis
-                    updateProgressUI(45); // Simulasi Progres 45%
+                    const dashboard = document.getElementById('dashboard-panel');
+                    dashboard.style.display = 'block';
+                    dashboard.style.animation = 'fadeIn 0.5s ease-out forwards';
+
+                    // Update UI Progress Simulasi & Mulai Auto-save
+                    updateProgressUI(45); 
                     startAutoSave();
                 } else {
-                    msgArea.innerText = data.message || "Email tidak terdaftar.";
+                    msgArea.innerText = data.message || "Email tidak terdaftar di sistem kami.";
                     msgArea.style.color = "var(--accent-red)";
                 }
             } catch (error) {
-                msgArea.innerText = "Gagal terhubung ke database. Pastikan link Apps Script sudah benar.";
+                msgArea.innerText = "Gagal terhubung ke Google Sheets. Pastikan ID dan Deploy sudah benar.";
                 msgArea.style.color = "var(--accent-red)";
             } finally {
                 btn.innerText = "Masuk Sekarang";
-                btn.disabled = false;
                 btn.classList.remove('loading-pulse');
             }
         }
 
-        // FUNGSI UPDATE PROGRESS
+        // FUNGSI UPDATE PROGRESS UI
         function updateProgressUI(percentage) {
             setTimeout(() => {
                 document.getElementById('progress-fill').style.width = percentage + '%';
                 document.getElementById('progress-text').innerText = percentage + '% Selesai';
-            }, 500);
+            }, 400); // Sedikit delay agar transisi panel selesai dulu
         }
 
-        // TAMPILKAN MATERI SEMPOA (Dengan Logika Penguncian Waktu)
+        // TAMPILKAN MATERI SEMPOA (Dengan Logika Tanggal 6 September 2026)
         function showSempoaSkill() {
             const contentArea = document.getElementById('content-area');
             const deadline = new Date("2026-09-07T00:00:00+07:00");
             const now = new Date();
-
-            contentArea.style.display = 'block';
             
+            contentArea.style.display = 'block';
+            contentArea.style.animation = 'none'; // reset animasi
+            setTimeout(() => contentArea.style.animation = 'fadeIn 0.4s ease-out', 10);
+
             if (now >= deadline) {
                 contentArea.innerHTML = `
-                    <div style="background: #ffeeee; color: var(--accent-red); padding: 20px; border-radius: 8px; text-align: center; font-weight: bold;">
+                    <div class="locked-notice">
                         🔒 Maaf, akses ke materi Sempoa Skill telah dikunci sejak tanggal 6 September 2026.
                     </div>
                 `;
@@ -424,19 +475,22 @@
         function showClassroomMgmt() {
             const contentArea = document.getElementById('content-area');
             contentArea.style.display = 'block';
+            contentArea.style.animation = 'none';
+            setTimeout(() => contentArea.style.animation = 'fadeIn 0.4s ease-out', 10);
+            
             contentArea.innerHTML = classroomMgmtData;
         }
 
-        // FITUR AUTO-SAVE BERKALA (Ke Server)
+        // FITUR AUTO-SAVE BERKALA
         function startAutoSave() {
             autoSaveInterval = setInterval(() => {
                 learningDuration += 60;
-                callApi({ 
-                    action: 'save_progress', 
-                    email: currentUserEmail, 
-                    duration: learningDuration 
-                }).catch(e => console.error("Gagal simpan progres otomatis", e));
-            }, 60000); // Tiap 60 detik
+                callApi({
+                    action: 'save_progress',
+                    email: currentUserEmail,
+                    duration: learningDuration
+                }).catch(e => console.error("Gagal sinkronisasi auto-save", e));
+            }, 60000); // Auto-save setiap 60 detik
         }
     </script>
 </body>
