@@ -605,157 +605,1946 @@
       }
     }
 
+
+    /* ============================================================
+       LANDING PAGE — [MANDATORY] INTERNAL TEACHER TRAINING
+       ============================================================ */
+    .training-login-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100dvh;
+      overflow: hidden;
+      padding: 28px 18px;
+      background:
+        linear-gradient(
+          180deg,
+          #bfe6ff 0%,
+          #ccecff 44%,
+          #dff4ff 100%
+        );
+    }
+
+    .training-login-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.44;
+      background-image:
+        radial-gradient(circle, rgba(26, 134, 213, 0.64) 1.25px, transparent 1.4px);
+      background-size: 16px 16px;
+      mask-image:
+        radial-gradient(
+          ellipse at center,
+          rgba(0, 0, 0, 1) 0%,
+          rgba(0, 0, 0, 0.84) 50%,
+          rgba(0, 0, 0, 0.35) 100%
+        );
+      pointer-events: none;
+    }
+
+    .training-login-screen::before {
+      position: absolute;
+      top: -165px;
+      left: 50%;
+      width: min(920px, 86vw);
+      height: 360px;
+      border-radius: 50%;
+      background:
+        radial-gradient(
+          ellipse,
+          rgba(255, 255, 255, 0.34) 0%,
+          rgba(255, 255, 255, 0.08) 62%,
+          transparent 72%
+        );
+      content: "";
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .training-login-content {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      width: min(100%, 520px);
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      text-align: center;
+    }
+
+    .training-login-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .training-login-brand img {
+      width: 112px;
+      max-height: 78px;
+      margin-bottom: 9px;
+      object-fit: contain;
+      filter:
+        drop-shadow(0 4px 8px rgba(18, 92, 153, 0.10));
+    }
+
+    .training-login-title {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+      color: #115c9a;
+      line-height: 1.06;
+    }
+
+    .training-login-mandatory {
+      color: #174879;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(28px, 4vw, 43px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      text-shadow: 0 2px 0 rgba(255, 255, 255, 0.45);
+    }
+
+    .training-login-subtitle {
+      margin-top: 5px;
+      color: #1470b8;
+      font-size: clamp(21px, 3vw, 31px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+
+    .training-title-accent {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 12px 0 7px;
+      color: #ffc62d;
+    }
+
+    .training-title-accent span {
+      display: block;
+      width: 34px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, #f7b91f);
+    }
+
+    .training-title-accent span:last-child {
+      background: linear-gradient(90deg, #f7b91f, transparent);
+    }
+
+    .training-title-accent i {
+      font-size: 10px;
+      filter: drop-shadow(0 2px 2px rgba(190, 128, 0, 0.15));
+    }
+
+    .training-login-quote {
+      max-width: 405px;
+      margin: 0;
+      color: #426d8e;
+      font-size: 12px;
+      font-style: italic;
+      font-weight: 500;
+      line-height: 1.65;
+    }
+
+    .training-login-card {
+      position: relative;
+      width: min(100%, 410px);
+      overflow: hidden;
+      padding: 28px 30px 27px;
+      border: 1px solid rgba(39, 126, 208, 0.22);
+      border-radius: 17px;
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow:
+        0 18px 45px rgba(41, 108, 166, 0.17),
+        0 4px 10px rgba(34, 98, 154, 0.08);
+      backdrop-filter: blur(10px);
+    }
+
+    .training-login-card-accent {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background:
+        linear-gradient(
+          90deg,
+          #296be7,
+          #2d8cf0 48%,
+          #3baee9
+        );
+    }
+
+    .training-login-card h2 {
+      margin: 0 0 7px;
+      color: #1766aa;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+
+    .training-login-card > p {
+      max-width: 300px;
+      margin: 0 auto 20px;
+      color: #6b8295;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .training-email-field {
+      position: relative;
+    }
+
+    .training-email-field i {
+      position: absolute;
+      top: 50%;
+      left: 14px;
+      z-index: 2;
+      color: #8ba5bb;
+      font-size: 13px;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .training-email-field input {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 14px 12px 40px;
+      border: 1px solid #d2ddeb;
+      border-radius: 10px;
+      outline: none;
+      background: #f4f7fb;
+      color: #29435b;
+      font-size: 12px;
+      transition:
+        border-color 0.18s ease,
+        background 0.18s ease,
+        box-shadow 0.18s ease;
+    }
+
+    .training-email-field input::placeholder {
+      color: #9aabba;
+    }
+
+    .training-email-field input:focus {
+      border-color: #418be8;
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(65, 139, 232, 0.14);
+    }
+
+    .training-verification-message {
+      min-height: 25px;
+      padding-top: 6px;
+      color: #e5484d;
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 1.4;
+      text-align: left;
+    }
+
+    .training-login-button {
+      display: flex;
+      width: 100%;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 0;
+      border-radius: 10px;
+      background:
+        linear-gradient(90deg, #2863df 0%, #357ee9 55%, #3e91ef 100%);
+      box-shadow:
+        0 8px 18px rgba(43, 106, 221, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition:
+        transform 0.18s ease,
+        filter 0.18s ease,
+        box-shadow 0.18s ease;
+    }
+
+    .training-login-button:hover {
+      filter: brightness(1.035);
+      box-shadow:
+        0 10px 22px rgba(43, 106, 221, 0.29),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+      transform: translateY(-1px);
+    }
+
+    .training-login-button:active {
+      transform: translateY(0);
+    }
+
+    .training-login-button:disabled {
+      cursor: wait;
+      filter: saturate(0.72);
+      opacity: 0.78;
+      transform: none;
+    }
+
+    .training-login-wave {
+      position: absolute;
+      right: 0;
+      bottom: -1px;
+      left: 0;
+      z-index: 1;
+      height: 175px;
+      pointer-events: none;
+    }
+
+    .training-login-wave svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .training-decoration {
+      position: absolute;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      color: rgba(255, 255, 255, 0.80);
+      filter: drop-shadow(0 4px 5px rgba(54, 122, 177, 0.10));
+      pointer-events: none;
+    }
+
+    .training-decoration-book {
+      top: 17%;
+      left: 5%;
+      font-size: 28px;
+      transform: rotate(-4deg);
+    }
+
+    .training-decoration-bulb {
+      top: 36%;
+      left: 3%;
+      color: rgba(255, 210, 48, 0.90);
+      font-size: 29px;
+    }
+
+    .training-decoration-star-one {
+      top: 55%;
+      left: 8%;
+      color: rgba(255, 205, 36, 0.92);
+      font-size: 17px;
+    }
+
+    .training-decoration-clock {
+      bottom: 25%;
+      left: 6%;
+      font-size: 34px;
+    }
+
+    .training-decoration-calculator {
+      bottom: 8%;
+      left: 4%;
+      color: rgba(255, 255, 255, 0.92);
+      font-size: 27px;
+    }
+
+    .training-decoration-rocket {
+      top: 14%;
+      right: 4%;
+      font-size: 30px;
+      transform: rotate(-12deg);
+    }
+
+    .training-decoration-atom {
+      top: 35%;
+      right: 3%;
+      color: rgba(255, 215, 47, 0.80);
+      font-size: 31px;
+    }
+
+    .training-decoration-question {
+      top: 60%;
+      right: 5%;
+      font-size: 34px;
+    }
+
+    .training-decoration-star-two {
+      top: 53%;
+      right: 12%;
+      color: rgba(255, 211, 42, 0.92);
+      font-size: 15px;
+    }
+
+    .training-decoration-sun {
+      bottom: 12%;
+      right: 4%;
+      color: rgba(255, 206, 33, 0.90);
+      font-size: 30px;
+    }
+
+    @media (max-height: 760px) and (min-width: 641px) {
+      .training-login-screen {
+        padding-top: 18px;
+        padding-bottom: 18px;
+      }
+
+      .training-login-content {
+        gap: 12px;
+        transform: scale(0.92);
+      }
+
+      .training-login-brand img {
+        width: 96px;
+        margin-bottom: 5px;
+      }
+
+      .training-login-card {
+        padding-top: 23px;
+        padding-bottom: 22px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .training-login-screen {
+        align-items: flex-start;
+        overflow-y: auto;
+        padding: 34px 18px 90px;
+      }
+
+      .training-login-content {
+        width: 100%;
+        gap: 17px;
+      }
+
+      .training-login-brand img {
+        width: 98px;
+        margin-bottom: 8px;
+      }
+
+      .training-login-mandatory {
+        font-size: clamp(26px, 9.5vw, 37px);
+      }
+
+      .training-login-subtitle {
+        max-width: 320px;
+        font-size: clamp(20px, 6.6vw, 27px);
+      }
+
+      .training-login-quote {
+        max-width: 315px;
+        padding: 0 12px;
+        font-size: 11px;
+      }
+
+      .training-login-card {
+        width: min(100%, 390px);
+        padding: 26px 22px 24px;
+      }
+
+      .training-login-wave {
+        position: fixed;
+        height: 120px;
+      }
+
+      .training-decoration-book,
+      .training-decoration-clock,
+      .training-decoration-calculator {
+        left: 2%;
+        opacity: 0.55;
+        transform: scale(0.78);
+      }
+
+      .training-decoration-rocket,
+      .training-decoration-question,
+      .training-decoration-sun {
+        right: 2%;
+        opacity: 0.55;
+        transform: scale(0.78);
+      }
+
+      .training-decoration-bulb,
+      .training-decoration-star-one,
+      .training-decoration-atom,
+      .training-decoration-star-two {
+        opacity: 0.48;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .training-decoration {
+        opacity: 0.26 !important;
+      }
+
+      .training-login-screen {
+        padding-right: 14px;
+        padding-left: 14px;
+      }
+
+      .training-login-card h2 {
+        font-size: 17px;
+      }
+    }
+
+
+    /* Logo Ruangguru harus selalu terlihat, termasuk saat video berjalan. */
+    .youtube-left-badge,
+    .youtube-left-badge.is-player-running {
+      visibility: visible !important;
+      opacity: 1 !important;
+      transform: none !important;
+      pointer-events: auto !important;
+    }
+
+
+    #verification-button.training-login-button {
+      background:
+        linear-gradient(90deg, #2863df 0%, #357ee9 55%, #3e91ef 100%) !important;
+      box-shadow:
+        0 8px 18px rgba(43, 106, 221, 0.24),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16) !important;
+    }
+
+
+    /* ============================================================
+       BLUE DASHBOARD — INTERNAL TEACHER TRAINING
+       ============================================================ */
+    body.dashboard-active {
+      background-color: #dff2ff !important;
+      background-image:
+        radial-gradient(circle, rgba(39, 136, 224, 0.18) 1.2px, transparent 1.35px) !important;
+      background-size: 18px 18px !important;
+    }
+
+    body.dashboard-active::before,
+    body.dashboard-active::after {
+      display: none !important;
+    }
+
+    body.dashboard-active > main {
+      width: 100%;
+      max-width: 1540px !important;
+      padding-top: 18px;
+      padding-bottom: 40px;
+    }
+
+    .blue-dashboard {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+    }
+
+    .blue-dashboard::before {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: -1;
+      height: 175px;
+      background: #c4e8ff;
+      clip-path: polygon(
+        0 58%,
+        13% 52%,
+        28% 63%,
+        45% 48%,
+        63% 60%,
+        78% 45%,
+        100% 34%,
+        100% 100%,
+        0 100%
+      );
+      content: "";
+      pointer-events: none;
+    }
+
+    .blue-dashboard-hero {
+      display: flex;
+      min-height: 128px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      padding: 24px 30px;
+      border-radius: 22px 22px 0 0;
+      background: #2364d9;
+      box-shadow: 0 14px 30px rgba(30, 94, 197, 0.20);
+      color: #fff;
+    }
+
+    .blue-dashboard-welcome {
+      display: flex;
+      min-width: 0;
+      align-items: flex-start;
+      gap: 17px;
+    }
+
+    .blue-dashboard-greeting-icon {
+      display: grid;
+      flex: 0 0 auto;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.15);
+      font-size: 25px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.20);
+    }
+
+    .blue-dashboard-welcome h1 {
+      margin: 0;
+      color: #fff;
+      font-size: clamp(23px, 2.4vw, 34px);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.18;
+    }
+
+    .blue-dashboard-welcome p {
+      max-width: 800px;
+      margin: 9px 0 0;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 13px;
+      font-style: italic;
+      line-height: 1.65;
+    }
+
+    .blue-dashboard-time-panel {
+      display: flex;
+      flex: 0 0 auto;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .blue-dashboard-clock {
+      color: #fff;
+      font-size: 23px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    .blue-dashboard-date {
+      margin-top: 7px;
+      color: rgba(255, 255, 255, 0.83);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .blue-dashboard-logout {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 12px;
+      padding: 8px 13px;
+      border: 1px solid rgba(255, 255, 255, 0.42);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.10);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      transition:
+        background 0.18s ease,
+        transform 0.18s ease;
+    }
+
+    .blue-dashboard-logout:hover {
+      background: rgba(255, 255, 255, 0.20);
+      transform: translateY(-1px);
+    }
+
+    .blue-dashboard-brandbar {
+      display: flex;
+      min-height: 72px;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 30px;
+      border-right: 1px solid rgba(81, 153, 218, 0.15);
+      border-bottom: 1px solid rgba(81, 153, 218, 0.15);
+      border-left: 1px solid rgba(81, 153, 218, 0.15);
+      border-radius: 0 0 22px 22px;
+      background: rgba(247, 252, 255, 0.96);
+      box-shadow: 0 10px 24px rgba(61, 132, 195, 0.10);
+    }
+
+    .blue-dashboard-brandbar img {
+      width: 68px;
+      max-height: 48px;
+      object-fit: contain;
+    }
+
+    .blue-dashboard-brandbar div {
+      display: flex;
+      flex-direction: column;
+      padding-left: 14px;
+      border-left: 1px solid #d5e5f2;
+      line-height: 1.2;
+    }
+
+    .blue-dashboard-brandbar span {
+      color: #2a84c9;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .blue-dashboard-brandbar strong {
+      margin-top: 3px;
+      color: #183a69;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .blue-dashboard-layout {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr) 286px;
+      gap: 20px;
+      align-items: start;
+      margin-top: 20px;
+    }
+
+    .blue-dashboard-left,
+    .blue-dashboard-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .blue-profile-card,
+    .blue-dashboard-nav-card,
+    .blue-calendar-card,
+    .blue-deadline-card,
+    .blue-content-card,
+    .blue-history-card,
+    .blue-help-card {
+      border: 1px solid rgba(54, 139, 215, 0.18) !important;
+      background: rgba(255, 255, 255, 0.97) !important;
+      box-shadow: 0 12px 28px rgba(35, 105, 170, 0.11) !important;
+    }
+
+    .blue-profile-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 22px 16px 20px;
+      border-radius: 18px;
+      text-align: center;
+    }
+
+    .blue-profile-avatar {
+      display: grid;
+      width: 66px;
+      height: 66px;
+      place-items: center;
+      border: 5px solid #e9f5ff;
+      border-radius: 999px;
+      background: #2b6dd6;
+      box-shadow: 0 8px 18px rgba(43, 109, 214, 0.27);
+      color: #fff;
+      font-size: 25px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .blue-profile-card h2 {
+      width: 100%;
+      margin: 15px 0 0;
+      overflow: hidden;
+      color: #17365e;
+      font-size: 14px;
+      font-weight: 700;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .blue-profile-card p {
+      width: 100%;
+      margin: 5px 0 0;
+      overflow: hidden;
+      color: #7590a8;
+      font-size: 10px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .blue-profile-role {
+      margin-top: 12px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: #e8f3ff;
+      color: #2a70c9;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .blue-dashboard-nav-card {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 13px;
+      border-radius: 18px;
+    }
+
+    .dashboard-nav-button {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 13px !important;
+      border: 0 !important;
+      border-radius: 11px !important;
+      background: transparent !important;
+      color: #4c647c !important;
+      font-size: 12px !important;
+      font-weight: 500 !important;
+      text-align: left;
+      transition:
+        background 0.18s ease,
+        color 0.18s ease,
+        transform 0.18s ease;
+    }
+
+    .dashboard-nav-button:hover {
+      background: #eef7ff !important;
+      color: #2364b7 !important;
+      transform: translateX(2px);
+    }
+
+    .dashboard-nav-button[aria-selected="true"] {
+      background: #e3f1ff !important;
+      color: #1669bd !important;
+      font-weight: 700 !important;
+      box-shadow: inset 3px 0 0 #2b7ddd;
+    }
+
+    .dashboard-nav-icon {
+      display: grid;
+      width: 25px;
+      place-items: center;
+      font-size: 15px;
+    }
+
+    .blue-dashboard-main {
+      min-width: 0;
+    }
+
+    .blue-section-heading {
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .blue-section-heading p,
+    .blue-card-heading p {
+      margin: 0 0 4px;
+      color: #2786ca;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .blue-section-heading h2 {
+      margin: 0;
+      color: #194c8d;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .blue-section-heading > span {
+      display: block;
+      margin-top: 5px;
+      color: #7290aa;
+      font-size: 11px;
+    }
+
+    .blue-course-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 15px;
+      margin-bottom: 16px;
+    }
+
+    .blue-course-card {
+      position: relative;
+      display: flex;
+      min-height: 220px;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+      padding: 23px 22px 20px;
+      border: 1px solid rgba(53, 139, 215, 0.20);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.97);
+      box-shadow: 0 12px 26px rgba(35, 105, 170, 0.10);
+      text-align: center;
+      transition:
+        border-color 0.20s ease,
+        box-shadow 0.20s ease,
+        transform 0.20s ease;
+    }
+
+    .blue-course-card::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #28aee3;
+      content: "";
+    }
+
+    .blue-course-classroom::before {
+      background: #6874e8;
+    }
+
+    .blue-course-card:hover,
+    .blue-course-card:focus-visible {
+      border-color: rgba(38, 129, 212, 0.38);
+      box-shadow: 0 17px 34px rgba(35, 105, 170, 0.15);
+      outline: none;
+      transform: translateY(-3px);
+    }
+
+    .blue-course-icon {
+      display: grid;
+      width: 66px;
+      height: 66px;
+      place-items: center;
+      border: 1px solid #bce8f8;
+      border-radius: 15px;
+      background: #e9faff;
+      box-shadow: 5px 5px 0 #d7f2fb;
+      color: #09a7da;
+      font-size: 28px;
+    }
+
+    .blue-course-classroom .blue-course-icon {
+      border-color: #d3d0ff;
+      background: #f1efff;
+      box-shadow: 5px 5px 0 #e1dfff;
+      color: #6b63e8;
+    }
+
+    .blue-course-card h3 {
+      margin: 17px 0 0;
+      color: #0c9ccc;
+      font-size: 19px;
+      font-weight: 700;
+    }
+
+    .blue-course-classroom h3 {
+      color: #6659df;
+    }
+
+    .blue-course-card strong {
+      margin-top: 3px;
+      color: #2074b9;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .blue-course-card p {
+      max-width: 350px;
+      margin: 12px 0 0;
+      color: #637f98;
+      font-size: 11px;
+      line-height: 1.65;
+    }
+
+    .blue-course-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: auto;
+      padding-top: 15px;
+      color: #2175bd;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .blue-content-card {
+      overflow: hidden;
+      border-top: 4px solid #3a9bea !important;
+      border-radius: 18px !important;
+    }
+
+    .blue-content-placeholder {
+      display: flex;
+      min-height: 220px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .blue-content-placeholder > span {
+      display: grid;
+      width: 50px;
+      height: 50px;
+      place-items: center;
+      border-radius: 999px;
+      background: #edf6ff;
+      color: #6a9dcc;
+    }
+
+    .blue-content-placeholder h2 {
+      margin: 13px 0 0;
+      color: #294f75;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .blue-content-placeholder p {
+      max-width: 420px;
+      margin: 5px 0 0;
+      color: #7c93a7;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .blue-history-card,
+    .blue-help-card {
+      padding: 22px !important;
+      border-radius: 18px !important;
+    }
+
+    .blue-card-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #e4eef6;
+    }
+
+    .blue-card-heading h2 {
+      margin: 0;
+      color: #194c8d;
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .blue-card-heading > div > span {
+      display: block;
+      margin-top: 5px;
+      color: #7790a7;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .blue-refresh-button {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 12px;
+      border: 1px solid #cbdceb;
+      border-radius: 10px;
+      background: #fff;
+      color: #446884;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .blue-refresh-button:hover {
+      background: #f2f8fd;
+    }
+
+    .blue-progress-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 17px;
+      padding: 17px;
+      border: 1px solid #cfe8f8;
+      border-radius: 15px;
+      background: #edf8ff;
+    }
+
+    .blue-progress-card .progress-ring {
+      flex: 0 0 auto;
+    }
+
+    .blue-progress-card p {
+      margin: 0;
+      color: #2278b8;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .blue-progress-card h3 {
+      margin: 3px 0 0;
+      color: #193d68;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .blue-progress-card span {
+      display: block;
+      margin-top: 4px;
+      color: #7890a5;
+      font-size: 10px;
+    }
+
+    .blue-submission-list {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin-top: 16px;
+    }
+
+    .blue-submission-list article {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      border: 1px solid #dbe8f2;
+      border-radius: 13px;
+      background: #f8fbfe;
+    }
+
+    .blue-submission-icon {
+      display: grid;
+      width: 40px;
+      height: 40px;
+      place-items: center;
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 4px 10px rgba(51, 110, 166, 0.08);
+      color: #4789c3;
+    }
+
+    .blue-submission-list h3 {
+      margin: 0;
+      color: #294966;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .blue-submission-list p {
+      margin: 3px 0 0;
+      color: #7b92a5;
+      font-size: 9px;
+    }
+
+    .blue-faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      margin-top: 17px;
+    }
+
+    .blue-faq-list article {
+      display: flex;
+      gap: 14px;
+      padding: 16px;
+      border: 1px solid #dbe8f2;
+      border-radius: 14px;
+      background: #f9fcff;
+    }
+
+    .blue-faq-number {
+      display: grid;
+      flex: 0 0 auto;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border-radius: 11px;
+      background: #e5f3ff;
+      color: #2978ba;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .blue-faq-list h3 {
+      margin: 0;
+      color: #1e527f;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .blue-faq-list p,
+    .blue-faq-list li {
+      color: #607e96;
+      font-size: 10px;
+      line-height: 1.65;
+    }
+
+    .blue-faq-list p {
+      margin: 5px 0 0;
+    }
+
+    .blue-faq-list ul {
+      margin: 7px 0 0;
+      padding-left: 17px;
+    }
+
+    .blue-whatsapp-card {
+      border-color: #c9edd8 !important;
+      background: #f1fbf5 !important;
+    }
+
+    .blue-whatsapp-card .blue-faq-number {
+      background: #dcf7e7;
+      color: #18a95b;
+      font-size: 18px;
+    }
+
+    .blue-whatsapp-card button {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 10px;
+      padding: 9px 13px;
+      border-radius: 9px;
+      background: #20b765;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .blue-whatsapp-card button:hover {
+      background: #18a65a;
+    }
+
+    .blue-calendar-card {
+      padding: 17px !important;
+      border-top: 4px solid #20aee6 !important;
+      border-radius: 18px !important;
+    }
+
+    .blue-calendar-heading {
+      padding-bottom: 12px;
+      border-bottom: 1px solid #e5eef5;
+      color: #1c5b93;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .blue-calendar-navigation {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 13px 0 12px;
+    }
+
+    .blue-calendar-navigation button {
+      display: grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border-radius: 8px;
+      color: #3378b5;
+      font-size: 10px;
+    }
+
+    .blue-calendar-navigation button:hover {
+      background: #edf6ff;
+    }
+
+    .blue-calendar-navigation h2 {
+      margin: 0;
+      color: #173b68;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .blue-calendar-days-head {
+      margin-bottom: 4px;
+    }
+
+    .blue-calendar-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 13px;
+      padding-top: 12px;
+      border-top: 1px solid #e6eef5;
+      color: #657f96;
+      font-size: 9px;
+    }
+
+    .blue-calendar-legend span {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .blue-calendar-legend i {
+      display: block;
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+    }
+
+    .blue-legend-red {
+      background: #ff5d5d;
+    }
+
+    .blue-legend-orange {
+      background: #ff982f;
+    }
+
+    .blue-legend-blue {
+      background: #3d89e7;
+    }
+
+    .blue-deadline-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .blue-deadline-card {
+      padding: 15px !important;
+      border-radius: 16px !important;
+    }
+
+    .blue-deadline-card > div {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .blue-deadline-card p {
+      margin: 0;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .blue-deadline-card span {
+      flex: 0 0 auto;
+      padding: 4px 7px;
+      border-radius: 999px;
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    .blue-deadline-card h3 {
+      margin: 9px 0 0;
+      color: #173756;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .blue-deadline-card small {
+      display: block;
+      margin-top: 4px;
+      color: #768ca0;
+      font-size: 9px;
+      line-height: 1.45;
+    }
+
+    .blue-deadline-task {
+      border-left: 4px solid #ff5252 !important;
+    }
+
+    .blue-deadline-task p {
+      color: #e43e3e;
+    }
+
+    .blue-deadline-task span {
+      background: #ffe4e4;
+      color: #e13e3e;
+    }
+
+    .blue-deadline-material {
+      border-left: 4px solid #ff982f !important;
+    }
+
+    .blue-deadline-material p {
+      color: #e87914;
+    }
+
+    .blue-deadline-material span {
+      background: #fff0df;
+      color: #dd7517;
+    }
+
+    /* Content generated dynamically by renderSempoaSkill / renderClassroomManagement */
+    .blue-content-card h2,
+    .blue-content-card h3 {
+      color: #173c66;
+    }
+
+    .blue-content-card .bg-slate-50 {
+      background-color: #f6faff !important;
+    }
+
+    .blue-content-card .border-slate-200,
+    .blue-content-card .border-slate-100 {
+      border-color: #d9e8f4 !important;
+    }
+
+    .blue-content-card .text-teal-600,
+    .blue-content-card .text-sky-600 {
+      color: #1684c6 !important;
+    }
+
+    .blue-content-card .bg-orange-50 {
+      background-color: #fff3e6 !important;
+    }
+
+    .blue-content-card .text-orange-600 {
+      color: #e77c17 !important;
+    }
+
+    @media (max-width: 1180px) {
+      .blue-dashboard-layout {
+        grid-template-columns: 210px minmax(0, 1fr);
+      }
+
+      .blue-dashboard-right {
+        display: grid;
+        grid-column: 1 / -1;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
+
+      .blue-deadline-stack {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 800px) {
+      body.dashboard-active > main {
+        padding: 10px 10px 28px;
+      }
+
+      .blue-dashboard-hero {
+        min-height: 0;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 20px;
+        border-radius: 18px 18px 0 0;
+      }
+
+      .blue-dashboard-time-panel {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        column-gap: 12px;
+        text-align: left;
+      }
+
+      .blue-dashboard-clock {
+        font-size: 20px;
+      }
+
+      .blue-dashboard-date {
+        grid-column: 1;
+        margin-top: 4px;
+      }
+
+      .blue-dashboard-logout {
+        grid-row: 1 / 3;
+        grid-column: 2;
+        margin-top: 0;
+      }
+
+      .blue-dashboard-brandbar {
+        padding: 10px 20px;
+        border-radius: 0 0 18px 18px;
+      }
+
+      .blue-dashboard-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .blue-dashboard-left {
+        gap: 10px;
+      }
+
+      .blue-profile-card {
+        display: grid;
+        grid-template-columns: 54px minmax(0, 1fr) auto;
+        column-gap: 12px;
+        align-items: center;
+        padding: 14px;
+        text-align: left;
+      }
+
+      .blue-profile-avatar {
+        grid-row: 1 / 3;
+        width: 54px;
+        height: 54px;
+        border-width: 4px;
+        font-size: 20px;
+      }
+
+      .blue-profile-card h2 {
+        grid-column: 2;
+        align-self: end;
+        margin: 0;
+      }
+
+      .blue-profile-card p {
+        grid-column: 2;
+        align-self: start;
+        margin-top: 3px;
+      }
+
+      .blue-profile-role {
+        grid-row: 1 / 3;
+        grid-column: 3;
+        margin-top: 0;
+      }
+
+      .blue-dashboard-nav-card {
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 8px;
+      }
+
+      .dashboard-nav-button {
+        width: auto;
+        min-width: max-content;
+        justify-content: center;
+        padding: 10px 12px !important;
+      }
+
+      .dashboard-nav-button:hover {
+        transform: none;
+      }
+
+      .dashboard-nav-button[aria-selected="true"] {
+        box-shadow: inset 0 -3px 0 #2b7ddd;
+      }
+
+      .blue-dashboard-right {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .blue-dashboard-welcome {
+        gap: 12px;
+      }
+
+      .blue-dashboard-greeting-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+      }
+
+      .blue-dashboard-welcome h1 {
+        font-size: 21px;
+      }
+
+      .blue-dashboard-welcome p {
+        font-size: 11px;
+      }
+
+      .blue-dashboard-brandbar div {
+        display: none;
+      }
+
+      .blue-course-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .blue-course-card {
+        min-height: 205px;
+      }
+
+      .blue-profile-card {
+        grid-template-columns: 50px minmax(0, 1fr);
+      }
+
+      .blue-profile-role {
+        display: none;
+      }
+
+      .blue-submission-list article {
+        grid-template-columns: 40px minmax(0, 1fr);
+      }
+
+      .blue-submission-list article > div:last-child {
+        grid-column: 2;
+      }
+
+      .blue-card-heading {
+        flex-direction: column;
+      }
+
+      .blue-progress-card {
+        align-items: flex-start;
+      }
+    }
+
+
+    /* FIX 1: ensure the blue hero and all of its text remain clearly visible */
+    #dashboard.blue-dashboard > header.blue-dashboard-hero {
+      border-color: transparent !important;
+      background: #2364d9 !important;
+      color: #ffffff !important;
+    }
+
+    #dashboard.blue-dashboard #greeting-text {
+      color: #ffffff !important;
+      text-shadow: 0 1px 2px rgba(13, 54, 122, 0.18);
+    }
+
+    #dashboard.blue-dashboard #dashboard-message {
+      color: rgba(255, 255, 255, 0.92) !important;
+    }
+
+    #dashboard.blue-dashboard #live-time {
+      color: #ffffff !important;
+    }
+
+    #dashboard.blue-dashboard #live-date {
+      color: rgba(255, 255, 255, 0.88) !important;
+    }
+
+    #dashboard.blue-dashboard #change-email-button {
+      border-color: rgba(255, 255, 255, 0.55) !important;
+      background: rgba(255, 255, 255, 0.12) !important;
+      color: #ffffff !important;
+    }
+
+    #dashboard.blue-dashboard #change-email-button:hover {
+      background: rgba(255, 255, 255, 0.22) !important;
+    }
+
+    /* FIX 2 layout helpers */
+    .course-selection-hidden {
+      display: none !important;
+    }
+
+    .course-detail-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 16px;
+      padding: 9px 12px;
+      border: 1px solid #c9ddec;
+      border-radius: 10px;
+      background: #f7fbff;
+      color: #236bb2;
+      font-size: 10px;
+      font-weight: 700;
+      transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.18s ease;
+    }
+
+    .course-detail-back:hover {
+      border-color: #8ec2e8;
+      background: #edf7ff;
+      transform: translateX(-2px);
+    }
+
+    .course-detail-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #dceaf4;
+    }
+
+    .course-detail-header-copy {
+      min-width: 0;
+    }
+
+    .course-detail-header-copy > p:first-child {
+      margin: 0 0 4px;
+      color: #1d85c6;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .course-detail-header-copy h2 {
+      margin: 0;
+      color: #173c66;
+      font-size: 19px;
+      font-weight: 700;
+    }
+
+    .course-detail-header-copy > p:last-child {
+      margin: 5px 0 0;
+      color: #708ba1;
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    @media (max-width: 600px) {
+      .course-detail-header {
+        flex-direction: column;
+      }
+    }
+
   </style>
 </head>
 
 <body>
   <main class="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-6 md:px-6">
     <!-- LOGIN / VERIFIKASI -->
-    <section id="verification-screen" class="my-auto flex flex-col items-center py-8">
-      <img
-        id="login-logo"
-        src="https://cdn-web.ruangguru.com/file-uploader/3f15f74f-6104-44d8-b0b3-7b886772a4f2.png"
-        alt="Math Champs"
-        class="mb-7 w-56 max-w-[70vw]"
-      />
+    <section id="verification-screen" class="training-login-screen">
+      <div class="training-login-pattern" aria-hidden="true"></div>
 
-      <div class="glass-card w-full max-w-md p-7 text-center md:p-8">
-        <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-sky-50 text-sky-600">
-          <i class="fa-solid fa-user-check text-xl" aria-hidden="true"></i>
-        </div>
+      <div class="training-decoration training-decoration-book" aria-hidden="true">
+        <i class="fa-solid fa-book-open"></i>
+      </div>
+      <div class="training-decoration training-decoration-bulb" aria-hidden="true">
+        <i class="fa-regular fa-lightbulb"></i>
+      </div>
+      <div class="training-decoration training-decoration-star-one" aria-hidden="true">
+        <i class="fa-solid fa-star"></i>
+      </div>
+      <div class="training-decoration training-decoration-clock" aria-hidden="true">
+        <i class="fa-regular fa-clock"></i>
+      </div>
+      <div class="training-decoration training-decoration-calculator" aria-hidden="true">
+        <i class="fa-solid fa-calculator"></i>
+      </div>
+      <div class="training-decoration training-decoration-rocket" aria-hidden="true">
+        <i class="fa-solid fa-rocket"></i>
+      </div>
+      <div class="training-decoration training-decoration-atom" aria-hidden="true">
+        <i class="fa-solid fa-atom"></i>
+      </div>
+      <div class="training-decoration training-decoration-question" aria-hidden="true">
+        <i class="fa-regular fa-circle-question"></i>
+      </div>
+      <div class="training-decoration training-decoration-star-two" aria-hidden="true">
+        <i class="fa-solid fa-star"></i>
+      </div>
+      <div class="training-decoration training-decoration-sun" aria-hidden="true">
+        <i class="fa-regular fa-sun"></i>
+      </div>
 
-        <h1 class="mb-2 text-2xl font-bold text-slate-800">Verifikasi Pendaftaran</h1>
-        <p class="mb-6 text-sm leading-relaxed text-slate-500">
-          Masukkan email yang Kakak gunakan saat mengisi Form Pendaftaran.
-        </p>
+      <div class="training-login-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 180" preserveAspectRatio="none">
+          <path
+            d="M0,98 C220,50 350,140 565,95 C780,50 920,135 1110,92 C1260,58 1370,72 1440,48 L1440,180 L0,180 Z"
+            fill="rgba(139, 207, 255, 0.48)"
+          ></path>
+          <path
+            d="M0,124 C225,88 410,150 645,115 C870,80 1015,145 1220,112 C1325,95 1395,102 1440,88 L1440,180 L0,180 Z"
+            fill="rgba(89, 181, 245, 0.20)"
+          ></path>
+        </svg>
+      </div>
 
-        <form id="verification-form" novalidate>
-          <label for="email-input" class="mb-2 block text-left text-xs font-semibold text-slate-600">
-            Email pendaftaran
-          </label>
+      <div class="training-login-content">
+        <div class="training-login-brand">
+          <img
+            id="login-logo"
+            src="https://cdn-web.ruangguru.com/file-uploader/3f15f74f-6104-44d8-b0b3-7b886772a4f2.png"
+            alt="Math Champs"
+          />
 
-          <div class="relative">
-            <i class="fa-solid fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" aria-hidden="true"></i>
-            <input
-              type="email"
-              id="email-input"
-              autocomplete="email"
-              inputmode="email"
-              placeholder="contoh: guru@email.com"
-              class="w-full rounded-xl border border-slate-300 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-700 outline-none transition focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-100"
-              required
-            />
+          <h1 class="training-login-title">
+            <span class="training-login-mandatory">[MANDATORY]</span>
+            <span class="training-login-subtitle">Internal Teacher Training</span>
+          </h1>
+
+          <div class="training-title-accent" aria-hidden="true">
+            <span></span>
+            <i class="fa-solid fa-star"></i>
+            <span></span>
           </div>
 
-          <div
-            id="verification-message"
-            class="mt-3 min-h-6 text-left text-xs font-medium text-rose-500"
-            aria-live="polite"
-          ></div>
+          <p class="training-login-quote">
+            “Guru yang baik adalah guru yang mau terus belajar dan memperbaiki diri.”
+          </p>
+        </div>
 
-          <button
-            id="verification-button"
-            type="submit"
-            class="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-sky-600 py-3 text-sm font-semibold text-white transition hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-200"
-          >
-            Verifikasi Email
-            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
-          </button>
-        </form>
+        <div class="training-login-card">
+          <div class="training-login-card-accent" aria-hidden="true"></div>
+
+          <h2>Masuk ke Portal Pelatihan</h2>
+          <p>
+            Gunakan email yang terdaftar untuk melanjutkan perjalanan belajarmu.
+          </p>
+
+          <form id="verification-form" novalidate>
+            <label for="email-input" class="sr-only">Email pendaftaran</label>
+
+            <div class="training-email-field">
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+              <input
+                type="email"
+                id="email-input"
+                autocomplete="email"
+                inputmode="email"
+                placeholder="contoh: guru@email.com"
+                required
+              />
+            </div>
+
+            <div
+              id="verification-message"
+              class="training-verification-message"
+              aria-live="polite"
+            ></div>
+
+            <button
+              id="verification-button"
+              type="submit"
+              class="training-login-button"
+            >
+              Masuk Sekarang
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+          </form>
+        </div>
       </div>
     </section>
 
     <!-- DASHBOARD -->
-    <section id="dashboard" hidden>
-      <header class="mb-6 flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-sm md:flex-row md:items-center md:justify-between">
-        <div class="flex items-center gap-4">
-          <img
-            src="https://cdn-web.ruangguru.com/file-uploader/3f15f74f-6104-44d8-b0b3-7b886772a4f2.png"
-            alt="Math Champs"
-            class="w-32"
-          />
-          <div class="hidden h-9 w-px bg-slate-200 sm:block"></div>
+    <section id="dashboard" class="blue-dashboard" hidden>
+      <header class="blue-dashboard-hero">
+        <div class="blue-dashboard-welcome">
+          <div id="greeting-icon" class="blue-dashboard-greeting-icon" aria-hidden="true">☀️</div>
           <div>
-            <p class="text-xs font-medium uppercase tracking-wide text-sky-600">Portal Pelatihan Guru</p>
-            <h1 id="greeting-text" class="text-xl font-bold text-slate-800 md:text-2xl">Halo, Kakak</h1>
+            <h1 id="greeting-text">Selamat Datang, Kakak!</h1>
+            <p id="dashboard-message">
+              Jangan lupa siapkan catatan, sempoa 17 tiang, dan minuman favoritmu!
+              Selamat belajar! 📝🧮☕
+            </p>
           </div>
         </div>
 
-        <button
-          id="change-email-button"
-          type="button"
-          class="inline-flex items-center justify-center gap-2 self-start rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 transition hover:bg-slate-50 md:self-auto"
-        >
-          <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
-          Ganti Email
-        </button>
-      </header>
-
-      <nav class="mb-6 overflow-x-auto border-b border-slate-200" aria-label="Navigasi portal">
-        <div class="flex min-w-max gap-1">
-          <button class="tab-button px-4 py-3 text-sm" id="tab-button-flow" data-tab="flow" aria-selected="true">
-            🗺️ Alur Pelatihan
-          </button>
-          <button class="tab-button px-4 py-3 text-sm" id="tab-button-history" data-tab="history" aria-selected="false">
-            📊 Riwayat Belajar
-          </button>
-          <button class="tab-button px-4 py-3 text-sm" id="tab-button-help" data-tab="help" aria-selected="false">
-            ❓ Pusat Bantuan
+        <div class="blue-dashboard-time-panel">
+          <time id="live-time" class="blue-dashboard-clock">00:00:00</time>
+          <time id="live-date" class="blue-dashboard-date">Tanggal hari ini</time>
+          <button id="change-email-button" type="button" class="blue-dashboard-logout">
+            <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+            Keluar
           </button>
         </div>
-      </nav>
+      </header>
 
-      <div class="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
+      <div class="blue-dashboard-brandbar">
+        <img
+          src="https://cdn-web.ruangguru.com/file-uploader/3f15f74f-6104-44d8-b0b3-7b886772a4f2.png"
+          alt="Math Champs"
+        />
         <div>
+          <span>[MANDATORY]</span>
+          <strong>Internal Teacher Training</strong>
+        </div>
+      </div>
+
+      <div class="blue-dashboard-layout">
+        <!-- LEFT SIDEBAR -->
+        <aside class="blue-dashboard-left">
+          <section class="blue-profile-card">
+            <div id="profile-initials" class="blue-profile-avatar">K</div>
+            <h2 id="profile-name">Kakak</h2>
+            <p id="profile-email">email@contoh.com</p>
+            <span class="blue-profile-role">Peserta Pelatihan</span>
+          </section>
+
+          <nav class="blue-dashboard-nav-card" aria-label="Navigasi portal">
+            <button
+              class="tab-button dashboard-nav-button"
+              id="tab-button-flow"
+              data-tab="flow"
+              aria-selected="true"
+              type="button"
+            >
+              <span class="dashboard-nav-icon">🗺️</span>
+              <span>Alur Pelatihan</span>
+            </button>
+
+            <button
+              class="tab-button dashboard-nav-button"
+              id="tab-button-history"
+              data-tab="history"
+              aria-selected="false"
+              type="button"
+            >
+              <span class="dashboard-nav-icon">📊</span>
+              <span>Riwayat Belajar</span>
+            </button>
+
+            <button
+              class="tab-button dashboard-nav-button"
+              id="tab-button-help"
+              data-tab="help"
+              aria-selected="false"
+              type="button"
+            >
+              <span class="dashboard-nav-icon">❓</span>
+              <span>Pusat Bantuan</span>
+            </button>
+          </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <div class="blue-dashboard-main">
           <!-- TAB ALUR -->
           <section id="tab-flow" class="tab-panel">
-            <div class="mb-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div class="blue-section-heading">
+              <p>Portal Pelatihan Guru</p>
+              <h2>Pilih Materi Pelatihanmu</h2>
+              <span>Klik materi untuk mulai belajar</span>
+            </div>
+
+            <div class="blue-course-grid">
               <button
                 type="button"
                 id="open-sempoa-card"
-                class="glass-card hover-lift border-t-4 border-t-teal-500 p-5 text-left focus:outline-none"
+                class="blue-course-card blue-course-sempoa"
               >
-                <div class="mb-3 flex items-center gap-3">
-                  <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
-                    <i class="fa-solid fa-calculator text-lg" aria-hidden="true"></i>
-                  </span>
-                  <div>
-                    <h2 class="font-bold text-slate-800">Sempoa Skill</h2>
-                    <p class="text-xs font-semibold text-teal-600">Section 1–6</p>
-                  </div>
-                </div>
-                <p class="text-xs leading-relaxed text-slate-500">
-                  Video pembelajaran dan modul teknis sempoa dari pengenalan hingga multi-digit.
+                <span class="blue-course-icon">
+                  <i class="fa-solid fa-calculator" aria-hidden="true"></i>
+                </span>
+                <h3>Sempoa Skill</h3>
+                <strong>Section 1–6</strong>
+                <p>
+                  Video pembelajaran dan modul teknis sempoa dari pengenalan
+                  hingga multi-digit.
                 </p>
+                <span class="blue-course-action">
+                  Buka Materi <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </span>
               </button>
 
               <button
                 type="button"
                 id="open-classroom-card"
-                class="glass-card hover-lift border-t-4 border-t-sky-500 p-5 text-left focus:outline-none"
+                class="blue-course-card blue-course-classroom"
               >
-                <div class="mb-3 flex items-center gap-3">
-                  <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-sky-50 text-sky-600">
-                    <i class="fa-solid fa-chalkboard-user text-lg" aria-hidden="true"></i>
-                  </span>
-                  <div>
-                    <h2 class="font-bold text-slate-800">Classroom Management</h2>
-                    <p class="text-xs font-semibold text-sky-600">Panduan & pengumpulan tugas</p>
-                  </div>
-                </div>
-                <p class="text-xs leading-relaxed text-slate-500">
-                  Panduan kelas offline, video submission, serta pengumpulan tugas wajib.
+                <span class="blue-course-icon">
+                  <i class="fa-solid fa-chalkboard-user" aria-hidden="true"></i>
+                </span>
+                <h3>Classroom Management</h3>
+                <strong>Panduan & pengumpulan tugas</strong>
+                <p>
+                  Panduan kelas offline, video submission, serta pusat
+                  pengumpulan tugas wajib.
                 </p>
+                <span class="blue-course-action">
+                  Buka Panduan <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </span>
               </button>
             </div>
 
-            <div id="content-area" class="glass-card p-5 md:p-6">
-              <div class="flex min-h-48 flex-col items-center justify-center text-center">
-                <span class="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-400">
+            <div id="content-area" class="glass-card blue-content-card">
+              <div class="blue-content-placeholder">
+                <span>
                   <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
                 </span>
-                <h2 class="font-semibold text-slate-700">Pilih materi yang ingin dibuka</h2>
-                <p class="mt-1 max-w-md text-xs leading-relaxed text-slate-500">
+                <h2>Pilih materi yang ingin dibuka</h2>
+                <p>
                   Pilih Sempoa Skill atau Classroom Management melalui kartu di atas.
                 </p>
               </div>
@@ -764,63 +2553,60 @@
 
           <!-- TAB RIWAYAT -->
           <section id="tab-history" class="tab-panel" hidden>
-            <div class="glass-card p-5 md:p-6">
-              <div class="mb-5 flex items-center justify-between border-b border-slate-100 pb-4">
+            <div class="glass-card blue-history-card">
+              <div class="blue-card-heading">
                 <div>
-                  <h2 class="font-bold text-slate-800">Riwayat Belajar Kakak</h2>
-                  <p class="mt-1 text-xs text-slate-500">Progres video tersimpan pada browser dan email yang sedang digunakan.</p>
+                  <p>Progres Personal</p>
+                  <h2>Riwayat Belajar Kakak</h2>
+                  <span>
+                    Progres video tersimpan pada browser dan email yang sedang digunakan.
+                  </span>
                 </div>
-                <button
-                  id="refresh-status-button"
-                  type="button"
-                  class="rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50"
-                >
-                  <i class="fa-solid fa-rotate-right mr-1" aria-hidden="true"></i>
+
+                <button id="refresh-status-button" type="button" class="blue-refresh-button">
+                  <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
                   Perbarui
                 </button>
               </div>
 
-              <div class="mb-5 rounded-xl border border-sky-100 bg-sky-50 p-4">
-                <div class="flex items-center gap-4">
-                  <div id="video-progress-ring" class="progress-ring shrink-0" style="--progress: 0%">
-                    <span class="sr-only">Progres video</span>
-                  </div>
-                  <div>
-                    <p class="text-xs font-semibold uppercase tracking-wide text-sky-700">Progres Video Sempoa Skill</p>
-                    <p id="video-progress-text" class="mt-1 text-lg font-bold text-slate-800">0 dari 11 video selesai</p>
-                    <p class="mt-1 text-xs text-slate-500">Video ditandai selesai setelah ditonton minimal 90%.</p>
-                  </div>
+              <div class="blue-progress-card">
+                <div id="video-progress-ring" class="progress-ring" style="--progress: 0%">
+                  <span class="sr-only">Progres video</span>
+                </div>
+
+                <div>
+                  <p>Progres Video Sempoa Skill</p>
+                  <h3 id="video-progress-text">0 dari 11 video selesai</h3>
+                  <span>Video ditandai selesai setelah ditonton minimal 90%.</span>
                 </div>
               </div>
 
-              <div class="space-y-4">
-                <article class="flex flex-col gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 sm:flex-row sm:items-center sm:justify-between">
-                  <div class="flex items-center gap-3">
-                    <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-slate-400 shadow-sm">
-                      <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
-                    </span>
-                    <div>
-                      <h3 class="text-sm font-semibold text-slate-800">Tugas Kartu Lihat Hitung (KLH)</h3>
-                      <p class="text-xs text-slate-500">Dicek berdasarkan email pada spreadsheet submission.</p>
-                    </div>
+              <div class="blue-submission-list">
+                <article>
+                  <span class="blue-submission-icon">
+                    <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
+                  </span>
+                  <div>
+                    <h3>Tugas Kartu Lihat Hitung (KLH)</h3>
+                    <p>Dicek berdasarkan email pada spreadsheet submission.</p>
                   </div>
                   <div id="status-klh" class="text-sm font-bold text-slate-500">
-                    <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Mengecek...
+                    <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>
+                    Mengecek...
                   </div>
                 </article>
 
-                <article class="flex flex-col gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 sm:flex-row sm:items-center sm:justify-between">
-                  <div class="flex items-center gap-3">
-                    <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-slate-400 shadow-sm">
-                      <i class="fa-solid fa-video" aria-hidden="true"></i>
-                    </span>
-                    <div>
-                      <h3 class="text-sm font-semibold text-slate-800">Video Submission</h3>
-                      <p class="text-xs text-slate-500">Dicek berdasarkan email pada spreadsheet submission.</p>
-                    </div>
+                <article>
+                  <span class="blue-submission-icon">
+                    <i class="fa-solid fa-video" aria-hidden="true"></i>
+                  </span>
+                  <div>
+                    <h3>Video Submission</h3>
+                    <p>Dicek berdasarkan email pada spreadsheet submission.</p>
                   </div>
                   <div id="status-video" class="text-sm font-bold text-slate-500">
-                    <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Mengecek...
+                    <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>
+                    Mengecek...
                   </div>
                 </article>
               </div>
@@ -829,96 +2615,115 @@
 
           <!-- TAB BANTUAN -->
           <section id="tab-help" class="tab-panel" hidden>
-            <div class="glass-card p-5 md:p-6">
-              <h2 class="mb-5 border-b border-slate-100 pb-4 font-bold text-slate-800">Tanya Jawab (FAQ)</h2>
+            <div class="glass-card blue-help-card">
+              <div class="blue-card-heading">
+                <div>
+                  <p>Bantuan Peserta</p>
+                  <h2>Tanya Jawab (FAQ)</h2>
+                  <span>Informasi singkat seputar pelatihan dan pengumpulan tugas.</span>
+                </div>
+              </div>
 
-              <div class="space-y-5 text-sm">
+              <div class="blue-faq-list">
                 <article>
-                  <h3 class="font-semibold text-sky-700">Apa yang bisa dipelajari dari Sempoa Skill?</h3>
-                  <ul class="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-slate-600">
-                    <li>Mempelajari penerapan tambah dan kurang menggunakan sempoa.</li>
-                    <li>Menggunakan sempoa untuk menghitung digit lanjutan.</li>
-                    <li>Mengunduh modul soal untuk latihan mandiri.</li>
-                  </ul>
+                  <span class="blue-faq-number">01</span>
+                  <div>
+                    <h3>Apa yang bisa dipelajari dari Sempoa Skill?</h3>
+                    <ul>
+                      <li>Mempelajari penerapan tambah dan kurang menggunakan sempoa.</li>
+                      <li>Menggunakan sempoa untuk menghitung digit lanjutan.</li>
+                      <li>Mengunduh modul soal untuk latihan mandiri.</li>
+                    </ul>
+                  </div>
                 </article>
 
                 <article>
-                  <h3 class="font-semibold text-sky-700">Apakah wajib mengumpulkan tugas?</h3>
-                  <p class="mt-2 leading-relaxed text-slate-600">
-                    Ya. Tugas wajib dikumpulkan agar Kakak dapat memperoleh badge pelatihan.
-                  </p>
+                  <span class="blue-faq-number">02</span>
+                  <div>
+                    <h3>Apakah wajib mengumpulkan tugas?</h3>
+                    <p>
+                      Ya. Tugas wajib dikumpulkan agar Kakak dapat memperoleh
+                      badge pelatihan.
+                    </p>
+                  </div>
                 </article>
 
-                <article class="rounded-xl border border-sky-100 bg-sky-50 p-4">
-                  <h3 class="font-semibold text-slate-800">Masih memiliki pertanyaan?</h3>
-                  <p class="mb-3 mt-1 text-sm text-slate-600">Silakan tanyakan melalui grup Coach Nasional.</p>
-                  <button
-                    type="button"
-                    id="whatsapp-button"
-                    class="inline-flex items-center gap-2 rounded-lg bg-green-500 px-4 py-2 text-xs font-semibold text-white transition hover:bg-green-600"
-                  >
-                    <i class="fa-brands fa-whatsapp text-lg" aria-hidden="true"></i>
-                    Grup WhatsApp Coach
-                  </button>
+                <article class="blue-whatsapp-card">
+                  <span class="blue-faq-number">
+                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                  </span>
+                  <div>
+                    <h3>Masih memiliki pertanyaan?</h3>
+                    <p>Silakan tanyakan melalui grup Coach Nasional.</p>
+                    <button id="whatsapp-button" type="button">
+                      <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                      Grup WhatsApp Coach
+                    </button>
+                  </div>
                 </article>
               </div>
             </div>
           </section>
         </div>
 
-        <!-- SIDEBAR -->
-        <aside class="space-y-5">
-          <section class="glass-card p-5" aria-label="Kalender">
-            <div class="mb-4 flex items-center justify-between">
+        <!-- RIGHT SIDEBAR -->
+        <aside class="blue-dashboard-right">
+          <section class="glass-card blue-calendar-card" aria-label="Kalender">
+            <div class="blue-calendar-heading">
+              <span>🗓️ Kalender</span>
+            </div>
+
+            <div class="blue-calendar-navigation">
               <button
                 id="previous-month"
                 type="button"
-                class="flex h-8 w-8 items-center justify-center rounded-lg text-slate-600 hover:bg-slate-100"
                 aria-label="Bulan sebelumnya"
               >
-                <i class="fa-solid fa-chevron-left text-xs" aria-hidden="true"></i>
+                <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
               </button>
 
-              <h2 id="calendar-title" class="text-sm font-bold text-slate-800">Bulan 2026</h2>
+              <h2 id="calendar-title">Bulan 2026</h2>
 
               <button
                 id="next-month"
                 type="button"
-                class="flex h-8 w-8 items-center justify-center rounded-lg text-slate-600 hover:bg-slate-100"
                 aria-label="Bulan berikutnya"
               >
-                <i class="fa-solid fa-chevron-right text-xs" aria-hidden="true"></i>
+                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
               </button>
             </div>
 
-            <div class="cal-grid cal-day-head mb-1">
-              <div>Min</div><div>Sen</div><div>Sel</div><div>Rab</div><div>Kam</div><div>Jum</div><div>Sab</div>
+            <div class="cal-grid cal-day-head blue-calendar-days-head">
+              <div>Min</div><div>Sen</div><div>Sel</div><div>Rab</div>
+              <div>Kam</div><div>Jum</div><div>Sab</div>
             </div>
+
             <div id="calendar-days" class="cal-grid"></div>
 
-            <div class="mt-4 flex flex-wrap gap-3 text-[10px] text-slate-500">
-              <span class="flex items-center gap-1"><span class="h-2.5 w-2.5 rounded-full bg-red-200"></span> Deadline tugas</span>
-              <span class="flex items-center gap-1"><span class="h-2.5 w-2.5 rounded-full bg-orange-200"></span> Deadline materi</span>
+            <div class="blue-calendar-legend">
+              <span><i class="blue-legend-red"></i> Deadline tugas</span>
+              <span><i class="blue-legend-orange"></i> Deadline materi</span>
+              <span><i class="blue-legend-blue"></i> Hari ini</span>
             </div>
           </section>
 
-          <section class="space-y-3" aria-label="Deadline">
-            <article class="glass-card border-l-4 border-l-red-500 p-4">
-              <div class="mb-1 flex items-start justify-between gap-2">
-                <p class="text-[11px] font-bold uppercase tracking-wide text-red-600">Batas Pengumpulan Tugas</p>
-                <span id="task-countdown" class="rounded-full bg-red-100 px-2 py-0.5 text-[10px] font-bold text-red-700">Menghitung...</span>
+          <section class="blue-deadline-stack" aria-label="Deadline">
+            <article class="glass-card blue-deadline-card blue-deadline-task">
+              <div>
+                <p>Batas Pengumpulan Tugas</p>
+                <span id="task-countdown">Menghitung...</span>
               </div>
-              <p class="text-sm font-bold text-slate-800">8 Agustus 2026</p>
-              <p class="mt-1 text-[11px] text-slate-500">Pukul 23.59 WIB</p>
+              <h3>8 Agustus 2026</h3>
+              <small>Pukul 23.59 WIB</small>
             </article>
 
-            <article class="glass-card border-l-4 border-l-orange-400 p-4">
-              <div class="mb-1 flex items-start justify-between gap-2">
-                <p class="text-[11px] font-bold uppercase tracking-wide text-orange-600">Batas Akses Sempoa Skill</p>
-                <span id="material-countdown" class="rounded-full bg-orange-100 px-2 py-0.5 text-[10px] font-bold text-orange-700">Menghitung...</span>
+            <article class="glass-card blue-deadline-card blue-deadline-material">
+              <div>
+                <p>Batas Akses Sempoa Skill</p>
+                <span id="material-countdown">Menghitung...</span>
               </div>
-              <p class="text-sm font-bold text-slate-800">6 September 2026</p>
-              <p class="mt-1 text-[11px] text-slate-500">Materi terkunci mulai 7 September 2026 WIB</p>
+              <h3>6 September 2026</h3>
+              <small>Materi terkunci mulai 7 September 2026 WIB</small>
             </article>
           </section>
         </aside>
@@ -992,7 +2797,7 @@
     const RUANGGURU_LOGO =
       "https://upload.wikimedia.org/wikipedia/commons/7/71/Ruang_Guru_logo.svg";
 
-    // Theme, YouTube overlays, and Coach group updated: 27 July 2026
+    // Header contrast and click-to-open course details updated: 27 July 2026
     const WHATSAPP_GROUP =
       "https://chat.whatsapp.com/JqT7gIcW4I0GblvtDOte3w";
 
@@ -1123,6 +2928,7 @@
     let currentCalendarDate = new Date();
     let youtubePlayer = null;
     let youtubeProgressTimer = null;
+    let dashboardClockTimer = null;
     let currentVideoId = "";
     let currentVideoTitle = "";
     let lastFocusedElement = null;
@@ -1213,7 +3019,7 @@
         verificationButton.disabled = true;
         verificationButton.classList.add("loading-pulse");
         verificationButton.innerHTML =
-          '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Memeriksa data...';
+          '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Memverifikasi...';
       }
 
       try {
@@ -1255,25 +3061,120 @@
           verificationButton.disabled = false;
           verificationButton.classList.remove("loading-pulse");
           verificationButton.innerHTML =
-            'Verifikasi Email <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>';
+            'Masuk Sekarang <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>';
         }
       }
+    }
+
+    function getUserInitials(name) {
+      const words = String(name || "Kakak")
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
+
+      if (words.length === 0) return "K";
+      if (words.length === 1) return words[0].slice(0, 1).toUpperCase();
+
+      return (
+        words[0].slice(0, 1) +
+        words[words.length - 1].slice(0, 1)
+      ).toUpperCase();
+    }
+
+    function getGreetingForHour(hour) {
+      if (hour >= 5 && hour < 11) {
+        return { text: "Selamat Pagi", icon: "☀️" };
+      }
+
+      if (hour >= 11 && hour < 15) {
+        return { text: "Selamat Siang", icon: "🌤️" };
+      }
+
+      if (hour >= 15 && hour < 18) {
+        return { text: "Selamat Sore", icon: "🌇" };
+      }
+
+      return { text: "Selamat Malam", icon: "🌙" };
+    }
+
+    function updateDashboardIdentity() {
+      const name = String(currentUser.name || "Kakak").trim() || "Kakak";
+      const email = normalizeEmail(currentUser.email);
+
+      const profileName = document.getElementById("profile-name");
+      const profileEmail = document.getElementById("profile-email");
+      const profileInitials = document.getElementById("profile-initials");
+
+      if (profileName) profileName.textContent = name;
+      if (profileEmail) profileEmail.textContent = email;
+      if (profileInitials) profileInitials.textContent = getUserInitials(name);
+    }
+
+    function updateDashboardClock() {
+      const now = new Date();
+      const greeting = getGreetingForHour(now.getHours());
+      const name = String(currentUser.name || "Kakak").trim() || "Kakak";
+
+      const greetingIcon = document.getElementById("greeting-icon");
+      const greetingText = document.getElementById("greeting-text");
+      const liveTime = document.getElementById("live-time");
+      const liveDate = document.getElementById("live-date");
+
+      if (greetingIcon) {
+        greetingIcon.textContent = greeting.icon;
+      }
+
+      if (greetingText) {
+        greetingText.textContent = `${greeting.text}, ${name}!`;
+      }
+
+      if (liveTime) {
+        liveTime.textContent = new Intl.DateTimeFormat("id-ID", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false
+        }).format(now);
+      }
+
+      if (liveDate) {
+        liveDate.textContent = new Intl.DateTimeFormat("id-ID", {
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        }).format(now);
+      }
+    }
+
+    function startDashboardClock() {
+      if (dashboardClockTimer) {
+        window.clearInterval(dashboardClockTimer);
+      }
+
+      updateDashboardClock();
+      dashboardClockTimer = window.setInterval(updateDashboardClock, 1000);
+    }
+
+    function stopDashboardClock() {
+      if (!dashboardClockTimer) return;
+
+      window.clearInterval(dashboardClockTimer);
+      dashboardClockTimer = null;
     }
 
     function showDashboard() {
       verificationScreen.hidden = true;
       dashboard.hidden = false;
+      document.body.classList.add("dashboard-active");
 
-      const greetingName = currentUser.name || "Kakak";
-      document.getElementById("greeting-text").textContent =
-        "Halo, " + greetingName;
-
+      updateDashboardIdentity();
+      startDashboardClock();
       updateTaskStatuses();
       updateVideoProgress();
       renderCalendar();
       calculateCountdowns();
-      renderSempoaSkill(false);
-      window.scrollTo({ top: 0, behavior: "instant" });
+      resetCourseSelection();
+      window.scrollTo({ top: 0, behavior: "auto" });
     }
 
     function logout() {
@@ -1286,6 +3187,8 @@
       };
 
       closeModal();
+      stopDashboardClock();
+      document.body.classList.remove("dashboard-active");
       dashboard.hidden = true;
       verificationScreen.hidden = false;
       verificationMessage.textContent = "";
@@ -1341,6 +3244,8 @@
           JSON.stringify(currentUser)
         );
 
+        updateDashboardIdentity();
+        updateDashboardClock();
         updateTaskStatuses();
       } catch (error) {
         alert(error.message);
@@ -1368,13 +3273,72 @@
       }
     }
 
+    function getCourseSelectionElements() {
+      return {
+        heading: document.querySelector("#tab-flow .blue-section-heading"),
+        grid: document.querySelector("#tab-flow .blue-course-grid")
+      };
+    }
+
+    function setCourseSelectionVisible(isVisible) {
+      const { heading, grid } = getCourseSelectionElements();
+
+      if (heading) {
+        heading.classList.toggle("course-selection-hidden", !isVisible);
+      }
+
+      if (grid) {
+        grid.classList.toggle("course-selection-hidden", !isVisible);
+      }
+    }
+
+    function resetCourseSelection(scrollToTop = false) {
+      setCourseSelectionVisible(true);
+
+      contentArea.innerHTML = `
+        <div class="blue-content-placeholder">
+          <span>
+            <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+          </span>
+          <h2>Pilih materi yang ingin dibuka</h2>
+          <p>
+            Pilih Sempoa Skill atau Classroom Management melalui kartu di atas.
+          </p>
+        </div>
+      `;
+
+      if (scrollToTop) {
+        document
+          .querySelector("#tab-flow .blue-section-heading")
+          ?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    function courseBackButtonHtml() {
+      return `
+        <button type="button" class="course-detail-back" id="course-detail-back-button">
+          <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+          Kembali ke Pilihan Materi
+        </button>
+      `;
+    }
+
+    function bindCourseBackButton() {
+      document
+        .getElementById("course-detail-back-button")
+        ?.addEventListener("click", () => resetCourseSelection(true));
+    }
+
     function isMaterialLocked() {
       return new Date() >= MATERIAL_DEADLINE;
     }
 
     function renderSempoaSkill(scrollToContent = true) {
+      setCourseSelectionVisible(false);
+
       if (isMaterialLocked()) {
         contentArea.innerHTML = `
+          ${courseBackButtonHtml()}
           <div class="flex min-h-52 flex-col items-center justify-center rounded-xl border border-red-200 bg-red-50 p-6 text-center">
             <span class="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white text-red-500 shadow-sm">
               <i class="fa-solid fa-lock text-lg" aria-hidden="true"></i>
@@ -1433,11 +3397,12 @@
           .join("");
 
         contentArea.innerHTML = `
-          <div class="mb-5 flex flex-col gap-3 border-b border-slate-100 pb-4 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <p class="text-[10px] font-semibold uppercase tracking-wide text-teal-600">Materi Pelatihan</p>
-              <h2 class="text-lg font-bold text-slate-800">Sempoa Skill — Section 1–6</h2>
-              <p class="mt-1 text-xs text-slate-500">Video dan modul tersedia sampai 6 September 2026.</p>
+          ${courseBackButtonHtml()}
+          <div class="course-detail-header mb-5">
+            <div class="course-detail-header-copy">
+              <p>Materi Pelatihan</p>
+              <h2>Sempoa Skill — Section 1–6</h2>
+              <p>Video dan modul tersedia sampai 6 September 2026.</p>
             </div>
             <span class="w-max rounded-full bg-orange-50 px-3 py-1.5 text-[10px] font-bold text-orange-600">
               <i class="fa-regular fa-clock mr-1" aria-hidden="true"></i>
@@ -1452,12 +3417,16 @@
         bindSempoaMaterialButtons();
       }
 
+      bindCourseBackButton();
+
       if (scrollToContent) {
         contentArea.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
 
     function renderClassroomManagement() {
+      setCourseSelectionVisible(false);
+
       const materials = classroomMaterials
         .map((material) => {
           const disabled = material.type === "disabled";
@@ -1482,10 +3451,13 @@
         .join("");
 
       contentArea.innerHTML = `
-        <div class="mb-5 border-b border-slate-100 pb-4">
-          <p class="text-[10px] font-semibold uppercase tracking-wide text-sky-600">Panduan Guru</p>
-          <h2 class="text-lg font-bold text-slate-800">Classroom Management</h2>
-          <p class="mt-1 text-xs text-slate-500">Bagian ini dapat dibuka kapan saja tanpa batas waktu.</p>
+        ${courseBackButtonHtml()}
+        <div class="course-detail-header mb-5">
+          <div class="course-detail-header-copy">
+            <p>Panduan Guru</p>
+            <h2>Classroom Management</h2>
+            <p>Bagian ini dapat dibuka kapan saja tanpa batas waktu.</p>
+          </div>
         </div>
         <div class="space-y-3">
           ${materials}
@@ -1510,6 +3482,7 @@
           });
         });
 
+      bindCourseBackButton();
       contentArea.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
@@ -1813,18 +3786,16 @@
       });
     }
 
-    function updateYoutubeLeftBadge(playerState) {
+    function updateYoutubeLeftBadge() {
       const badge = document.getElementById("youtube-left-badge");
       if (!badge) return;
 
-      const shouldReleasePlayerControls =
-        window.YT &&
-        playerState === YT.PlayerState.PLAYING;
-
-      badge.classList.toggle(
-        "is-player-running",
-        Boolean(shouldReleasePlayerControls)
-      );
+      // Badge Ruangguru selalu aktif untuk menutup tombol link/share YouTube.
+      badge.classList.remove("is-player-running");
+      badge.style.visibility = "visible";
+      badge.style.opacity = "1";
+      badge.style.transform = "none";
+      badge.style.pointerEvents = "auto";
     }
 
     function handleYoutubeStateChange(event) {
