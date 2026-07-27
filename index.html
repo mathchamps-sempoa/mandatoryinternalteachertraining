@@ -1,409 +1,1678 @@
-html_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Pelatihan Guru - Math Champs</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f2f9ff 0%, #d0e8f8 100%);
-            min-height: 100vh;
-            color: #333333;
-        }
-        
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-        }
-        
-        .floating-logo {
-            animation: float 3.5s ease-in-out infinite;
-            filter: drop-shadow(0 8px 12px rgba(77, 156, 214, 0.2));
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portal Pelatihan Guru Math Champs" />
+  <title>Portal Pelatihan Guru - Math Champs</title>
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-15px) scale(1.02); }
-        }
-        
-        .loading-pulse { 
-            animation: pulseBtn 1.5s infinite; 
-            pointer-events: none; 
-            opacity: 0.8;
-        }
-        
-        @keyframes pulseBtn {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(0.98); box-shadow: 0 0 0 10px rgba(77, 156, 214, 0); }
-        }
-        
-        .hover-lift { transition: all 0.3s ease; }
-        .hover-lift:hover { 
-            transform: translateY(-5px); 
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1); 
-        }
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    rel="stylesheet"
+  />
 
-        /* Calendar Styles */
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 4px;
-            text-align: center;
-            font-size: 0.75rem;
-        }
-        .calendar-day {
-            padding: 4px;
-            border-radius: 4px;
-            background: #f8fafc;
-            color: #64748b;
-            font-weight: 500;
-        }
-        .calendar-header {
-            font-weight: bold;
-            color: #94a3b8;
-            padding-bottom: 4px;
-            border-bottom: 1px solid #e2e8f0;
-            margin-bottom: 4px;
-        }
-        .date-highlight-red {
-            background: #fee2e2;
-            color: #d32f2f;
-            font-weight: bold;
-            animation: pulse-red 2s infinite;
-            border: 1px solid #fca5a5;
-        }
-        .date-highlight-orange {
-            background: #ffedd5;
-            color: #f2994a;
-            font-weight: bold;
-            animation: pulse-orange 2s infinite;
-            border: 1px solid #fdba74;
-        }
+  <style>
+    :root {
+      --mc-blue: #0284c7;
+      --mc-dark: #0f172a;
+      --mc-soft: #f0f7ff;
+    }
 
-        @keyframes pulse-red { 0%, 100% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.4); } 70% { box-shadow: 0 0 0 6px rgba(211, 47, 47, 0); } }
-        @keyframes pulse-orange { 0%, 100% { box-shadow: 0 0 0 0 rgba(242, 153, 74, 0.4); } 70% { box-shadow: 0 0 0 6px rgba(242, 153, 74, 0); } }
+    * {
+      box-sizing: border-box;
+    }
 
-        #dashboard-panel, #content-area { display: none; }
-    </style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(14, 165, 233, 0.12), transparent 30%),
+        linear-gradient(180deg, #f7fbff 0%, var(--mc-soft) 100%);
+      color: #334155;
+      min-height: 100vh;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      box-shadow: 0 8px 28px rgba(15, 23, 42, 0.06);
+    }
+
+    .hover-lift {
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .hover-lift:hover,
+    .hover-lift:focus-visible {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.09);
+    }
+
+    .tab-button {
+      border-radius: 12px 12px 0 0;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .tab-button[aria-selected="true"] {
+      color: #0369a1;
+      background: #e0f2fe;
+      border-bottom-color: #0284c7;
+      font-weight: 700;
+    }
+
+    .tab-button[aria-selected="false"] {
+      color: #64748b;
+      background: transparent;
+    }
+
+    .tab-button[aria-selected="false"]:hover {
+      background: #f1f5f9;
+      color: #334155;
+    }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 4px;
+      text-align: center;
+    }
+
+    .cal-day-head {
+      color: #94a3b8;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .cal-date {
+      padding: 7px 2px;
+      border-radius: 8px;
+      color: #475569;
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    .cal-date-today {
+      color: #fff !important;
+      background: #0284c7;
+      font-weight: 700;
+      box-shadow: 0 4px 10px rgba(2, 132, 199, 0.28);
+    }
+
+    .cal-date-dl-task {
+      color: #dc2626 !important;
+      background: #fee2e2;
+      border: 1px solid #fca5a5;
+      font-weight: 700;
+    }
+
+    .cal-date-dl-video {
+      color: #ea580c !important;
+      background: #ffedd5;
+      border: 1px solid #fdba74;
+      font-weight: 700;
+    }
+
+    .media-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.55rem 0.75rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 9px;
+      background: #fff;
+      color: #475569;
+      font-size: 0.75rem;
+      font-weight: 600;
+      transition: all 0.18s ease;
+    }
+
+    .media-button:hover,
+    .media-button:focus-visible {
+      color: #0f172a;
+      background: #f8fafc;
+      border-color: #bae6fd;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+    }
+
+    .media-button[data-watched="true"] {
+      color: #15803d;
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+
+    .media-button:disabled {
+      cursor: not-allowed;
+      opacity: 0.55;
+      box-shadow: none;
+    }
+
+    .loading-pulse {
+      pointer-events: none;
+      animation: pulse 1.4s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.55; }
+    }
+
+    .modal-backdrop {
+      background: rgba(15, 23, 42, 0.86);
+      backdrop-filter: blur(4px);
+    }
+
+    .youtube-shield {
+      position: absolute;
+      z-index: 30;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.96);
+      pointer-events: auto;
+      user-select: none;
+    }
+
+    .youtube-shield-top {
+      top: 0;
+      left: 0;
+      width: min(54%, 390px);
+      height: 54px;
+      justify-content: flex-start;
+      padding-left: 14px;
+    }
+
+    .youtube-shield-bottom {
+      right: 0;
+      bottom: 0;
+      width: 142px;
+      height: 48px;
+      border-radius: 10px 0 0 0;
+    }
+
+    .youtube-shield img {
+      max-height: 28px;
+      max-width: 112px;
+      object-fit: contain;
+    }
+
+    .progress-ring {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(#0ea5e9 var(--progress), #e2e8f0 0);
+    }
+
+    .progress-ring::after {
+      content: "";
+      width: 34px;
+      height: 34px;
+      border-radius: inherit;
+      background: #fff;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    @media (max-width: 640px) {
+      .youtube-shield-top {
+        width: 62%;
+        height: 46px;
+      }
+
+      .youtube-shield-bottom {
+        width: 112px;
+        height: 42px;
+      }
+    }
+  </style>
 </head>
-<body class="flex flex-col items-center p-4 md:p-8">
 
-    <div id="hero-banner" class="mt-10 mb-8 text-center transition-all duration-500">
-        <img src="https://cdn-web.ruangguru.com/file-uploader/3f15f74f-6104-44d8-b0b3-7b886772a4f2.png" alt="Logo Math Champs" class="w-56 mx-auto floating-logo">
-    </div>
+<body>
+  <main class="mx-auto flex min-h-screen w-full max-w-7xl flex-col px-4 py-6 md:px-6">
+    <!-- LOGIN / VERIFIKASI -->
+    <section id="verification-screen" class="my-auto flex flex-col items-center py-8">
+      <img
+        id="login-logo"
+        src="https://cdn-web.ruangguru.com/file-uploader/3f15f74f-6104-44d8-b0b3-7b886772a4f2.png"
+        alt="Math Champs"
+        class="mb-7 w-56 max-w-[70vw]"
+      />
 
-    <div id="login-panel" class="glass-panel w-full max-w-md rounded-2xl p-8 text-center border-t-8 border-t-[#4d9cd6] animate-[fadeIn_0.5s_ease-out]">
-        <h2 class="text-2xl font-bold text-[#4d9cd6] mb-2">Portal Pelatihan Guru</h2>
-        <p class="text-slate-500 text-sm mb-6">Silakan masuk menggunakan email pendaftaran Anda.</p>
-        
-        <div class="relative mb-6">
-            <i class="fas fa-envelope absolute left-4 top-3.5 text-slate-400"></i>
-            <input type="email" id="email-input" placeholder="contoh: guru@ruangguru.com" 
-                class="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-300 focus:border-[#4d9cd6] focus:ring-2 focus:ring-[#d0e8f8] outline-none transition-all text-slate-700" required>
+      <div class="glass-card w-full max-w-md p-7 text-center md:p-8">
+        <div class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-sky-50 text-sky-600">
+          <i class="fa-solid fa-user-check text-xl" aria-hidden="true"></i>
         </div>
-        
-        <div id="login-msg" class="text-sm font-semibold min-h-[24px] mb-4"></div>
-        
-        <button id="login-btn" onclick="doLogin()" 
-            class="w-full bg-[#4d9cd6] hover:bg-[#3a88c2] text-white font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-blue-500/30 flex justify-center items-center gap-2">
-            Masuk Sekarang <i class="fas fa-sign-in-alt"></i>
+
+        <h1 class="mb-2 text-2xl font-bold text-slate-800">Verifikasi Pendaftaran</h1>
+        <p class="mb-6 text-sm leading-relaxed text-slate-500">
+          Masukkan email yang Kakak gunakan saat mengisi Form Pendaftaran.
+        </p>
+
+        <form id="verification-form" novalidate>
+          <label for="email-input" class="mb-2 block text-left text-xs font-semibold text-slate-600">
+            Email pendaftaran
+          </label>
+
+          <div class="relative">
+            <i class="fa-solid fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" aria-hidden="true"></i>
+            <input
+              type="email"
+              id="email-input"
+              autocomplete="email"
+              inputmode="email"
+              placeholder="contoh: guru@email.com"
+              class="w-full rounded-xl border border-slate-300 bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-700 outline-none transition focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-100"
+              required
+            />
+          </div>
+
+          <div
+            id="verification-message"
+            class="mt-3 min-h-6 text-left text-xs font-medium text-rose-500"
+            aria-live="polite"
+          ></div>
+
+          <button
+            id="verification-button"
+            type="submit"
+            class="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-sky-600 py-3 text-sm font-semibold text-white transition hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-200"
+          >
+            Verifikasi Email
+            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" hidden>
+      <header class="mb-6 flex flex-col gap-4 rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-sm md:flex-row md:items-center md:justify-between">
+        <div class="flex items-center gap-4">
+          <img
+            src="https://cdn-web.ruangguru.com/file-uploader/3f15f74f-6104-44d8-b0b3-7b886772a4f2.png"
+            alt="Math Champs"
+            class="w-32"
+          />
+          <div class="hidden h-9 w-px bg-slate-200 sm:block"></div>
+          <div>
+            <p class="text-xs font-medium uppercase tracking-wide text-sky-600">Portal Pelatihan Guru</p>
+            <h1 id="greeting-text" class="text-xl font-bold text-slate-800 md:text-2xl">Halo, Kakak</h1>
+          </div>
+        </div>
+
+        <button
+          id="change-email-button"
+          type="button"
+          class="inline-flex items-center justify-center gap-2 self-start rounded-xl border border-slate-200 px-4 py-2 text-xs font-semibold text-slate-600 transition hover:bg-slate-50 md:self-auto"
+        >
+          <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+          Ganti Email
         </button>
-    </div>
+      </header>
 
-    <div id="dashboard-panel" class="w-full max-w-6xl mt-2 animate-[fadeIn_0.5s_ease-out]">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            
-            <div class="lg:col-span-2 flex flex-col gap-6">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="glass-panel rounded-2xl p-6 cursor-pointer hover-lift border-t-4 border-t-[#4bbdb4] relative overflow-hidden group" onclick="showSempoaSkill()">
-                        <div class="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center mb-4 text-[#4bbdb4] text-xl shadow-sm"><i class="fas fa-calculator"></i></div>
-                        <h3 class="font-bold text-teal-800 text-lg">Sempoa Skill</h3>
-                        <p class="text-sm text-slate-500 mt-1">Materi teknis & Section 1-6.</p>
-                    </div>
-                    
-                    <div class="glass-panel rounded-2xl p-6 cursor-pointer hover-lift border-t-4 border-t-[#4d9cd6] relative overflow-hidden group" onclick="showClassroomMgmt()">
-                        <div class="w-12 h-12 rounded-xl bg-sky-50 flex items-center justify-center mb-4 text-[#4d9cd6] text-xl shadow-sm"><i class="fas fa-chalkboard-teacher"></i></div>
-                        <h3 class="font-bold text-sky-800 text-lg">Classroom Mgmt</h3>
-                        <p class="text-sm text-slate-500 mt-1">Panduan kelas & kumpul tugas.</p>
-                    </div>
-                </div>
-                
-                <div id="content-area" class="glass-panel rounded-2xl p-6 md:p-8"></div>
-            </div>
-
-            <div class="lg:col-span-1 flex flex-col gap-6">
-                <div class="glass-panel rounded-2xl p-5 border-l-4 border-l-[#d32f2f]">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center text-[#d32f2f]"><i class="fas fa-calendar-times"></i></div>
-                        <div>
-                            <h4 class="font-bold text-slate-700 text-sm">Batas Kumpul Tugas</h4>
-                            <p class="text-[#d32f2f] font-bold text-xs">8 Agustus 2026</p>
-                        </div>
-                    </div>
-                    <div class="bg-white p-3 rounded-xl border border-slate-100">
-                        <div class="text-center font-bold text-slate-600 mb-2 text-sm">Agustus 2026</div>
-                        <div class="calendar-grid calendar-header">
-                            <div>M</div><div>S</div><div>S</div><div>R</div><div>K</div><div>J</div><div>S</div>
-                        </div>
-                        <div class="calendar-grid">
-                            <div class="text-transparent">.</div><div class="text-transparent">.</div><div class="text-transparent">.</div><div class="text-transparent">.</div><div class="text-transparent">.</div><div class="text-transparent">.</div><div class="calendar-day">1</div>
-                            <div class="calendar-day">2</div><div class="calendar-day">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div><div class="calendar-day">6</div><div class="calendar-day">7</div><div class="calendar-day date-highlight-red">8</div>
-                            <div class="calendar-day">9</div><div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div><div class="calendar-day">13</div><div class="calendar-day">14</div><div class="calendar-day">15</div>
-                            <div class="text-slate-300 text-xs col-span-7 mt-1 text-center">...</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glass-panel rounded-2xl p-5 border-l-4 border-l-[#f2994a]">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-orange-50 flex items-center justify-center text-[#f2994a]"><i class="fas fa-hourglass-half"></i></div>
-                        <div>
-                            <h4 class="font-bold text-slate-700 text-sm">Batas Nonton Video</h4>
-                            <p class="text-[#f2994a] font-bold text-xs">6 September 2026</p>
-                        </div>
-                    </div>
-                    <div class="bg-white p-3 rounded-xl border border-slate-100">
-                        <div class="text-center font-bold text-slate-600 mb-2 text-sm">September 2026</div>
-                        <div class="calendar-grid calendar-header">
-                            <div>M</div><div>S</div><div>S</div><div>R</div><div>K</div><div>J</div><div>S</div>
-                        </div>
-                        <div class="calendar-grid">
-                            <div class="text-transparent">.</div><div class="text-transparent">.</div><div class="calendar-day">1</div><div class="calendar-day">2</div><div class="calendar-day">3</div><div class="calendar-day">4</div><div class="calendar-day">5</div>
-                            <div class="calendar-day date-highlight-orange">6</div><div class="calendar-day">7</div><div class="calendar-day">8</div><div class="calendar-day">9</div><div class="calendar-day">10</div><div class="calendar-day">11</div><div class="calendar-day">12</div>
-                            <div class="text-slate-300 text-xs col-span-7 mt-1 text-center">...</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+      <nav class="mb-6 overflow-x-auto border-b border-slate-200" aria-label="Navigasi portal">
+        <div class="flex min-w-max gap-1">
+          <button class="tab-button px-4 py-3 text-sm" id="tab-button-flow" data-tab="flow" aria-selected="true">
+            🗺️ Alur Pelatihan
+          </button>
+          <button class="tab-button px-4 py-3 text-sm" id="tab-button-history" data-tab="history" aria-selected="false">
+            📊 Riwayat Belajar
+          </button>
+          <button class="tab-button px-4 py-3 text-sm" id="tab-button-help" data-tab="help" aria-selected="false">
+            ❓ Pusat Bantuan
+          </button>
         </div>
+      </nav>
+
+      <div class="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
+        <div>
+          <!-- TAB ALUR -->
+          <section id="tab-flow" class="tab-panel">
+            <div class="mb-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <button
+                type="button"
+                id="open-sempoa-card"
+                class="glass-card hover-lift border-t-4 border-t-teal-500 p-5 text-left focus:outline-none"
+              >
+                <div class="mb-3 flex items-center gap-3">
+                  <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-teal-50 text-teal-600">
+                    <i class="fa-solid fa-calculator text-lg" aria-hidden="true"></i>
+                  </span>
+                  <div>
+                    <h2 class="font-bold text-slate-800">Sempoa Skill</h2>
+                    <p class="text-xs font-semibold text-teal-600">Section 1–6</p>
+                  </div>
+                </div>
+                <p class="text-xs leading-relaxed text-slate-500">
+                  Video pembelajaran dan modul teknis sempoa dari pengenalan hingga multi-digit.
+                </p>
+              </button>
+
+              <button
+                type="button"
+                id="open-classroom-card"
+                class="glass-card hover-lift border-t-4 border-t-sky-500 p-5 text-left focus:outline-none"
+              >
+                <div class="mb-3 flex items-center gap-3">
+                  <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-sky-50 text-sky-600">
+                    <i class="fa-solid fa-chalkboard-user text-lg" aria-hidden="true"></i>
+                  </span>
+                  <div>
+                    <h2 class="font-bold text-slate-800">Classroom Management</h2>
+                    <p class="text-xs font-semibold text-sky-600">Panduan & pengumpulan tugas</p>
+                  </div>
+                </div>
+                <p class="text-xs leading-relaxed text-slate-500">
+                  Panduan kelas offline, video submission, serta pengumpulan tugas wajib.
+                </p>
+              </button>
+            </div>
+
+            <div id="content-area" class="glass-card p-5 md:p-6">
+              <div class="flex min-h-48 flex-col items-center justify-center text-center">
+                <span class="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-400">
+                  <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+                </span>
+                <h2 class="font-semibold text-slate-700">Pilih materi yang ingin dibuka</h2>
+                <p class="mt-1 max-w-md text-xs leading-relaxed text-slate-500">
+                  Pilih Sempoa Skill atau Classroom Management melalui kartu di atas.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <!-- TAB RIWAYAT -->
+          <section id="tab-history" class="tab-panel" hidden>
+            <div class="glass-card p-5 md:p-6">
+              <div class="mb-5 flex items-center justify-between border-b border-slate-100 pb-4">
+                <div>
+                  <h2 class="font-bold text-slate-800">Riwayat Belajar Kakak</h2>
+                  <p class="mt-1 text-xs text-slate-500">Progres video tersimpan pada browser dan email yang sedang digunakan.</p>
+                </div>
+                <button
+                  id="refresh-status-button"
+                  type="button"
+                  class="rounded-lg border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+                >
+                  <i class="fa-solid fa-rotate-right mr-1" aria-hidden="true"></i>
+                  Perbarui
+                </button>
+              </div>
+
+              <div class="mb-5 rounded-xl border border-sky-100 bg-sky-50 p-4">
+                <div class="flex items-center gap-4">
+                  <div id="video-progress-ring" class="progress-ring shrink-0" style="--progress: 0%">
+                    <span class="sr-only">Progres video</span>
+                  </div>
+                  <div>
+                    <p class="text-xs font-semibold uppercase tracking-wide text-sky-700">Progres Video Sempoa Skill</p>
+                    <p id="video-progress-text" class="mt-1 text-lg font-bold text-slate-800">0 dari 11 video selesai</p>
+                    <p class="mt-1 text-xs text-slate-500">Video ditandai selesai setelah ditonton minimal 90%.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                <article class="flex flex-col gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-slate-400 shadow-sm">
+                      <i class="fa-solid fa-file-lines" aria-hidden="true"></i>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-semibold text-slate-800">Tugas Kartu Lihat Hitung (KLH)</h3>
+                      <p class="text-xs text-slate-500">Dicek berdasarkan email pada spreadsheet submission.</p>
+                    </div>
+                  </div>
+                  <div id="status-klh" class="text-sm font-bold text-slate-500">
+                    <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Mengecek...
+                  </div>
+                </article>
+
+                <article class="flex flex-col gap-3 rounded-xl border border-slate-200 bg-slate-50 p-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div class="flex items-center gap-3">
+                    <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-white text-slate-400 shadow-sm">
+                      <i class="fa-solid fa-video" aria-hidden="true"></i>
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-semibold text-slate-800">Video Submission</h3>
+                      <p class="text-xs text-slate-500">Dicek berdasarkan email pada spreadsheet submission.</p>
+                    </div>
+                  </div>
+                  <div id="status-video" class="text-sm font-bold text-slate-500">
+                    <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Mengecek...
+                  </div>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <!-- TAB BANTUAN -->
+          <section id="tab-help" class="tab-panel" hidden>
+            <div class="glass-card p-5 md:p-6">
+              <h2 class="mb-5 border-b border-slate-100 pb-4 font-bold text-slate-800">Tanya Jawab (FAQ)</h2>
+
+              <div class="space-y-5 text-sm">
+                <article>
+                  <h3 class="font-semibold text-sky-700">Apa yang bisa dipelajari dari Sempoa Skill?</h3>
+                  <ul class="mt-2 list-disc space-y-1 pl-5 text-sm leading-relaxed text-slate-600">
+                    <li>Mempelajari penerapan tambah dan kurang menggunakan sempoa.</li>
+                    <li>Menggunakan sempoa untuk menghitung digit lanjutan.</li>
+                    <li>Mengunduh modul soal untuk latihan mandiri.</li>
+                  </ul>
+                </article>
+
+                <article>
+                  <h3 class="font-semibold text-sky-700">Apakah wajib mengumpulkan tugas?</h3>
+                  <p class="mt-2 leading-relaxed text-slate-600">
+                    Ya. Tugas wajib dikumpulkan agar Kakak dapat memperoleh badge pelatihan.
+                  </p>
+                </article>
+
+                <article class="rounded-xl border border-sky-100 bg-sky-50 p-4">
+                  <h3 class="font-semibold text-slate-800">Masih memiliki pertanyaan?</h3>
+                  <p class="mb-3 mt-1 text-sm text-slate-600">Silakan tanyakan melalui grup Coach Nasional.</p>
+                  <button
+                    type="button"
+                    id="whatsapp-button"
+                    class="inline-flex items-center gap-2 rounded-lg bg-green-500 px-4 py-2 text-xs font-semibold text-white transition hover:bg-green-600"
+                  >
+                    <i class="fa-brands fa-whatsapp text-lg" aria-hidden="true"></i>
+                    Grup WhatsApp Coach
+                  </button>
+                </article>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- SIDEBAR -->
+        <aside class="space-y-5">
+          <section class="glass-card p-5" aria-label="Kalender">
+            <div class="mb-4 flex items-center justify-between">
+              <button
+                id="previous-month"
+                type="button"
+                class="flex h-8 w-8 items-center justify-center rounded-lg text-slate-600 hover:bg-slate-100"
+                aria-label="Bulan sebelumnya"
+              >
+                <i class="fa-solid fa-chevron-left text-xs" aria-hidden="true"></i>
+              </button>
+
+              <h2 id="calendar-title" class="text-sm font-bold text-slate-800">Bulan 2026</h2>
+
+              <button
+                id="next-month"
+                type="button"
+                class="flex h-8 w-8 items-center justify-center rounded-lg text-slate-600 hover:bg-slate-100"
+                aria-label="Bulan berikutnya"
+              >
+                <i class="fa-solid fa-chevron-right text-xs" aria-hidden="true"></i>
+              </button>
+            </div>
+
+            <div class="cal-grid cal-day-head mb-1">
+              <div>Min</div><div>Sen</div><div>Sel</div><div>Rab</div><div>Kam</div><div>Jum</div><div>Sab</div>
+            </div>
+            <div id="calendar-days" class="cal-grid"></div>
+
+            <div class="mt-4 flex flex-wrap gap-3 text-[10px] text-slate-500">
+              <span class="flex items-center gap-1"><span class="h-2.5 w-2.5 rounded-full bg-red-200"></span> Deadline tugas</span>
+              <span class="flex items-center gap-1"><span class="h-2.5 w-2.5 rounded-full bg-orange-200"></span> Deadline materi</span>
+            </div>
+          </section>
+
+          <section class="space-y-3" aria-label="Deadline">
+            <article class="glass-card border-l-4 border-l-red-500 p-4">
+              <div class="mb-1 flex items-start justify-between gap-2">
+                <p class="text-[11px] font-bold uppercase tracking-wide text-red-600">Batas Pengumpulan Tugas</p>
+                <span id="task-countdown" class="rounded-full bg-red-100 px-2 py-0.5 text-[10px] font-bold text-red-700">Menghitung...</span>
+              </div>
+              <p class="text-sm font-bold text-slate-800">8 Agustus 2026</p>
+              <p class="mt-1 text-[11px] text-slate-500">Pukul 23.59 WIB</p>
+            </article>
+
+            <article class="glass-card border-l-4 border-l-orange-400 p-4">
+              <div class="mb-1 flex items-start justify-between gap-2">
+                <p class="text-[11px] font-bold uppercase tracking-wide text-orange-600">Batas Akses Sempoa Skill</p>
+                <span id="material-countdown" class="rounded-full bg-orange-100 px-2 py-0.5 text-[10px] font-bold text-orange-700">Menghitung...</span>
+              </div>
+              <p class="text-sm font-bold text-slate-800">6 September 2026</p>
+              <p class="mt-1 text-[11px] text-slate-500">Materi terkunci mulai 7 September 2026 WIB</p>
+            </article>
+          </section>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODAL MEDIA -->
+  <div
+    id="media-modal"
+    class="modal-backdrop fixed inset-0 z-50 flex items-center justify-center p-3 md:p-6"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="media-modal-title"
+    hidden
+  >
+    <div class="flex max-h-[94vh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl">
+      <div class="flex items-center justify-between gap-4 border-b border-slate-200 bg-slate-50 px-4 py-3">
+        <div class="min-w-0">
+          <p class="text-[10px] font-semibold uppercase tracking-wide text-sky-600">Portal Math Champs</p>
+          <h2 id="media-modal-title" class="truncate text-sm font-bold text-slate-800 md:text-base">Materi</h2>
+        </div>
+
+        <button
+          id="close-modal-button"
+          type="button"
+          class="shrink-0 rounded-lg px-3 py-2 text-xs font-bold text-red-500 transition hover:bg-red-50"
+        >
+          Tutup <i class="fa-solid fa-xmark ml-1" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      <div id="media-modal-body" class="relative aspect-video w-full bg-slate-950">
+        <div class="flex h-full items-center justify-center text-sm text-white">
+          Memuat materi...
+        </div>
+      </div>
+
+      <div id="media-modal-footer" class="border-t border-slate-200 bg-white px-4 py-3 text-xs text-slate-500">
+        Materi dibuka di dalam Portal Math Champs.
+      </div>
     </div>
+  </div>
 
-    <script>
-        // API URL APPS SCRIPT YANG BARU (Update sesuai instruksi terakhir)
-        const API_URL = "https://script.google.com/macros/s/AKfycbx09ukQqWDv2tr16FYdsE63z-s1mWCnHUOcuqAiomDjVEwKuPIx00xgziqiRHLFZbUj/exec";
-        
-        let currentUserEmail = "";
-        let autoSaveInterval;
-        let learningDuration = 0;
+  <script>
+    "use strict";
 
-        // Styling untuk tombol materi (Target Blank agar buka di tab baru)
-        const btnClass = "inline-flex items-center gap-2 px-4 py-2 bg-slate-50 hover:bg-[#d0e8f8] text-slate-700 hover:text-[#00509d] text-sm font-semibold rounded-lg border border-slate-200 transition-colors shadow-sm";
-        
-        const classroomMgmtData = `
-            <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-200">
-                <i class="fas fa-chalkboard-teacher text-3xl text-[#4d9cd6]"></i>
-                <h2 class="text-2xl font-bold text-[#00509d] m-0">Classroom Management</h2>
-            </div>
-            
-            <div class="mb-5 p-5 bg-white rounded-xl border border-slate-100 shadow-sm">
-                <strong class="flex items-center text-slate-700 mb-4 text-base"><i class="fas fa-book-open text-[#4d9cd6] mr-2"></i> Panduan Kelas Offline</strong>
-                <p class="text-xs text-slate-500 mb-3 italic">Estimasi pengerjaan: 30 Menit</p>
-                <div class="flex flex-wrap gap-3">
-                    <a href="https://youtu.be/yTpWptR9lzI" target="_blank" class="\${btnClass}"><i class="fab fa-youtube text-[#d32f2f]"></i> Video Panduan</a>
-                    <a href="https://drive.google.com/file/d/1NPvU2M83XQ2DlSl5aWog9lWv-u1KfxaX/view" target="_blank" class="\${btnClass}"><i class="fas fa-file-pdf text-[#f2994a]"></i> Panduan (Drive)</a>
-                </div>
-            </div>
-            
-            <div class="p-5 bg-white rounded-xl border border-slate-100 shadow-sm">
-                <strong class="flex items-center text-slate-700 mb-4 text-base"><i class="fas fa-thumbtack text-[#d32f2f] mr-2"></i> Pengumpulan Tugas Wajib</strong>
-                <p class="text-xs text-slate-500 mb-3 italic">Wajib dikumpulkan sebelum 8 Agustus 2026</p>
-                <div class="flex flex-wrap gap-3">
-                    <a href="https://tinyurl.com/pengumpulanvideosubmission" target="_blank" class="\${btnClass}"><i class="fas fa-upload text-[#4bbdb4]"></i> Video Submission</a>
-                    <a href="https://tinyurl.com/PengumpulanKLH" target="_blank" class="\${btnClass}"><i class="fas fa-upload text-[#4bbdb4]"></i> Tugas KLH</a>
-                </div>
-            </div>
-        `;
+    /*
+      Endpoint Google Apps Script yang digunakan oleh versi sebelumnya.
 
-        const sempoaSkillData = `
-            <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-200">
-                <i class="fas fa-calculator text-3xl text-[#4bbdb4]"></i>
-                <h2 class="text-2xl font-bold text-[#00a89d] m-0">Sempoa Skill (Section 1-6)</h2>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
-                    <strong class="block text-slate-700 mb-1 text-sm">1. Pengenalan Sempoa</strong>
-                    <p class="text-xs text-slate-500 mb-3 italic">Estimasi: 20 Menit</p>
-                    <div class="flex flex-wrap gap-2">
-                        <a href="https://youtu.be/ZumRbx0uxzw" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 1</a>
-                        <a href="https://youtu.be/XKZhGlAkqI0" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 2</a>
-                        <a href="https://drive.google.com/file/d/1XUHRXjm5rUzGSkiSTy87rMX15VK8uo1O/view" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fas fa-file-pdf text-[#4bbdb4]"></i> Modul</a>
-                    </div>
-                </div>
-                <div class="p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
-                    <strong class="block text-slate-700 mb-1 text-sm">2. Kawan Kecil</strong>
-                    <p class="text-xs text-slate-500 mb-3 italic">Estimasi: 25 Menit</p>
-                    <div class="flex flex-wrap gap-2">
-                        <a href="https://youtu.be/aMD7jUXH2lI" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 1</a>
-                        <a href="https://youtu.be/wOoubFdBlf4" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 2</a>
-                        <a href="https://drive.google.com/file/d/1RE7_VAHrkx7LIneQ5Bmxl0UzuYp16LtM/view" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fas fa-file-pdf text-[#4bbdb4]"></i> Modul</a>
-                    </div>
-                </div>
-                <div class="p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
-                    <strong class="block text-slate-700 mb-1 text-sm">3. Kawan Besar</strong>
-                    <p class="text-xs text-slate-500 mb-3 italic">Estimasi: 25 Menit</p>
-                    <div class="flex flex-wrap gap-2">
-                        <a href="https://youtu.be/VAxKB166otw" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 1</a>
-                        <a href="https://youtu.be/Z_Ohxd8wkLE" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 2</a>
-                    </div>
-                </div>
-                <div class="p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
-                    <strong class="block text-slate-700 mb-1 text-sm">4. Rumus Gabungan</strong>
-                    <p class="text-xs text-slate-500 mb-3 italic">Estimasi: 30 Menit</p>
-                    <div class="flex flex-wrap gap-2">
-                        <a href="https://youtu.be/M2Ld8XMy0iM" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 1</a>
-                        <a href="https://youtu.be/Tjjr9Ye1DAA" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 2</a>
-                    </div>
-                </div>
-                <div class="p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
-                    <strong class="block text-slate-700 mb-1 text-sm">5. Multi-Digit Dasar</strong>
-                    <p class="text-xs text-slate-500 mb-3 italic">Estimasi: 20 Menit</p>
-                    <div class="flex flex-wrap gap-2">
-                        <a href="https://youtu.be/qIdMsbvxjo0" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 1</a>
-                    </div>
-                </div>
-                 <div class="p-4 bg-white rounded-xl border border-slate-100 shadow-sm">
-                    <strong class="block text-slate-700 mb-1 text-sm">6. Multi-Digit Lanjut</strong>
-                    <p class="text-xs text-slate-500 mb-3 italic">Estimasi: 25 Menit</p>
-                    <div class="flex flex-wrap gap-2">
-                        <a href="https://youtu.be/gUbRxFFR1sY" target="_blank" class="\${btnClass} !text-xs !px-3"><i class="fab fa-youtube text-[#d32f2f]"></i> Vid 1</a>
-                    </div>
-                </div>
-            </div>
-        `;
+      Respons minimum yang diharapkan:
+      {
+        success: true,
+        name: "Nama Guru",
+        taskKLH: true,
+        taskVideo: false
+      }
 
-        // JSONP API Fetch
-        function callApi(params) {
-            return new Promise((resolve, reject) => {
-                const callbackName = 'jsonpCallback_' + Math.round(100000 * Math.random());
-                const script = document.createElement('script');
-                const timeout = setTimeout(() => {
-                    cleanup();
-                    reject(new Error('Koneksi terputus (Timeout).'));
-                }, 15000);
-                
-                function cleanup() {
-                    clearTimeout(timeout);
-                    delete window[callbackName];
-                    if (document.body.contains(script)) script.remove();
-                }
-                
-                window[callbackName] = (data) => {
-                    cleanup();
-                    resolve(data);
-                };
-                
-                params.callback = callbackName;
-                const query = new URLSearchParams(params).toString();
-                
-                script.onerror = () => { cleanup(); reject(new Error('Gagal memuat API server.')); };
-                script.src = `${API_URL}?${query}`;
-                document.body.appendChild(script);
-            });
+      Respons gagal:
+      {
+        success: false,
+        message: "Email tidak ditemukan."
+      }
+    */
+    const API_URL =
+      "https://script.google.com/macros/s/AKfycbx09ukQqWDv2tr16FYdsE63z-s1mWCnHUOcuqAiomDjVEwKuPIx00xgziqiRHLFZbUj/exec";
+
+    const BRAND_LOGO =
+      "https://cdn-web.ruangguru.com/file-uploader/3f15f74f-6104-44d8-b0b3-7b886772a4f2.png";
+
+    // Form submission links fixed: 27 July 2026
+    const WHATSAPP_GROUP =
+      "https://chat.whatsapp.com/LnAl2hbrWGZ3dkYRvqSRLC";
+
+    const TASK_DEADLINE = new Date("2026-08-08T23:59:59+07:00");
+    const MATERIAL_DEADLINE = new Date("2026-09-07T00:00:00+07:00");
+
+    const sempoaSections = [
+      {
+        title: "1. Pengenalan Sempoa",
+        videos: [
+          { id: "ZumRbx0uxzw", title: "Pengenalan Sempoa — Video 1" },
+          { id: "XKZhGlAkqI0", title: "Pengenalan Sempoa — Video 2" },
+          { id: "HL48XMlyvjw", title: "Pengenalan Sempoa — Video 3" }
+        ],
+        module: {
+          title: "Modul Pengenalan Sempoa",
+          url: "https://drive.google.com/file/d/1XUHRXjm5rUzGSkiSTy87rMX15VK8uo1O/view?usp=drive_link"
+        }
+      },
+      {
+        title: "2. Kawan Kecil",
+        videos: [
+          { id: "aMD7jUXH2lI", title: "Kawan Kecil — Video 1" },
+          { id: "wOoubFdBlf4", title: "Kawan Kecil — Video 2" }
+        ],
+        module: {
+          title: "Modul Kawan Kecil",
+          url: "https://drive.google.com/file/d/1RE7_VAHrkx7LIneQ5Bmxl0UzuYp16LtM/view?usp=drive_link"
+        }
+      },
+      {
+        title: "3. Kawan Besar",
+        videos: [
+          { id: "VAxKB166otw", title: "Kawan Besar — Video 1" },
+          { id: "Z_Ohxd8wkLE", title: "Kawan Besar — Video 2" }
+        ],
+        module: {
+          title: "Modul Kawan Besar",
+          url: "https://drive.google.com/file/d/1LIXN8OAkVcuiKbvRc_4VrwTon3C5hv4c/view?usp=drive_link"
+        }
+      },
+      {
+        title: "4. Rumus Gabungan",
+        videos: [
+          { id: "M2Ld8XMy0iM", title: "Rumus Gabungan — Video 1" },
+          { id: "Tjjr9Ye1DAA", title: "Rumus Gabungan — Video 2" }
+        ],
+        module: {
+          title: "Modul Rumus Gabungan",
+          url: "https://drive.google.com/file/d/1Vn0wtakWXXm7rA4az_sTZ-bEA4BM6wfW/view?usp=drive_link"
+        }
+      },
+      {
+        title: "5. Multi-Digit Dasar",
+        videos: [
+          { id: "qIdMsbvxjo0", title: "Multi-Digit Dasar — Video 1" }
+        ],
+        module: {
+          title: "Modul Multi-Digit Dasar",
+          url: "https://drive.google.com/file/d/1puEpi4J3QwL2VoGuHaUOoHGxyLq0HbGa/view?usp=drive_link"
+        }
+      },
+      {
+        title: "6. Multi-Digit Lanjutan",
+        videos: [
+          { id: "gUbRxFFR1sY", title: "Multi-Digit Lanjutan — Video 1" }
+        ],
+        module: {
+          title: "Modul Multi-Digit Lanjutan",
+          url: "https://drive.google.com/file/d/1WRW6G7VjXP6u6KM0qlLQKrFkoDtMX4B1/view?usp=drive_link"
+        }
+      }
+    ];
+
+    const classroomMaterials = [
+      {
+        type: "youtube",
+        title: "Video Panduan Kelas Offline",
+        url: "https://youtu.be/yTpWptR9lzI",
+        icon: "fa-brands fa-youtube",
+        iconClass: "text-red-500"
+      },
+      {
+        type: "drive",
+        title: "Panduan Kelas Offline",
+        url: "https://drive.google.com/file/d/1NPvU2M83XQ2DlSl5aWog9lWv-u1KfxaX/view?usp=drive_link",
+        icon: "fa-solid fa-file-pdf",
+        iconClass: "text-red-500"
+      },
+      {
+        type: "drive",
+        title: "Panduan Pengerjaan Video Submission",
+        url: "https://drive.google.com/file/d/1NH58GhGe-l2HxHkN_tNBgvoYpPKvNzux/view?usp=drive_link",
+        icon: "fa-solid fa-file-video",
+        iconClass: "text-violet-500",
+        note: "Buka panduan di dalam portal"
+      },
+      {
+        type: "external_form",
+        title: "Pengumpulan Video Submission",
+        url: "https://forms.gle/wkQf6Smoqx8u6NGU9",
+        icon: "fa-solid fa-upload",
+        iconClass: "text-sky-500",
+        note: "Google Form dibuka di tab baru"
+      },
+      {
+        type: "external_form",
+        title: "Pengumpulan Tugas Kartu Lihat Hitung",
+        url: "https://forms.gle/AQsbHFBcoMtpuUVo7",
+        icon: "fa-solid fa-upload",
+        iconClass: "text-sky-500",
+        note: "Google Form dibuka di tab baru"
+      }
+    ];
+
+    const totalVideos = sempoaSections.reduce(
+      (total, section) => total + section.videos.length,
+      0
+    );
+
+    let currentUser = {
+      email: "",
+      name: "Kakak",
+      taskKLH: false,
+      taskVideo: false
+    };
+
+    let currentCalendarDate = new Date();
+    let youtubePlayer = null;
+    let youtubeProgressTimer = null;
+    let currentVideoId = "";
+    let currentVideoTitle = "";
+    let lastFocusedElement = null;
+
+    const verificationScreen = document.getElementById("verification-screen");
+    const dashboard = document.getElementById("dashboard");
+    const verificationForm = document.getElementById("verification-form");
+    const emailInput = document.getElementById("email-input");
+    const verificationMessage = document.getElementById("verification-message");
+    const verificationButton = document.getElementById("verification-button");
+    const contentArea = document.getElementById("content-area");
+    const mediaModal = document.getElementById("media-modal");
+    const mediaModalBody = document.getElementById("media-modal-body");
+    const mediaModalTitle = document.getElementById("media-modal-title");
+    const mediaModalFooter = document.getElementById("media-modal-footer");
+
+    function normalizeEmail(value) {
+      return String(value || "").trim().toLowerCase();
+    }
+
+    function isValidEmail(value) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function callApi(params) {
+      return new Promise((resolve, reject) => {
+        const callbackName =
+          "jsonp_" + Date.now() + "_" + Math.floor(Math.random() * 100000);
+        const script = document.createElement("script");
+
+        const timeout = window.setTimeout(() => {
+          cleanup();
+          reject(new Error("Waktu koneksi habis."));
+        }, 15000);
+
+        function cleanup() {
+          window.clearTimeout(timeout);
+          delete window[callbackName];
+          if (script.parentNode) {
+            script.parentNode.removeChild(script);
+          }
         }
 
-        // Login Function
-        async function doLogin() {
-            const emailInput = document.getElementById('email-input');
-            const email = emailInput.value.trim();
-            const msgArea = document.getElementById('login-msg');
-            const btn = document.getElementById('login-btn');
-            
-            if (!email) {
-                msgArea.innerText = "Email tidak boleh kosong.";
-                msgArea.className = "text-sm font-semibold min-h-[24px] mb-4 text-[#d32f2f]";
-                emailInput.focus();
-                return;
-            }
-            
-            msgArea.innerText = "Memverifikasi datamu di sistem...";
-            msgArea.className = "text-sm font-semibold min-h-[24px] mb-4 text-[#4d9cd6]";
-            btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Memproses...';
-            btn.classList.add('loading-pulse');
-            
-            try {
-                const data = await callApi({ action: 'login', email: email });
-                if (data.success) {
-                    currentUserEmail = email;
-                    
-                    // Transisi ke Dashboard
-                    document.getElementById('login-panel').style.display = 'none';
-                    const banner = document.getElementById('hero-banner');
-                    banner.classList.remove('mt-10', 'mb-8');
-                    banner.classList.add('mt-2', 'mb-4', 'scale-90');
-                    
-                    const dashboard = document.getElementById('dashboard-panel');
-                    dashboard.style.display = 'block';
-                    
-                    startAutoSave();
-                } else {
-                    msgArea.innerText = data.message || "Email tidak terdaftar di sistem.";
-                    msgArea.className = "text-sm font-semibold min-h-[24px] mb-4 text-[#d32f2f]";
-                }
-            } catch (error) {
-                msgArea.innerText = "Gagal terhubung ke database server.";
-                msgArea.className = "text-sm font-semibold min-h-[24px] mb-4 text-[#d32f2f]";
-            } finally {
-                btn.innerHTML = 'Masuk Sekarang <i class="fas fa-sign-in-alt"></i>';
-                btn.classList.remove('loading-pulse');
-            }
+        window[callbackName] = (data) => {
+          cleanup();
+          resolve(data);
+        };
+
+        script.onerror = () => {
+          cleanup();
+          reject(new Error("Tidak dapat menghubungi server."));
+        };
+
+        const searchParams = new URLSearchParams({
+          ...params,
+          callback: callbackName
+        });
+
+        script.src = API_URL + "?" + searchParams.toString();
+        document.body.appendChild(script);
+      });
+    }
+
+    async function verifyEmail(email, options = {}) {
+      const normalizedEmail = normalizeEmail(email);
+      const silent = Boolean(options.silent);
+
+      if (!isValidEmail(normalizedEmail)) {
+        if (!silent) {
+          verificationMessage.textContent =
+            "Masukkan alamat email dengan format yang benar.";
+          emailInput.focus();
+        }
+        return false;
+      }
+
+      if (!silent) {
+        verificationMessage.textContent = "";
+        verificationButton.disabled = true;
+        verificationButton.classList.add("loading-pulse");
+        verificationButton.innerHTML =
+          '<i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i> Memeriksa data...';
+      }
+
+      try {
+        const data = await callApi({
+          action: "login",
+          email: normalizedEmail
+        });
+
+        if (!data || !data.success) {
+          throw new Error(
+            (data && data.message) ||
+              "Email belum ditemukan pada data Form Pendaftaran."
+          );
         }
 
-        // Logic Content Display
-        function showSempoaSkill() {
-            const contentArea = document.getElementById('content-area');
-            const deadline = new Date("2026-09-07T00:00:00+07:00");
-            const now = new Date();
+        currentUser = {
+          email: normalizedEmail,
+          name: String(data.name || "Kakak").trim(),
+          taskKLH: Boolean(data.taskKLH),
+          taskVideo: Boolean(data.taskVideo)
+        };
 
-            contentArea.style.display = 'block';
-            contentArea.style.animation = 'none';
-            setTimeout(() => contentArea.style.animation = 'fadeIn 0.3s ease-out', 10);
-            
-            if (now >= deadline) {
-                contentArea.innerHTML = `
-                    <div class="bg-red-50 text-[#d32f2f] p-8 rounded-xl text-center font-bold border border-red-200 shadow-sm">
-                        <i class="fas fa-lock text-4xl mb-4 block text-red-400"></i>
-                        Maaf, akses ke materi Sempoa Skill telah dikunci sejak tanggal 6 September 2026.
-                    </div>
+        sessionStorage.setItem(
+          "mathChampsVerifiedUser",
+          JSON.stringify(currentUser)
+        );
+
+        showDashboard();
+        return true;
+      } catch (error) {
+        if (!silent) {
+          verificationMessage.innerHTML =
+            escapeHtml(error.message) +
+            '<br><span class="font-normal text-slate-500">Pastikan email sama dengan email yang digunakan pada Form Pendaftaran.</span>';
+        }
+        return false;
+      } finally {
+        if (!silent) {
+          verificationButton.disabled = false;
+          verificationButton.classList.remove("loading-pulse");
+          verificationButton.innerHTML =
+            'Verifikasi Email <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>';
+        }
+      }
+    }
+
+    function showDashboard() {
+      verificationScreen.hidden = true;
+      dashboard.hidden = false;
+
+      const greetingName = currentUser.name || "Kakak";
+      document.getElementById("greeting-text").textContent =
+        "Halo, " + greetingName;
+
+      updateTaskStatuses();
+      updateVideoProgress();
+      renderCalendar();
+      calculateCountdowns();
+      renderSempoaSkill(false);
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+
+    function logout() {
+      sessionStorage.removeItem("mathChampsVerifiedUser");
+      currentUser = {
+        email: "",
+        name: "Kakak",
+        taskKLH: false,
+        taskVideo: false
+      };
+
+      closeModal();
+      dashboard.hidden = true;
+      verificationScreen.hidden = false;
+      verificationMessage.textContent = "";
+      emailInput.value = "";
+      emailInput.focus();
+    }
+
+    function updateTaskStatuses() {
+      setSubmissionStatus(
+        document.getElementById("status-klh"),
+        currentUser.taskKLH
+      );
+      setSubmissionStatus(
+        document.getElementById("status-video"),
+        currentUser.taskVideo
+      );
+    }
+
+    function setSubmissionStatus(element, completed) {
+      if (completed) {
+        element.className = "text-sm font-bold text-green-600";
+        element.innerHTML =
+          '<i class="fa-solid fa-circle-check text-green-500" aria-hidden="true"></i> Selesai';
+      } else {
+        element.className = "text-sm font-bold text-red-500";
+        element.innerHTML =
+          '<i class="fa-solid fa-circle-xmark text-red-500" aria-hidden="true"></i> Belum dikumpulkan';
+      }
+    }
+
+    async function refreshSubmissionStatuses() {
+      const button = document.getElementById("refresh-status-button");
+      button.disabled = true;
+      button.innerHTML =
+        '<i class="fa-solid fa-spinner fa-spin mr-1" aria-hidden="true"></i> Memeriksa...';
+
+      try {
+        const data = await callApi({
+          action: "login",
+          email: currentUser.email
+        });
+
+        if (!data || !data.success) {
+          throw new Error("Status tidak dapat diperbarui.");
+        }
+
+        currentUser.name = String(data.name || currentUser.name).trim();
+        currentUser.taskKLH = Boolean(data.taskKLH);
+        currentUser.taskVideo = Boolean(data.taskVideo);
+
+        sessionStorage.setItem(
+          "mathChampsVerifiedUser",
+          JSON.stringify(currentUser)
+        );
+
+        updateTaskStatuses();
+      } catch (error) {
+        alert(error.message);
+      } finally {
+        button.disabled = false;
+        button.innerHTML =
+          '<i class="fa-solid fa-rotate-right mr-1" aria-hidden="true"></i> Perbarui';
+      }
+    }
+
+    function switchTab(tabName) {
+      document.querySelectorAll(".tab-panel").forEach((panel) => {
+        panel.hidden = panel.id !== "tab-" + tabName;
+      });
+
+      document.querySelectorAll(".tab-button").forEach((button) => {
+        button.setAttribute(
+          "aria-selected",
+          button.dataset.tab === tabName ? "true" : "false"
+        );
+      });
+
+      if (tabName === "history") {
+        updateVideoProgress();
+      }
+    }
+
+    function isMaterialLocked() {
+      return new Date() >= MATERIAL_DEADLINE;
+    }
+
+    function renderSempoaSkill(scrollToContent = true) {
+      if (isMaterialLocked()) {
+        contentArea.innerHTML = `
+          <div class="flex min-h-52 flex-col items-center justify-center rounded-xl border border-red-200 bg-red-50 p-6 text-center">
+            <span class="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white text-red-500 shadow-sm">
+              <i class="fa-solid fa-lock text-lg" aria-hidden="true"></i>
+            </span>
+            <h2 class="font-bold text-red-700">Akses Sempoa Skill Telah Ditutup</h2>
+            <p class="mt-2 max-w-lg text-xs leading-relaxed text-red-600">
+              Video dan modul Sempoa Skill hanya dapat diakses sampai 6 September 2026 pukul 23.59 WIB.
+              Classroom Management tetap dapat dibuka.
+            </p>
+          </div>
+        `;
+      } else {
+        const sectionCards = sempoaSections
+          .map((section) => {
+            const videoButtons = section.videos
+              .map((video, index) => {
+                const watched = isVideoWatched(video.id);
+                return `
+                  <button
+                    type="button"
+                    class="media-button video-material-button"
+                    data-video-id="${escapeHtml(video.id)}"
+                    data-video-title="${escapeHtml(video.title)}"
+                    data-watched="${watched}"
+                  >
+                    <i class="${watched ? "fa-solid fa-circle-check text-green-500" : "fa-brands fa-youtube text-red-500"}" aria-hidden="true"></i>
+                    Video ${index + 1}
+                  </button>
                 `;
+              })
+              .join("");
+
+            return `
+              <article class="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                <div class="mb-3 flex items-start justify-between gap-3">
+                  <h3 class="text-sm font-bold text-slate-800">${escapeHtml(section.title)}</h3>
+                  <span class="rounded-full bg-white px-2 py-1 text-[10px] font-semibold text-slate-500 shadow-sm">
+                    ${section.videos.length} video
+                  </span>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  ${videoButtons}
+                  <button
+                    type="button"
+                    class="media-button module-material-button"
+                    data-url="${escapeHtml(section.module.url)}"
+                    data-title="${escapeHtml(section.module.title)}"
+                  >
+                    <i class="fa-solid fa-file-pdf text-teal-500" aria-hidden="true"></i>
+                    Modul
+                  </button>
+                </div>
+              </article>
+            `;
+          })
+          .join("");
+
+        contentArea.innerHTML = `
+          <div class="mb-5 flex flex-col gap-3 border-b border-slate-100 pb-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p class="text-[10px] font-semibold uppercase tracking-wide text-teal-600">Materi Pelatihan</p>
+              <h2 class="text-lg font-bold text-slate-800">Sempoa Skill — Section 1–6</h2>
+              <p class="mt-1 text-xs text-slate-500">Video dan modul tersedia sampai 6 September 2026.</p>
+            </div>
+            <span class="w-max rounded-full bg-orange-50 px-3 py-1.5 text-[10px] font-bold text-orange-600">
+              <i class="fa-regular fa-clock mr-1" aria-hidden="true"></i>
+              Akses terbatas
+            </span>
+          </div>
+          <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+            ${sectionCards}
+          </div>
+        `;
+
+        bindSempoaMaterialButtons();
+      }
+
+      if (scrollToContent) {
+        contentArea.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    function renderClassroomManagement() {
+      const materials = classroomMaterials
+        .map((material) => {
+          const disabled = material.type === "disabled";
+          return `
+            <button
+              type="button"
+              class="media-button classroom-material-button w-full justify-start px-4 py-3 text-left"
+              data-type="${escapeHtml(material.type)}"
+              data-url="${escapeHtml(material.url)}"
+              data-title="${escapeHtml(material.title)}"
+              ${disabled ? "disabled" : ""}
+            >
+              <i class="${escapeHtml(material.icon)} ${escapeHtml(material.iconClass)} w-5 text-center text-base" aria-hidden="true"></i>
+              <span class="flex-1">
+                <span class="block text-xs font-semibold">${escapeHtml(material.title)}</span>
+                ${material.note ? `<span class="mt-0.5 block text-[10px] font-normal text-slate-400">${escapeHtml(material.note)}</span>` : ""}
+              </span>
+              ${disabled ? "" : '<i class="fa-solid fa-chevron-right text-[10px] text-slate-300" aria-hidden="true"></i>'}
+            </button>
+          `;
+        })
+        .join("");
+
+      contentArea.innerHTML = `
+        <div class="mb-5 border-b border-slate-100 pb-4">
+          <p class="text-[10px] font-semibold uppercase tracking-wide text-sky-600">Panduan Guru</p>
+          <h2 class="text-lg font-bold text-slate-800">Classroom Management</h2>
+          <p class="mt-1 text-xs text-slate-500">Bagian ini dapat dibuka kapan saja tanpa batas waktu.</p>
+        </div>
+        <div class="space-y-3">
+          ${materials}
+        </div>
+      `;
+
+      document
+        .querySelectorAll(".classroom-material-button:not(:disabled)")
+        .forEach((button) => {
+          button.addEventListener("click", () => {
+            const type = button.dataset.type;
+            const url = button.dataset.url;
+            const title = button.dataset.title;
+
+            if (type === "youtube") {
+              openYoutubeModal(extractYoutubeId(url), title, false);
+            } else if (type === "external_form") {
+              openExternalForm(url, title);
             } else {
-                contentArea.innerHTML = sempoaSkillData;
+              openEmbeddedPage(url, title);
             }
+          });
+        });
+
+      contentArea.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function bindSempoaMaterialButtons() {
+      document.querySelectorAll(".video-material-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          openYoutubeModal(
+            button.dataset.videoId,
+            button.dataset.videoTitle,
+            true
+          );
+        });
+      });
+
+      document.querySelectorAll(".module-material-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          openEmbeddedPage(button.dataset.url, button.dataset.title);
+        });
+      });
+    }
+
+    function watchedStorageKey() {
+      return "mathChampsWatchedVideos:" + normalizeEmail(currentUser.email);
+    }
+
+    function getWatchedVideos() {
+      try {
+        const parsed = JSON.parse(
+          localStorage.getItem(watchedStorageKey()) || "[]"
+        );
+        return Array.isArray(parsed) ? parsed : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function isVideoWatched(videoId) {
+      return getWatchedVideos().includes(videoId);
+    }
+
+    function markVideoWatched(videoId) {
+      if (!videoId || !currentUser.email) return;
+
+      const watched = new Set(getWatchedVideos());
+      watched.add(videoId);
+
+      localStorage.setItem(
+        watchedStorageKey(),
+        JSON.stringify(Array.from(watched))
+      );
+
+      updateVideoProgress();
+
+      const materialButton = document.querySelector(
+        `.video-material-button[data-video-id="${CSS.escape(videoId)}"]`
+      );
+
+      if (materialButton) {
+        materialButton.dataset.watched = "true";
+        materialButton.innerHTML =
+          '<i class="fa-solid fa-circle-check text-green-500" aria-hidden="true"></i>' +
+          materialButton.textContent.trim();
+      }
+    }
+
+    function updateVideoProgress() {
+      const watchedCount = getWatchedVideos().filter((videoId) =>
+        sempoaSections.some((section) =>
+          section.videos.some((video) => video.id === videoId)
+        )
+      ).length;
+
+      const percentage =
+        totalVideos === 0
+          ? 0
+          : Math.min(100, Math.round((watchedCount / totalVideos) * 100));
+
+      document.getElementById(
+        "video-progress-text"
+      ).textContent = `${watchedCount} dari ${totalVideos} video selesai`;
+
+      document
+        .getElementById("video-progress-ring")
+        .style.setProperty("--progress", percentage + "%");
+    }
+
+    function extractYoutubeId(url) {
+      const value = String(url || "");
+      const shortMatch = value.match(/youtu\.be\/([^?&#/]+)/);
+      if (shortMatch) return shortMatch[1];
+
+      const watchMatch = value.match(/[?&]v=([^?&#/]+)/);
+      if (watchMatch) return watchMatch[1];
+
+      const embedMatch = value.match(/embed\/([^?&#/]+)/);
+      return embedMatch ? embedMatch[1] : value;
+    }
+
+    function convertDriveUrlToPreview(url) {
+      const value = String(url || "");
+      const driveFileMatch = value.match(
+        /https:\/\/drive\.google\.com\/file\/d\/([^/]+)/
+      );
+
+      if (driveFileMatch) {
+        return (
+          "https://drive.google.com/file/d/" +
+          driveFileMatch[1] +
+          "/preview"
+        );
+      }
+
+      return value;
+    }
+
+    function openModalBase(title) {
+      lastFocusedElement = document.activeElement;
+      mediaModalTitle.textContent = title;
+      mediaModal.hidden = false;
+      document.body.style.overflow = "hidden";
+      document.getElementById("close-modal-button").focus();
+    }
+
+    function openExternalForm(url, title) {
+      stopYoutubeTracking();
+      destroyYoutubePlayer();
+      openModalBase(title);
+
+      mediaModalBody.style.aspectRatio = "auto";
+      mediaModalBody.style.minHeight = "360px";
+      mediaModalBody.style.background = "#f8fafc";
+
+      mediaModalBody.innerHTML = `
+        <div class="flex min-h-[360px] h-full items-center justify-center p-6">
+          <div class="w-full max-w-lg rounded-2xl border border-sky-100 bg-white p-7 text-center shadow-sm">
+            <span class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-sky-50 text-sky-600">
+              <i class="fa-brands fa-google text-2xl" aria-hidden="true"></i>
+            </span>
+
+            <h3 class="text-lg font-bold text-slate-800">${escapeHtml(title)}</h3>
+
+            <p class="mx-auto mt-2 max-w-md text-sm leading-relaxed text-slate-500">
+              Google Form tidak dapat ditampilkan langsung di dalam portal melalui link pendek.
+              Klik tombol berikut untuk membuka formulir. Portal ini akan tetap terbuka.
+            </p>
+
+            <a
+              href="${escapeHtml(url)}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-sky-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-sky-700 focus:outline-none focus:ring-4 focus:ring-sky-200"
+            >
+              <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+              Buka Form Pengumpulan
+            </a>
+
+            <p class="mt-4 text-[11px] leading-relaxed text-slate-400">
+              Setelah selesai mengirim jawaban, kembali ke tab Portal Math Champs dan tekan
+              tombol <strong>Perbarui</strong> pada Riwayat Belajar.
+            </p>
+          </div>
+        </div>
+      `;
+
+      mediaModalFooter.innerHTML = `
+        <span class="font-medium text-slate-600">
+          Form dibuka di tab baru untuk mencegah tampilan error.
+        </span>
+      `;
+    }
+
+    function openEmbeddedPage(url, title) {
+      stopYoutubeTracking();
+      destroyYoutubePlayer();
+      openModalBase(title);
+
+      mediaModalBody.style.aspectRatio = "16 / 9";
+      mediaModalBody.style.minHeight = "";
+      mediaModalBody.style.background = "#020617";
+
+      const embedUrl = convertDriveUrlToPreview(url);
+
+      mediaModalBody.innerHTML = `
+        <iframe
+          src="${escapeHtml(embedUrl)}"
+          title="${escapeHtml(title)}"
+          class="absolute inset-0 h-full w-full border-0 bg-white"
+          allow="autoplay; clipboard-write"
+          referrerpolicy="strict-origin-when-cross-origin"
+        ></iframe>
+      `;
+
+      mediaModalFooter.innerHTML = `
+        Materi dibuka di dalam portal.
+        <span class="ml-1 text-slate-400">
+          Apabila halaman tidak tampil, penyedia halaman tersebut mungkin tidak mengizinkan penyematan.
+        </span>
+      `;
+    }
+
+    function openYoutubeModal(videoId, title, trackProgress) {
+      stopYoutubeTracking();
+      destroyYoutubePlayer();
+
+      currentVideoId = trackProgress ? videoId : "";
+      currentVideoTitle = title;
+      openModalBase(title);
+
+      mediaModalBody.style.aspectRatio = "16 / 9";
+      mediaModalBody.style.minHeight = "";
+      mediaModalBody.style.background = "#020617";
+
+      mediaModalBody.innerHTML = `
+        <div id="youtube-player" class="absolute inset-0 h-full w-full"></div>
+
+        <div class="youtube-shield youtube-shield-top" aria-hidden="true">
+          <img src="${BRAND_LOGO}" alt="" />
+        </div>
+
+        <div class="youtube-shield youtube-shield-bottom" aria-hidden="true">
+          <img src="${BRAND_LOGO}" alt="" />
+        </div>
+      `;
+
+      mediaModalFooter.textContent = trackProgress
+        ? "Progres akan ditandai selesai setelah video ditonton minimal 90%."
+        : "Video diputar di dalam Portal Math Champs.";
+
+      createYoutubePlayer(videoId);
+    }
+
+    function createYoutubePlayer(videoId) {
+      if (!window.YT || typeof window.YT.Player !== "function") {
+        window.setTimeout(() => createYoutubePlayer(videoId), 250);
+        return;
+      }
+
+      youtubePlayer = new YT.Player("youtube-player", {
+        videoId,
+        width: "100%",
+        height: "100%",
+        playerVars: {
+          autoplay: 0,
+          controls: 1,
+          disablekb: 0,
+          fs: 0,
+          modestbranding: 1,
+          playsinline: 1,
+          rel: 0,
+          iv_load_policy: 3,
+          origin: window.location.origin
+        },
+        events: {
+          onStateChange: handleYoutubeStateChange,
+          onError: () => {
+            mediaModalFooter.textContent =
+              "Video tidak dapat diputar. Periksa kembali link atau pengaturan video YouTube.";
+          }
+        }
+      });
+    }
+
+    function handleYoutubeStateChange(event) {
+      if (event.data === YT.PlayerState.PLAYING) {
+        startYoutubeTracking();
+      } else if (
+        event.data === YT.PlayerState.PAUSED ||
+        event.data === YT.PlayerState.ENDED
+      ) {
+        checkYoutubeProgress();
+
+        if (event.data === YT.PlayerState.ENDED && currentVideoId) {
+          markVideoWatched(currentVideoId);
         }
 
-        function showClassroomMgmt() {
-            const contentArea = document.getElementById('content-area');
-            contentArea.style.display = 'block';
-            contentArea.style.animation = 'none';
-            setTimeout(() => contentArea.style.animation = 'fadeIn 0.3s ease-out', 10);
-            contentArea.innerHTML = classroomMgmtData;
+        stopYoutubeTracking();
+      }
+    }
+
+    function startYoutubeTracking() {
+      stopYoutubeTracking();
+      youtubeProgressTimer = window.setInterval(checkYoutubeProgress, 4000);
+    }
+
+    function stopYoutubeTracking() {
+      if (youtubeProgressTimer) {
+        window.clearInterval(youtubeProgressTimer);
+        youtubeProgressTimer = null;
+      }
+    }
+
+    function checkYoutubeProgress() {
+      if (
+        !youtubePlayer ||
+        typeof youtubePlayer.getDuration !== "function" ||
+        !currentVideoId
+      ) {
+        return;
+      }
+
+      const duration = Number(youtubePlayer.getDuration());
+      const currentTime = Number(youtubePlayer.getCurrentTime());
+
+      if (
+        Number.isFinite(duration) &&
+        duration > 0 &&
+        Number.isFinite(currentTime) &&
+        currentTime / duration >= 0.9
+      ) {
+        markVideoWatched(currentVideoId);
+        mediaModalFooter.innerHTML =
+          '<span class="font-semibold text-green-600"><i class="fa-solid fa-circle-check mr-1" aria-hidden="true"></i>Video telah ditandai selesai.</span>';
+        stopYoutubeTracking();
+      }
+    }
+
+    function destroyYoutubePlayer() {
+      if (youtubePlayer && typeof youtubePlayer.destroy === "function") {
+        try {
+          youtubePlayer.destroy();
+        } catch {
+          // Tidak perlu menghentikan penutupan modal jika player gagal dihancurkan.
+        }
+      }
+
+      youtubePlayer = null;
+      currentVideoId = "";
+      currentVideoTitle = "";
+    }
+
+    function closeModal() {
+      if (mediaModal.hidden) return;
+
+      stopYoutubeTracking();
+      destroyYoutubePlayer();
+      mediaModal.hidden = true;
+      mediaModalBody.style.aspectRatio = "16 / 9";
+      mediaModalBody.style.minHeight = "";
+      mediaModalBody.style.background = "#020617";
+      mediaModalBody.innerHTML =
+        '<div class="flex h-full items-center justify-center text-sm text-white">Memuat materi...</div>';
+      document.body.style.overflow = "";
+
+      if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+        lastFocusedElement.focus();
+      }
+    }
+
+    const monthNames = [
+      "Januari", "Februari", "Maret", "April", "Mei", "Juni",
+      "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+    ];
+
+    function renderCalendar() {
+      const year = currentCalendarDate.getFullYear();
+      const month = currentCalendarDate.getMonth();
+      const today = new Date();
+
+      document.getElementById("calendar-title").textContent =
+        monthNames[month] + " " + year;
+
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const container = document.getElementById("calendar-days");
+
+      const cells = [];
+
+      for (let i = 0; i < firstDay; i += 1) {
+        cells.push("<div></div>");
+      }
+
+      for (let day = 1; day <= daysInMonth; day += 1) {
+        const classes = ["cal-date"];
+
+        if (
+          day === today.getDate() &&
+          month === today.getMonth() &&
+          year === today.getFullYear()
+        ) {
+          classes.push("cal-date-today");
+        } else if (day === 8 && month === 7 && year === 2026) {
+          classes.push("cal-date-dl-task");
+        } else if (day === 6 && month === 8 && year === 2026) {
+          classes.push("cal-date-dl-video");
         }
 
-        // Auto Save Feature
-        function startAutoSave() {
-            autoSaveInterval = setInterval(() => {
-                learningDuration += 60;
-                callApi({
-                    action: 'save_progress',
-                    email: currentUserEmail,
-                    duration: learningDuration
-                }).catch(e => console.log("Gagal auto-save", e));
-            }, 60000);
+        cells.push(
+          `<div class="${classes.join(" ")}">${day}</div>`
+        );
+      }
+
+      container.innerHTML = cells.join("");
+    }
+
+    function changeMonth(offset) {
+      currentCalendarDate = new Date(
+        currentCalendarDate.getFullYear(),
+        currentCalendarDate.getMonth() + offset,
+        1
+      );
+      renderCalendar();
+    }
+
+    function countdownLabel(deadline) {
+      const now = new Date();
+      const difference = deadline.getTime() - now.getTime();
+
+      if (difference <= 0) {
+        return "Selesai/Tutup";
+      }
+
+      const totalDays = Math.ceil(
+        difference / (1000 * 60 * 60 * 24)
+      );
+
+      return totalDays + " hari lagi";
+    }
+
+    function calculateCountdowns() {
+      const taskElement = document.getElementById("task-countdown");
+      const materialElement = document.getElementById("material-countdown");
+
+      const taskText = countdownLabel(TASK_DEADLINE);
+      const materialText = countdownLabel(MATERIAL_DEADLINE);
+
+      taskElement.textContent = taskText;
+      materialElement.textContent = materialText;
+
+      if (taskText === "Selesai/Tutup") {
+        taskElement.className =
+          "rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-500";
+      }
+
+      if (materialText === "Selesai/Tutup") {
+        materialElement.className =
+          "rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-bold text-slate-500";
+      }
+    }
+
+    verificationForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      verifyEmail(emailInput.value);
+    });
+
+    document.getElementById("change-email-button").addEventListener("click", logout);
+
+    document.querySelectorAll(".tab-button").forEach((button) => {
+      button.addEventListener("click", () => switchTab(button.dataset.tab));
+    });
+
+    document
+      .getElementById("open-sempoa-card")
+      .addEventListener("click", () => renderSempoaSkill(true));
+
+    document
+      .getElementById("open-classroom-card")
+      .addEventListener("click", renderClassroomManagement);
+
+    document
+      .getElementById("refresh-status-button")
+      .addEventListener("click", refreshSubmissionStatuses);
+
+    document
+      .getElementById("previous-month")
+      .addEventListener("click", () => changeMonth(-1));
+
+    document
+      .getElementById("next-month")
+      .addEventListener("click", () => changeMonth(1));
+
+    document
+      .getElementById("whatsapp-button")
+      .addEventListener("click", () => {
+        window.open(WHATSAPP_GROUP, "_blank", "noopener,noreferrer");
+      });
+
+    document
+      .getElementById("close-modal-button")
+      .addEventListener("click", closeModal);
+
+    mediaModal.addEventListener("click", (event) => {
+      if (event.target === mediaModal) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !mediaModal.hidden) {
+        closeModal();
+      }
+    });
+
+    window.addEventListener("storage", updateVideoProgress);
+
+    function restoreSession() {
+      const saved = sessionStorage.getItem("mathChampsVerifiedUser");
+      if (!saved) {
+        emailInput.focus();
+        return;
+      }
+
+      try {
+        const parsed = JSON.parse(saved);
+
+        if (!parsed || !isValidEmail(normalizeEmail(parsed.email))) {
+          throw new Error("Invalid session");
         }
-    </script>
+
+        currentUser = {
+          email: normalizeEmail(parsed.email),
+          name: String(parsed.name || "Kakak").trim(),
+          taskKLH: Boolean(parsed.taskKLH),
+          taskVideo: Boolean(parsed.taskVideo)
+        };
+
+        showDashboard();
+      } catch {
+        sessionStorage.removeItem("mathChampsVerifiedUser");
+        emailInput.focus();
+      }
+    }
+
+    calculateCountdowns();
+    window.setInterval(calculateCountdowns, 60 * 60 * 1000);
+    restoreSession();
+  </script>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
-"""
-
-with open("index-final.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
-
-print("File generated: index-final.html")
